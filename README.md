@@ -1,7 +1,7 @@
 # An elegant e-commerce package powered for the laravel framework.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/mongi/mongicommerce.svg?style=flat-square)](https://packagist.org/packages/mongi/mongicommerce)
-[![Build Status](https://img.shields.io/travis/mongi/mongicommerce/master.svg?style=flat-square)](https://travis-ci.org/mongi/mongicommerce)
+[![Build Status](https://img.shields.io/travis/mongi/mongicommerce/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/imgmongelli/mongicommerce/)
 [![Quality Score](https://img.shields.io/scrutinizer/g/mongi/mongicommerce.svg?style=flat-square)](https://scrutinizer-ci.com/g/mongi/mongicommerce)
 [![Total Downloads](https://img.shields.io/packagist/dt/mongi/mongicommerce.svg?style=flat-square)](https://packagist.org/packages/mongi/mongicommerce)
 
