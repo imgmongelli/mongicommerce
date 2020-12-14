@@ -26,13 +26,13 @@ class CreateOrdersTable extends Migration
 
 
             $table->unsignedBigInteger('status_id');
-            $table->unsignedBigInteger('type_payment_id');
+            $table->unsignedBigInteger('payment_type_id');
             $table->timestamps();
 
             //fk
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('status_id')->references('id')->on('statuses_order');
-            $table->foreign('type_payment_id')->references('id')->on('typesPayment');
+            $table->foreign('payment_type_id')->references('id')->on('payment_type');
         });
     }
 

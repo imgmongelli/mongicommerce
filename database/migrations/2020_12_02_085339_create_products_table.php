@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTabe extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -27,13 +27,10 @@ class CreateProductsTabe extends Migration
             $table->decimal('weight')->nullable();
             $table->boolean('in_home')->default(false);
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('sub_category_id');
-
             $table->timestamps();
 
             //foreign
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
         });
     }
 

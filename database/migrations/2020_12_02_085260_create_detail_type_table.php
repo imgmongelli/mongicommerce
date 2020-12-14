@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatusOrder extends Migration
+class CreateDetailTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateStatusOrder extends Migration
      */
     public function up()
     {
-        Schema::create('statuses_order', function (Blueprint $table) {
+        Schema::create('detail_type', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('color');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateStatusOrder extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statuses_order');
+        Schema::dropIfExists('detail_type');
     }
 }

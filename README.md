@@ -18,7 +18,7 @@ composer require mongi/mongicommerce
 ## Usage
 
 ``` php
-// Usage description here
+ php artisan mongicommerce:install
 ```
 
 ### Testing
