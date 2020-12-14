@@ -17,8 +17,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": "^7.1",
-        "illuminate/support": "^8.0"
+        "php": "^7.1"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
