@@ -23,6 +23,12 @@ class InstallPackage extends Command
             '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
             '--tag' => "config"
         ]);
+        $this->info('Publishing Admin Template');
+
+        $this->call('vendor:publish', [
+            '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
+            '--tag' => "assets"
+        ]);
 
 
         $this->info('Installig Tables');

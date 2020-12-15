@@ -20,18 +20,11 @@ class MongicommerceServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-
         if ($this->app->runningInConsole()) {
-
-            $this->commands([
-                InstallPackage::class
-            ]);
 
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('mongicommerce.php'),
             ], 'config');
-
-
 
             // Publishing the views.
             /*$this->publishes([
@@ -39,9 +32,13 @@ class MongicommerceServiceProvider extends ServiceProvider
             ], 'views');*/
 
             // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/mongicommerce'),
-            ], 'assets');*/
+            $this->publishes([
+                __DIR__.'/../resources/assets' => public_path('/mongicommerce/template'),
+            ], 'assets');
+
+            $this->commands([
+                InstallPackage::class
+            ]);
 
             // Publishing the translation files.
             /*$this->publishes([
