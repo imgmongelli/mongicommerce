@@ -17,8 +17,11 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->timestamps();
 
+            //fk
+            $table->foreign('category_id')->references('id')->on('categories');
 
         });
     }
