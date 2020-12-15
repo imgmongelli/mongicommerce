@@ -2,6 +2,7 @@
 
 namespace Mongi\Mongicommerce;
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 use Mongi\Mongicommerce\Console\InstallPackage;
 
@@ -22,9 +23,15 @@ class MongicommerceServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
 
+            $config_file = config_path('mongicommerce.php');
+            if(file_exists($config_file)){
+                File::delete($config_file);
+            }
+
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('mongicommerce.php'),
             ], 'config');
+
 
             // Publishing the views.
             /*$this->publishes([

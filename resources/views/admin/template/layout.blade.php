@@ -7,13 +7,14 @@ Website: http://gootbootstrap.com
 Purchase: https://wrapbootstrap.com/theme/smartadmin-responsive-webapp-WB0573SK0?ref=myorange
 License: You must have a valid license purchased only from wrapbootstrap.com (link above) in order to legally use this theme for your project.
 -->
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <title>
-        Page Title - Category - SmartAdmin v4.5.1
+       @yield('title')
     </title>
-    <meta name="description" content="Page Title">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="description" content="@yield('title')">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no, minimal-ui">
     <!-- Call App Mode on ios devices -->
@@ -22,9 +23,10 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <meta name="msapplication-tap-highlight" content="no">
     <!-- base css -->
     <link id="vendorsbundle" rel="stylesheet" media="screen, print" href="{{css('vendors.bundle.css')}}">
-    <link id="appbundle" rel="stylesheet" media="screen, print" href="{{css('app.bundle.css')}}">
+    <link id="appbundle"  rel="stylesheet" media="screen, print" href="{{css('app.bundle.css')}}">
     <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
     <link id="myskin" rel="stylesheet" media="screen, print" href="{{css('skins/skin-master.css')}}">
+    @yield('css')
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{img('favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{img('favicon/favicon-32x32.png')}}">
@@ -118,148 +120,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <div class="page-wrapper">
     <div class="page-inner">
         <!-- BEGIN Left Aside -->
-        <aside class="page-sidebar">
-            <div class="page-logo">
-                <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
-                   data-toggle="modal" data-target="#modal-shortcut">
-                    <img src="{{img('logo.png')}}" alt="SmartAdmin WebApp" aria-roledescription="logo">
-                    <span class="page-logo-text mr-1">SmartAdmin WebApp</span>
-                    <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
-                    <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
-                </a>
-            </div>
-            <!-- BEGIN PRIMARY NAVIGATION -->
-            <nav id="js-primary-nav" class="primary-nav" role="navigation">
-                <div class="nav-filter">
-                    <div class="position-relative">
-                        <input type="text" id="nav_filter_input" placeholder="Filter menu" class="form-control"
-                               tabindex="0">
-                        <a href="#" onclick="return false;" class="btn-primary btn-search-close js-waves-off"
-                           data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar">
-                            <i class="fal fa-chevron-up"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <img src="{{img('demo/avatars/avatar-admin.png')}}" class="profile-image rounded-circle"
-                         alt="Dr. Codex Lantern">
-                    <div class="info-card-text">
-                        <a href="#" class="d-flex align-items-center text-white">
-                                    <span class="text-truncate text-truncate-sm d-inline-block">
-                                        Dr. Codex Lantern
-                                    </span>
-                        </a>
-                        <span class="d-inline-block text-truncate text-truncate-sm">Toronto, Canada</span>
-                    </div>
-                    <img src="{{img('card-backgrounds/cover-2-lg.png')}}" class="cover" alt="cover">
-                    <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle"
-                       data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
-                        <i class="fal fa-angle-down"></i>
-                    </a>
-                </div>
-                <!--
-                TIP: The menu items are not auto translated. You must have a residing lang file associated with the menu saved inside dist/media/data with reference to each 'data-i18n' attribute.
-                -->
-                <ul id="js-nav-menu" class="nav-menu">
-                    <li class="active">
-                        <a href="blank.html" title="Blank Project" data-filter-tags="blank page">
-                            <i class="fal fa-globe"></i>
-                            <span class="nav-link-text" data-i18n="nav.blankpage">Blank Project</span>
-                        </a>
-                    </li>
-                    <li class="nav-title">Navigation Title</li>
-                    <li>
-                        <a href="#" title="Category" data-filter-tags="category">
-                            <i class="fal fa-file"></i>
-                            <span class="nav-link-text" data-i18n="nav.category">Category</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0);" title="Menu child"
-                                   data-filter-tags="utilities menu child">
-                                    <span class="nav-link-text" data-i18n="nav.utilities_menu_child">Sub-category</span>
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="javascript:void(0);" title="Sublevel Item"
-                                           data-filter-tags="utilities menu child sublevel item">
-                                            <span class="nav-link-text"
-                                                  data-i18n="nav.utilities_menu_child_sublevel_item">Sublevel Item</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:void(0);" title="Another Item"
-                                           data-filter-tags="utilities menu child another item">
-                                            <span class="nav-link-text"
-                                                  data-i18n="nav.utilities_menu_child_another_item">Another Item</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="disabled">
-                                <a href="javascript:void(0);" title="Disabled item"
-                                   data-filter-tags="utilities disabled item">
-                                    <span class="nav-link-text"
-                                          data-i18n="nav.utilities_disabled_item">Disabled item</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- Example of open and active states -->
-                    <li class="active open">
-                        <a href="#" title="Category" data-filter-tags="category">
-                            <i class="fal fa-plus"></i>
-                            <span class="nav-link-text" data-i18n="nav.category">Open Item</span>
-                        </a>
-                        <ul>
-                            <li class="active open">
-                                <a href="javascript:void(0);" title="Menu child"
-                                   data-filter-tags="utilities menu child">
-                                    <span class="nav-link-text"
-                                          data-i18n="nav.utilities_menu_child">Open Sub-category</span>
-                                </a>
-                                <ul>
-                                    <li class="active">
-                                        <a href="javascript:void(0);" title="Sublevel Item"
-                                           data-filter-tags="utilities menu child sublevel item">
-                                            <span class="nav-link-text"
-                                                  data-i18n="nav.utilities_menu_child_sublevel_item">Active Item</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <div class="filter-message js-filter-message bg-success-600"></div>
-            </nav>
-            <!-- END PRIMARY NAVIGATION -->
-            <!-- NAV FOOTER -->
-            <div class="nav-footer shadow-top">
-                <a href="#" onclick="return false;" data-action="toggle" data-class="nav-function-minify"
-                   class="hidden-md-down">
-                    <i class="ni ni-chevron-right"></i>
-                    <i class="ni ni-chevron-right"></i>
-                </a>
-                <ul class="list-table m-auto nav-footer-buttons">
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Chat logs">
-                            <i class="fal fa-comments"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Support Chat">
-                            <i class="fal fa-life-ring"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Make a call">
-                            <i class="fal fa-phone"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div> <!-- END NAV FOOTER -->
-        </aside>
+        @include('mongicommerce::admin.template.sidebar')
         <!-- END Left Aside -->
         <div class="page-content-wrapper">
             <!-- BEGIN Page Header -->
@@ -301,16 +162,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                         <i class="ni ni-menu"></i>
                     </a>
                 </div>
-                <div class="search">
-                    <form class="app-forms hidden-xs-down" role="search" action="page_search.html" autocomplete="off">
-                        <input type="text" id="search-field" placeholder="Search for anything" class="form-control"
-                               tabindex="1">
-                        <a href="#" onclick="return false;" class="btn-danger btn-search-close js-waves-off d-none"
-                           data-action="toggle" data-class="mobile-search-on">
-                            <i class="fal fa-times"></i>
-                        </a>
-                    </form>
-                </div>
+
                 <div class="ml-auto d-flex">
                     <!-- activate app search icon (mobile) -->
                     <div class="hidden-sm-up">
@@ -565,7 +417,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                             <span class="status mr-2">
                                                                 <span
                                                                     class="profile-image rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-a.png')"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-a.png')}})"></span>
                                                             </span>
                                                     <span class="d-flex flex-column flex-1 ml-1">
                                                                 <span class="name">Adison Lee</span>
@@ -581,7 +433,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                             <span class="status status-success mr-2">
                                                                 <span
                                                                     class="profile-image rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-b.png')"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-b.png')}})"></span>
                                                             </span>
                                                     <span class="d-flex flex-column flex-1 ml-1">
                                                                 <span class="name">Oliver Kopyuv</span>
@@ -596,7 +448,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                             <span class="status status-warning mr-2">
                                                                 <span
                                                                     class="profile-image rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-e.png')"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-e.png')}})"></span>
                                                             </span>
                                                     <span class="d-flex flex-column flex-1 ml-1">
                                                                 <span class="name">Dr. John Cook PhD</span>
@@ -612,7 +464,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                                 <!-- <img src="img/demo/avatars/avatar-m.png" data-src="img/demo/avatars/avatar-h.png" class="profile-image rounded-circle" alt="Sarah McBrook" /> -->
                                                                 <span
                                                                     class="profile-image rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-h.png')"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-h.png')}})"></span>
                                                             </span>
                                                     <span class="d-flex flex-column flex-1 ml-1">
                                                                 <span class="name">Sarah McBrook</span>
@@ -627,7 +479,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                             <span class="status status-success mr-2">
                                                                 <span
                                                                     class="profile-image rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-m.png')"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-m.png')}})"></span>
                                                             </span>
                                                     <span class="d-flex flex-column flex-1 ml-1">
                                                                 <span class="name">Anothony Bezyeth</span>
@@ -643,7 +495,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                             <span class="status status-danger mr-2">
                                                                 <span
                                                                     class="profile-image rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-j.png')"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-j.png')}})"></span>
                                                             </span>
                                                     <span class="d-flex flex-column flex-1 ml-1">
                                                                 <span class="name">Lisa Hatchensen</span>
@@ -707,21 +559,21 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <div class="fs-sm d-flex align-items-center mt-2">
                                                             <span
                                                                 class="profile-image-md mr-1 rounded-circle d-inline-block"
-                                                                style="background-image:url('img/demo/avatars/avatar-a.png'); background-size: cover;"></span>
+                                                                style="background-image:url({{img('demo/avatars/avatar-a.png')}}); background-size: cover;"></span>
                                                             <span
                                                                 class="profile-image-md mr-1 rounded-circle d-inline-block"
-                                                                style="background-image:url('img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+                                                                style="background-image:url({{img('demo/avatars/avatar-b.png')}}); background-size: cover;"></span>
                                                             <span
                                                                 class="profile-image-md mr-1 rounded-circle d-inline-block"
-                                                                style="background-image:url('img/demo/avatars/avatar-c.png'); background-size: cover;"></span>
+                                                                style="background-image:url({{img('demo/avatars/avatar-c.png')}}); background-size: cover;"></span>
                                                             <span
                                                                 class="profile-image-md mr-1 rounded-circle d-inline-block"
-                                                                style="background-image:url('img/demo/avatars/avatar-e.png'); background-size: cover;"></span>
+                                                                style="background-image:url({{img('demo/avatars/avatar-e.png')}}); background-size: cover;"></span>
                                                             <div data-hasmore="+3"
                                                                  class="rounded-circle profile-image-md mr-1">
                                                                 <span
                                                                     class="profile-image-md mr-1 rounded-circle d-inline-block"
-                                                                    style="background-image:url('img/demo/avatars/avatar-h.png'); background-size: cover;"></span>
+                                                                    style="background-image:url({{img('demo/avatars/avatar-h.png')}}); background-size: cover;"></span>
                                                             </div>
                                                         </div>
                                                         <span class="fs-nano text-muted mt-1">55 minutes ago</span>
@@ -757,21 +609,21 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                         <div class="fs-sm d-flex align-items-center mt-1">
                                                             <a href="#" class="mr-1 mt-1" title="Cell A-0012">
                                                                 <span class="d-block img-share"
-                                                                      style="background-image:url('img/thumbs/pic-7.png'); background-size: cover;"></span>
+                                                                      style="background-image:url({{img('thumbs/pic-7.png')}}); background-size: cover;"></span>
                                                             </a>
                                                             <a href="#" class="mr-1 mt-1" title="Patient A-473 saliva">
                                                                 <span class="d-block img-share"
-                                                                      style="background-image:url('img/thumbs/pic-8.png'); background-size: cover;"></span>
+                                                                      style="background-image:url({{img('thumbs/pic-8.png')}}); background-size: cover;"></span>
                                                             </a>
                                                             <a href="#" class="mr-1 mt-1"
                                                                title="Patient A-473 blood cells">
                                                                 <span class="d-block img-share"
-                                                                      style="background-image:url('img/thumbs/pic-11.png'); background-size: cover;"></span>
+                                                                      style="background-image:url({{img('thumbs/pic-11.png')}}); background-size: cover;"></span>
                                                             </a>
                                                             <a href="#" class="mr-1 mt-1"
                                                                title="Patient A-473 Membrane O.C">
                                                                 <span class="d-block img-share"
-                                                                      style="background-image:url('img/thumbs/pic-12.png'); background-size: cover;"></span>
+                                                                      style="background-image:url({{img('thumbs/pic-12.png')}}); background-size: cover;"></span>
                                                             </a>
                                                         </div>
                                                         <span class="fs-nano text-muted mt-1">55 minutes ago</span>
@@ -1000,164 +852,37 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             <!-- the #js-page-content id is needed for some plugins to initialize -->
             <main id="js-page-content" role="main" class="page-content">
                 <ol class="breadcrumb page-breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">SmartAdmin</a></li>
-                    <li class="breadcrumb-item">Category</li>
-                    <li class="breadcrumb-item">Sub-category</li>
-                    <li class="breadcrumb-item active">Page Title</li>
-                    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span>
+                    <?php $link = "" ?>
+                    @for($i = 1; $i <= count(Request::segments()); $i++)
+                        @if($i < count(Request::segments()) & $i > 0)
+                            <?php $link .= "/" . Request::segment($i); ?>
+                            <li class="breadcrumb-item active"> <a href="<?= $link ?>">{{ ucwords(str_replace('-',' ',Request::segment($i)))}}</a> </li> >
+                        @else {{ucwords(str_replace('-',' ',Request::segment($i)))}}
+                        @endif
+                    @endfor
+                    <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class=""> {{\Carbon\Carbon::now()->dayName}}, {{\Carbon\Carbon::now()->format('d/m/Y')}}</span>
                     </li>
                 </ol>
                 <div class="subheader">
                     <h1 class="subheader-title">
-                        <i class='subheader-icon fal fa-globe'></i> Blank Page <span class='fw-300'>SubTitle</span> <sup
+                        <i class='subheader-icon fal fa-globe'></i> @yield('title') <span class='fw-300'>@yield('subtitle')</span> <sup
                             class='badge badge-primary fw-500'>STICKER</sup>
                         <small>
-                            Insert page description or punch line
+                            @yield('description')
                         </small>
                     </h1>
                     <!--
-Right content on content header
-A nice area to add graphs or buttons -->
+        Right content on content header
+        A nice area to add graphs or buttons -->
                     <div class="subheader-block">
-                        Right Subheader Block
+                       @yield('subheader')
                     </div>
                 </div>
-                <div class="alert alert-primary">
-                    <div class="d-flex flex-start w-100">
-                        <div class="mr-2 hidden-md-down">
-                                    <span class="icon-stack icon-stack-lg">
-                                        <i class="base base-6 icon-stack-3x opacity-100 color-primary-500"></i>
-                                        <i class="base base-10 icon-stack-2x opacity-100 color-primary-300 fa-flip-vertical"></i>
-                                        <i class="ni ni-blog-read icon-stack-1x opacity-100 color-white"></i>
-                                    </span>
-                        </div>
-                        <div class="d-flex flex-fill">
-                            <div class="flex-fill">
-                                <span class="h5">Pro Tip!</span>
-                                <p>
-                                    If you don't know where to start, this is a good page to start your application. It
-                                    comes with the basics to get you started. Contains a good inline documentation and
-                                    waypoints to guide you with your project. Use this area of the page as an attention
-                                    grabber. Users are likely to respond or pay attention when you involve a color icon
-                                    along with your information (as displayed here on the left).
-                                </p>
-                                <p class="m-0">
-                                    Follow a slogal with a useful link or call to action <a href="#" target="_blank">Call
-                                        to action >></a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @yield('content')
                 <!-- Your main content goes below here: -->
-                <div class="row">
-                    <div class="col-xl-6">
-                        <div id="panel-1" class="panel">
-                            <div class="panel-hdr">
-                                <h2>
-                                    Panel <span class="fw-300"><i>Title</i></span>
-                                </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Close"></button>
-                                </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        It stash and was even had of collection the latest story still every or times
-                                        derive come way. Travelling business ill. Helplessly starting didn't should he
-                                        her bad will so through audiences to the supported congress, if card with was
-                                        way allows century quarter the control village for of payload.
-                                    </div>
-                                    <p>Offers it children. Been far good the or so eye. And first the her to white
-                                        unionized that the absolutely supplies hall to named accuse times had or the to
-                                        in the monitor a by carefully and than train excessive turned been a rationale
-                                        to be the little. Agency still a the supported or people out doing place what
-                                        does one studies of that value designer the you line their transformed extent,
-                                        you to for not must reflection chequered with got rush than because he with
-                                        thoughts until sisters term much and bed they of duty organization. And ago.
-                                        As.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div id="panel-1" class="panel">
-                            <div class="panel-hdr">
-                                <h2>
-                                    Panel <span class="fw-300"><i>Title</i></span>
-                                </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Close"></button>
-                                </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        It stash and was even had of collection the latest story still every or times
-                                        derive come way. Travelling business ill. Helplessly starting didn't should he
-                                        her bad will so through audiences to the supported congress, if card with was
-                                        way allows century quarter the control village for of payload.
-                                    </div>
-                                    <p>Offers it children. Been far good the or so eye. And first the her to white
-                                        unionized that the absolutely supplies hall to named accuse times had or the to
-                                        in the monitor a by carefully and than train excessive turned been a rationale
-                                        to be the little. Agency still a the supported or people out doing place what
-                                        does one studies of that value designer the you line their transformed extent,
-                                        you to for not must reflection chequered with got rush than because he with
-                                        thoughts until sisters term much and bed they of duty organization. And ago.
-                                        As.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-12">
-                        <div id="panel-1" class="panel">
-                            <div class="panel-hdr">
-                                <h2>
-                                    Panel <span class="fw-300"><i>Title</i></span>
-                                </h2>
-                                <div class="panel-toolbar">
-                                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Collapse"></button>
-                                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Fullscreen"></button>
-                                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip"
-                                            data-offset="0,10" data-original-title="Close"></button>
-                                </div>
-                            </div>
-                            <div class="panel-container show">
-                                <div class="panel-content">
-                                    <div class="panel-tag">
-                                        It stash and was even had of collection the latest story still every or times
-                                        derive come way. Travelling business ill. Helplessly starting didn't should he
-                                        her bad will so through audiences to the supported congress, if card with was
-                                        way allows century quarter the control village for of payload.
-                                    </div>
-                                    <p>Offers it children. Been far good the or so eye. And first the her to white
-                                        unionized that the absolutely supplies hall to named accuse times had or the to
-                                        in the monitor a by carefully and than train excessive turned been a rationale
-                                        to be the little. Agency still a the supported or people out doing place what
-                                        does one studies of that value designer the you line their transformed extent,
-                                        you to for not must reflection chequered with got rush than because he with
-                                        thoughts until sisters term much and bed they of duty organization. And ago.
-                                        As.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </main>
+
             <!-- this overlay is activated only when mobile menu is triggered -->
             <div class="page-content-overlay" data-action="toggle" data-class="mobile-nav-on"></div>
             <!-- END Page Content -->
@@ -2109,6 +1834,8 @@ A nice area to add graphs or buttons -->
                 + src/../jquery-snippets.js (core) -->
 <script src="{{js('vendors.bundle.js')}}"></script>
 <script src="{{js('app.bundle.js')}}"></script>
+<script src="{{js('app.js')}}"></script>
+@yield('js')
 <!--This page contains the basic JS and CSS files to get started on your project. If you need aditional addon's or plugins please see scripts located at the bottom of each page in order to find out which JS/CSS files to add.-->
 </body>
 <!-- END Body -->
