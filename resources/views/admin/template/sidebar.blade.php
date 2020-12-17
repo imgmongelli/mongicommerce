@@ -47,6 +47,19 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Dashboard</span>
                 </a>
             </li>
+
+            <li>
+                <a href="{{route('admin.category.new')}}" title="Blank Project">
+                    <i class="fal fa-tags"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Categorie</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.details')}}" title="Blank Project">
+                    <i class="fal fa-list"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Dettagli</span>
+                </a>
+            </li>
             <li class="nav-title">Navigation Title</li>
             <li>
                 <a href="#" title="Category" data-filter-tags="category">

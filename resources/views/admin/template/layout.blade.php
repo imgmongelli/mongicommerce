@@ -26,6 +26,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
     <link id="appbundle"  rel="stylesheet" media="screen, print" href="{{css('app.bundle.css')}}">
     <link id="mytheme" rel="stylesheet" media="screen, print" href="#">
     <link id="myskin" rel="stylesheet" media="screen, print" href="{{css('skins/skin-master.css')}}">
+    <link rel="stylesheet" media="screen, print" href="{{css('notifications/sweetalert2/sweetalert2.bundle.css')}}">
     @yield('css')
     <!-- Place favicon.ico in the root directory -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{img('favicon/apple-touch-icon.png')}}">
@@ -865,8 +866,9 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 </ol>
                 <div class="subheader">
                     <h1 class="subheader-title">
-                        <i class='subheader-icon fal fa-globe'></i> @yield('title') <span class='fw-300'>@yield('subtitle')</span> <sup
-                            class='badge badge-primary fw-500'>STICKER</sup>
+                        <i class='subheader-icon fal @yield('title_icon')'></i> @yield('title')
+                        <span class='fw-300'>@yield('subtitle')</span>
+                        <sup class='badge badge-primary fw-500'>STICKER</sup>
                         <small>
                             @yield('description')
                         </small>
@@ -1832,8 +1834,10 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 + waves.js (extension)
                 + smartpanels.js (extension)
                 + src/../jquery-snippets.js (core) -->
+
 <script src="{{js('vendors.bundle.js')}}"></script>
 <script src="{{js('app.bundle.js')}}"></script>
+<script src="{{js('notifications/sweetalert2/sweetalert2.bundle.js')}}"></script>
 <script src="{{js('app.js')}}"></script>
 @yield('js')
 <!--This page contains the basic JS and CSS files to get started on your project. If you need aditional addon's or plugins please see scripts located at the bottom of each page in order to find out which JS/CSS files to add.-->
