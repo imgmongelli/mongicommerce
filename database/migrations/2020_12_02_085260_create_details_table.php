@@ -13,16 +13,15 @@ class CreateDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail', function (Blueprint $table) {
+        Schema::create('details', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('detail_type_id');
+            $table->string('type');
             $table->timestamps();
 
             //fk
             $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('detail_type_id')->references('id')->on('detail_type');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('detail');
+        Schema::dropIfExists('details');
     }
 }

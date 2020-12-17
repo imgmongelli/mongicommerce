@@ -87,7 +87,7 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" id="name_field">
+                                        <input type="text" class="form-control" id="name_detail">
                                     </div>
                                     <span class="help-block">Nome del campo </span>
                                 </div>
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div id="div_values" style="display:none;" class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Valore tipo dettaglio</label>
@@ -125,6 +125,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        <button onclick="saveDetails()" class="btn btn-primary mt-3">Crea dettaglio</button>
                     </div>
                 </div>
             </div>
@@ -145,6 +147,15 @@
         $(function () {
             getCategories();
         });
+
+        $('#type').change(function () {
+            let value = $(this).val();
+            if(value === 'select' || value === 'checkbox' || value === 'radio'){
+                $('#div_values').show();
+            }else{
+                $('#div_values').hide();
+            }
+        });
         function getCategories() {
             $.ajax({
                 method: 'POST',
@@ -161,6 +172,28 @@
                     });
                 }
             });
+        }
+
+        function saveDetails() {
+            let url = '{{route('admin.post.create.detail')}}';
+                    $.ajax({
+                        method:'POST',
+                        url: url,
+                        data : {
+                            category : $('#categories').val(),
+                            name : $('#name_detail').val(),
+                            type: $('#type').val(),
+                            values : $('#values_type').val()
+                        },
+                        'statusCode': {
+                            422: function (response) {
+                                error422(response);
+                            }
+                        },
+                        success:function (response) {
+                                success('Dettaglio creato con successo',true);
+                        }
+                    });
         }
     </script>
 @endsection

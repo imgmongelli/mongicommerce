@@ -54,55 +54,31 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Categorie</span>
                 </a>
             </li>
-            <li>
-                <a href="{{route('admin.details')}}" title="Blank Project">
-                    <i class="fal fa-list"></i>
-                    <span class="nav-link-text" data-i18n="nav.blankpage">Dettagli</span>
-                </a>
-            </li>
-            <li class="nav-title">Navigation Title</li>
+
+            <li class="nav-title">Sezione Dettagli</li>
             <li>
                 <a href="#" title="Category" data-filter-tags="category">
-                    <i class="fal fa-file"></i>
-                    <span class="nav-link-text" data-i18n="nav.category">Categorie</span>
+                    <i class="fal fa-list"></i>
+                    <span class="nav-link-text" data-i18n="nav.category">Dettagli</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="{{route('admin.category.new')}}" title="Disabled item"
+                        <a href="{{route('admin.details')}}" title="Disabled item"
                            data-filter-tags="utilities disabled item">
                                     <span class="nav-link-text"
-                                          data-i18n="nav.utilities_disabled_item">Nuova categoria</span>
+                                          data-i18n="nav.utilities_disabled_item">Crea dettagli</span>
                         </a>
                     </li>
+
                     <li>
-                        <a href="javascript:void(0);" title="Menu child"
-                           data-filter-tags="utilities menu child">
-                            <span class="nav-link-text" data-i18n="nav.utilities_menu_child">Sub-category</span>
-                        </a>
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0);" title="Sublevel Item"
-                                   data-filter-tags="utilities menu child sublevel item">
-                                            <span class="nav-link-text"
-                                                  data-i18n="nav.utilities_menu_child_sublevel_item">Sublevel Item</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" title="Another Item"
-                                   data-filter-tags="utilities menu child another item">
-                                            <span class="nav-link-text"
-                                                  data-i18n="nav.utilities_menu_child_another_item">Another Item</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="disabled">
-                        <a href="javascript:void(0);" title="Disabled item"
+                        <a href="{{route('admin.show.details')}}" title="Disabled item"
                            data-filter-tags="utilities disabled item">
                                     <span class="nav-link-text"
-                                          data-i18n="nav.utilities_disabled_item">Disabled item</span>
+                                          data-i18n="nav.utilities_disabled_item">Mostra dettagli</span>
                         </a>
                     </li>
+
+
                 </ul>
             </li>
             {{--

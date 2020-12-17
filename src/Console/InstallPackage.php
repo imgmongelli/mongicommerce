@@ -34,7 +34,7 @@ class InstallPackage extends Command
         $this->info('Installig Tables');
         Artisan::call('migrate:refresh');
         $this->info('Installig Options');
-        $this->call(DetailTypeSeeder::class);
+        #$this->call(DetailTypeSeeder::class);
         $this->info('Terminate successfully');
     }
 }
