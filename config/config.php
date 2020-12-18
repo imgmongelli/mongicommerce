@@ -12,11 +12,15 @@ return [
         'webfonts' => 'mongicommerce/template/admin/webfonts/',
     ],
     'details' => [
+
             "select" => "<select class='form-control mongicommerce_el'></select>",
-            "text" => "<input type='text' class='form-control mongicommerce_el'>",
-            "number" => "<input type='numer' class='form-control mongicommerce_el'>",
             "checkbox" => "<input type='checkbox' class='form-control mongicommerce_el'>",
             "radio" => "<input type='radio' class='form-control mongicommerce_el'>",
-            "textarea" => "<textarea class='form-control mongicommerce_el'></textarea>"
+
+    ],
+    'description_field' => [
+            "text" => "<input type='text' class='form-control mongicommerce_el'>",
+            "number" => "<input type='numer' class='form-control mongicommerce_el'>",
+            "textarea" => "<textarea class='form-control mongicommerce_el'></textarea>",
     ]
 ];

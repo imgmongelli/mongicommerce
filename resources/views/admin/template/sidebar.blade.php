@@ -25,10 +25,10 @@
             <div class="info-card-text">
                 <a href="#" class="d-flex align-items-center text-white">
                     <span class="text-truncate text-truncate-sm d-inline-block">
-                        Dr. Codex Lantern
+                        Gianluca Mongelli
                     </span>
                 </a>
-                <span class="d-inline-block text-truncate text-truncate-sm">Toronto, Canada</span>
+                <span class="d-inline-block text-truncate text-truncate-sm">Bari, Italia</span>
             </div>
             <img src="{{img('card-backgrounds/cover-2-lg.png')}}" class="cover" alt="cover">
 
@@ -60,12 +60,12 @@
             <li class="nav-title">Sezione Prodotti</li>
             <li>
                 <a href="#" title="Category" data-filter-tags="category">
-                    <i class="fal fa-plus"></i>
+                    <i class="fal fa-shopping-cart"></i>
                     <span class="nav-link-text" data-i18n="nav.category">Prodotti</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="#" title="Menu child"  data-filter-tags="utilities menu child">
+                        <a href="{{route('admin.product.new')}}" title="Menu child"  data-filter-tags="utilities menu child">
                             <span class="nav-link-text" >Crea prodotto</span>
                         </a>
                     </li>

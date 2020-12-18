@@ -891,10 +891,10 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
             <!-- BEGIN Page Footer -->
             <footer class="page-footer" role="contentinfo">
                 <div class="d-flex align-items-center flex-1 text-muted">
-                    <span class="hidden-md-down fw-700">2020 © SmartAdmin by&nbsp;<a href='https://www.gotbootstrap.com'
+                    <span class="hidden-md-down fw-700">{{\Carbon\Carbon::now()->year}} © MongiCommerce by&nbsp;<a href='https://github.com/imgmongelli'
                                                                                      class='text-primary fw-500'
                                                                                      title='gotbootstrap.com'
-                                                                                     target='_blank'>gotbootstrap.com</a></span>
+                                                                                     target='_blank'>Imgmongelli</a></span>
                 </div>
                 <div>
                     <ul class="list-table m-0">

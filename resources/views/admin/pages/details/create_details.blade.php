@@ -37,7 +37,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
                                                 <span class="icon-stack">
-                                                   <i class="fal fa-tag"></i>
+                                                   <i class="fal fa-tags"></i>
                                                 </span>
                                             </span>
                                         </div>
@@ -101,7 +101,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
                                                 <span class="icon-stack">
-                                                   <i class="fal fa-tag"></i>
+                                                   <i class="fal fa-comment-edit"></i>
                                                 </span>
                                             </span>
                                         </div>
@@ -117,7 +117,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
                                                 <span class="icon-stack">
-                                                   <i class="fal fa-tag"></i>
+                                                   <i class="fal fa-brackets-curly"></i>
                                                 </span>
                                             </span>
                                         </div>
@@ -157,11 +157,11 @@
 @section('js')
     <script src="{{js('formplugins/select2/select2.bundle.js')}}"></script>
     <script>
-        let url_get_categories = '{{route('admin.post.get.categories')}}';
+
         $('.js-example-basic-single').select2({
             tags: true,
             tokenSeparators: [","],
-            placeholder: 'Inserisci i valori'
+            placeholder: 'Valori'
         });
         $(function () {
             getCategories();
@@ -177,6 +177,7 @@
         });
 
         function getCategories() {
+            let url_get_categories = '{{route('admin.post.get.categories')}}';
             $.ajax({
                 method: 'POST',
                 url: url_get_categories,
