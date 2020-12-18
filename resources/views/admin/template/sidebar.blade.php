@@ -1,9 +1,8 @@
 <aside class="page-sidebar">
     <div class="page-logo">
-        <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative"
-           data-toggle="modal" data-target="#modal-shortcut">
-            <img src="{{img('logo.png')}}" alt="SmartAdmin WebApp" aria-roledescription="logo">
-            <span class="page-logo-text mr-1">SmartAdmin WebApp</span>
+        <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
+            <i class="fal fa-cart-plus fa-2x"></i>
+            <span class="page-logo-text mr-1">MongiCommerce</span>
             <span class="position-absolute text-white opacity-50 small pos-top pos-right mr-2 mt-n2"></span>
             <i class="fal fa-angle-down d-inline-block ml-1 fs-lg color-primary-300"></i>
         </a>
@@ -25,17 +24,14 @@
                  alt="Dr. Codex Lantern">
             <div class="info-card-text">
                 <a href="#" class="d-flex align-items-center text-white">
-                                    <span class="text-truncate text-truncate-sm d-inline-block">
-                                        Dr. Codex Lantern
-                                    </span>
+                    <span class="text-truncate text-truncate-sm d-inline-block">
+                        Dr. Codex Lantern
+                    </span>
                 </a>
                 <span class="d-inline-block text-truncate text-truncate-sm">Toronto, Canada</span>
             </div>
             <img src="{{img('card-backgrounds/cover-2-lg.png')}}" class="cover" alt="cover">
-            <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle"
-               data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
-                <i class="fal fa-angle-down"></i>
-            </a>
+
         </div>
         <!--
         TIP: The menu items are not auto translated. You must have a residing lang file associated with the menu saved inside dist/media/data with reference to each 'data-i18n' attribute.
@@ -54,33 +50,33 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Categorie</span>
                 </a>
             </li>
-
             <li class="nav-title">Sezione Dettagli</li>
             <li>
-                <a href="#" title="Category" data-filter-tags="category">
+                <a href="{{route('admin.details')}}" title="Blank Project">
                     <i class="fal fa-list"></i>
-                    <span class="nav-link-text" data-i18n="nav.category">Dettagli</span>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Dettagli</span>
+                </a>
+            </li>
+            <li class="nav-title">Sezione Prodotti</li>
+            <li>
+                <a href="#" title="Category" data-filter-tags="category">
+                    <i class="fal fa-plus"></i>
+                    <span class="nav-link-text" data-i18n="nav.category">Prodotti</span>
                 </a>
                 <ul>
                     <li>
-                        <a href="{{route('admin.details')}}" title="Disabled item"
-                           data-filter-tags="utilities disabled item">
-                                    <span class="nav-link-text"
-                                          data-i18n="nav.utilities_disabled_item">Crea dettagli</span>
+                        <a href="#" title="Menu child"  data-filter-tags="utilities menu child">
+                            <span class="nav-link-text" >Crea prodotto</span>
                         </a>
                     </li>
-
                     <li>
-                        <a href="{{route('admin.show.details')}}" title="Disabled item"
-                           data-filter-tags="utilities disabled item">
-                                    <span class="nav-link-text"
-                                          data-i18n="nav.utilities_disabled_item">Mostra dettagli</span>
+                        <a href="#" title="Menu child"  data-filter-tags="utilities menu child">
+                            <span class="nav-link-text" >Lista prodotti</span>
                         </a>
                     </li>
-
-
                 </ul>
             </li>
+
             {{--
             <!-- Example of open and active states -->
             <li class="active open">

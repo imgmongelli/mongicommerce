@@ -2,15 +2,14 @@
 
 
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminCategoryController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminCreateDetailController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminShowDetailController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminDetailController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
 
 //BackEnd Pages
 Route::get('/admin/dashboard',[DashboardController::class,'page'])->name('admin.dashboard');
 Route::get('/admin/categorie/',[AdminCategoryController::class,'page'])->name('admin.category.new');
-Route::get('/admin/crea/dettagli',[AdminCreateDetailController::class,'page'])->name('admin.details');
-Route::get('/admin/mostra/dettagli',[AdminShowDetailController::class,'page'])->name('admin.show.details');
+Route::get('/admin/dettagli',[AdminDetailController::class,'page'])->name('admin.details');
+
 
 
 
@@ -21,5 +20,5 @@ Route::post('/admin/post/get/categories',[AdminCategoryController::class,'getCat
 Route::post('/admin/post/create-new-category',[AdminCategoryController::class,'setNewCategory'])->name('admin.post.create.new.category');
 
 //details
-Route::post('/admin/post/create/detail',[AdminCreateDetailController::class,'setNewDetail'])->name('admin.post.create.detail');
-Route::post('/admin/post/get/details',[AdminShowDetailController::class,'getDetails'])->name('admin.post.get.details');
+Route::post('/admin/post/create/detail',[AdminDetailController::class,'setNewDetail'])->name('admin.post.create.detail');
+Route::post('/admin/post/get/details',[AdminDetailController::class,'getDetails'])->name('admin.post.get.details');

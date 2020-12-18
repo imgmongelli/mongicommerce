@@ -25,20 +25,15 @@
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
-                        <div class="panel-tag">
-                            Add the relative form sizing classes to the <code>.input-group</code> itself and contents
-                            within will automatically resize—no need for repeating the form control size classes on each
-                            element. <strong>Sizing on the individual input group elements isn’t supported</strong>
-                        </div>
                         <div class="form-group">
                             <label class="form-label" for="name">Nome categoria</label>
-                            <div class="input-group input-group-lg">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
-                                                        <span class="input-group-text py-1 px-3">
-                                                            <span class="icon-stack">
-                                                               <i class="fal fa-tag"></i>
-                                                            </span>
-                                                        </span>
+                                    <span class="input-group-text py-1 px-3">
+                                        <span class="icon-stack">
+                                           <i class="fal fa-book"></i>
+                                        </span>
+                                    </span>
                                 </div>
                                 <input id="name" type="text" class="form-control" placeholder=""
                                        aria-describedby="name">
@@ -47,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="sub-category">Sotto categoria</label>
-                            <div class="input-group input-group-lg">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text py-1 px-3">
                                         <span class="icon-stack">
@@ -64,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="description">Descrizione</label>
-                            <div class="input-group input-group-lg">
+                            <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fal fa-pen"></i>
@@ -73,8 +68,9 @@
                                 <textarea name="description" id="description" class="form-control"></textarea>
                             </div>
                         </div>
+                        <button id="btn_save_category" class="btn btn-primary btn-block">Inserisci</button>
                     </div>
-                    <button id="btn_save_category" class="btn btn-primary btn-block">Inserisci</button>
+
                 </div>
             </div>
         </div>
