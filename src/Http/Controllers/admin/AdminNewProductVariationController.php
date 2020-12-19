@@ -14,7 +14,9 @@ class AdminNewProductVariationController extends Controller
 {
     public function page($id_product){
         $product = Product::find($id_product);
-        return view('mongicommerce::admin.pages.products.new_product_variation',['product' => $product]);
+        $items = $product->items;
+
+        return view('mongicommerce::admin.pages.products.new_product_variation',['product' => $product,'items' => $items]);
     }
 
     public function createNewVariation(Request $r){
@@ -29,11 +31,15 @@ class AdminNewProductVariationController extends Controller
         $details = json_decode($r->get('details'),true);
         $quantity = $r->get('quantity');
         $price = $r->get('price');
+        $product_name = $r->get('product_name');
+        $product_description = $r->get('product_description');
 
         $product = Product::find($product_id);
 
         $product_item = new ProductItem();
         $product_item->product_id = $product->id;
+        $product_item->name = $product_name;
+        $product_item->description = $product_description;
         $product_item->img = null;
         $product_item->price = $price;
         $product_item->quantity = $quantity;

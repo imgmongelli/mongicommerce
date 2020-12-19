@@ -70,7 +70,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" title="Menu child"  data-filter-tags="utilities menu child">
+                        <a href="{{route('admin.product.list')}}" title="Menu child"  data-filter-tags="utilities menu child">
                             <span class="nav-link-text" >Lista prodotti</span>
                         </a>
                     </li>

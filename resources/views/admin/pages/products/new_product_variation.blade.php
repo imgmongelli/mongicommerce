@@ -4,6 +4,7 @@
 @section('subtitle',$product->name)
 @section('description',$product->description)
 @section('css')
+    <link rel="stylesheet" media="screen, print" href="{{css('datagrid/datatables/datatables.bundle.css')}}">
 @endsection
 @section('subheader')
 @endsection
@@ -29,7 +30,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nome prodotto</label>
-                                    <input type="text" disabled value="{{$product->name}}" id="product_name" class="form-control">
+                                    <input type="text" value="{{$product->name}}" id="product_name" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -38,7 +39,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
-                                    <textarea disabled name="" id="product_description" class="form-control"
+                                    <textarea name="" id="product_description" class="form-control"
                                               rows="10">{{$product->description}}</textarea>
                                 </div>
                             </div>
@@ -157,8 +158,63 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Varianti per questo prodotto
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <!-- datatable start -->
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead>
+                            <tr>
+                                <th>Nome Prodotto</th>
+                                <th>Descrizione Prodotto</th>
+                                <th>Dettagli</th>
+                                <th>Prezzo</th>
+                                <th>Quantità</th>
+                                <th>Azioni</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($items as $item)
+                                <tr>
+                                    <td>{{$item->name}}</td>
+                                    <td>{{$item->description}}</td>
+                                    <td>
+                                        @foreach($item->details as $detail)
+                                            <span class="badge badge-danger">{{$detail->detail->value}}</span>
+                                        @endforeach
+                                    </td>
+                                    <td><input value="{{$item->price}}" class="form-control" type="number"></td>
+                                    <td><input value="{{$item->quantity}}" class="form-control" type="number"></td>
+                                    <td><button class="btn btn-dark"><i class="fal fa-trash"></i></button></td>
+                                </tr>
+                            @endforeach
+
+
+
+                            </tbody>
+                        </table>
+                        <!-- datatable end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
+    <script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
     <script>
         let product_id = '{{$product->id}}';
         let category_id = '{{$product->category_id}}';
@@ -301,5 +357,16 @@
             });
 
         }
+    </script>
+    <script>
+        $(document).ready(function()
+        {
+            // initialize datatable
+            $('#dt-basic-example').dataTable(
+                {
+                    responsive: true,
+                });
+        });
+
     </script>
 @endsection

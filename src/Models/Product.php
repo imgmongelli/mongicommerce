@@ -11,5 +11,13 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $dates = ["created_at","updated_at"];
 
+    public function items(){
+        return $this->hasMany(ProductItem::class);
+    }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

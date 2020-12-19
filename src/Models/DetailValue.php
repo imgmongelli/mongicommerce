@@ -11,5 +11,8 @@ class DetailValue extends Model
 {
     use HasFactory;
 
+    public function detail(){
+        return $this->belongsTo(Detail::class,'detail_id');
+    }
 
 }

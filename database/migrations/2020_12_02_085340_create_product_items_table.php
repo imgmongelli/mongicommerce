@@ -17,6 +17,8 @@ class CreateProductItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->text('img')->nullable();
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
             $table->decimal('price');
             $table->integer('quantity')->nullable();
             $table->timestamps();

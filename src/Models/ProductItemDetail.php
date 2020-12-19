@@ -11,5 +11,7 @@ class ProductItemDetail extends Model
 {
     use HasFactory;
 
-
+    public function detail(){
+        return $this->belongsTo(DetailValue::class,'product_detail_value_id');
+    }
 }

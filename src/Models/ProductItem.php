@@ -11,5 +11,8 @@ class ProductItem extends Model
 {
     use HasFactory;
 
+    public function details(){
+        return $this->hasMany(ProductItemDetail::class,'product_item_id');
+    }
 
 }

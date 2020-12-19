@@ -211,6 +211,7 @@
                     }
                 },
                 success: function (response) {
+                    $('#name').val('');
                     updateTree();
                     getCategories();
                 }
