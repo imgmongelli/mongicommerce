@@ -45,6 +45,25 @@
                     </div>
                 </div>
             </div>
+            <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Specifiche prodotto
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div id="div_configurarion_field" class="panel-content">
+
+                    </div>
+                </div>
+
+            </div>
         </div>
         <div class="col-md-5">
             <div class="panel">
@@ -82,6 +101,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="panel">
                 <div class="panel-hdr">
                     <h2>
@@ -107,13 +127,49 @@
 @endsection
 @section('js')
     <script>
+        function getCategories() {
+            let url_get_categories = '{{route('admin.post.get.categories')}}';
+            $.ajax({
+                method: 'POST',
+                url: url_get_categories,
+                data: {},
+                'statusCode': {
+                    422: function (response) {
+                    }
+                },
+                success: function (response) {
+                    $('#categories').html('<option value="" selected>Seleziona</option>');
+                    $.each(response, function (index, value) {
+                        $('#categories').append($("<option />").val(value.id).text(value.name));
+                    });
+                }
+            });
+        }
         $(function () {
             getCategories();
         });
+
         $('#categories').change(function () {
             getDetails();
+            getConfigurationField();
         });
-
+        function getDetails() {
+            let url = '{{route('admin.post.get.details')}}';
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                    category_id: $('#categories').val()
+                },
+                'statusCode': {
+                    422: function (response) {
+                    }
+                },
+                success: function (response) {
+                    generateDetails(response);
+                }
+            });
+        }
         function generateDetails(details) {
             if (details.length > 0) {
                 let html = '';
@@ -134,8 +190,8 @@
 
         }
 
-        function getDetails() {
-            let url = '{{route('admin.post.get.details')}}';
+        function getConfigurationField() {
+            let url = '{{route('admin.post.get.configuration')}}';
             $.ajax({
                 method: 'POST',
                 url: url,
@@ -147,28 +203,34 @@
                     }
                 },
                 success: function (response) {
-                    generateDetails(response);
+                    generateConfigurationField(response);
                 }
             });
+        }
+        function generateConfigurationField(details) {
+            if (details.length > 0) {
+                let html = '';
+                $.each(details, function (index, value) {
+                    html += '<div class="row mt-3">';
+                    html += '<div class="col-md-12">';
+                    html += '<div class="form-group">';
+                    html += '<label class="form-label" for="name">' + value.name + '</label>';
+                    html += value.html;
+                    html += '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                });
+                $('#div_configurarion_field').html(html);
+            } else {
+                $('#div_configurarion_field').html('');
+            }
         }
 
-        function getCategories() {
-            let url_get_categories = '{{route('admin.post.get.categories')}}';
-            $.ajax({
-                method: 'POST',
-                url: url_get_categories,
-                data: {},
-                'statusCode': {
-                    422: function (response) {
-                    }
-                },
-                success: function (response) {
-                    $('#categories').html('<option value="" selected>Seleziona</option>');
-                    $.each(response, function (index, value) {
-                        $('#categories').append($("<option />").val(value.id).text(value.name));
-                    });
-                }
-            });
+        function saveProduct() {
+
         }
+
+
+
     </script>
 @endsection

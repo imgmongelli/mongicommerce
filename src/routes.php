@@ -2,6 +2,7 @@
 
 
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminCategoryController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminDetailController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
@@ -25,3 +26,7 @@ Route::post('/admin/post/create-new-category',[AdminCategoryController::class,'s
 //details
 Route::post('/admin/post/create/detail',[AdminDetailController::class,'setNewDetail'])->name('admin.post.create.detail');
 Route::post('/admin/post/get/details',[AdminDetailController::class,'getDetails'])->name('admin.post.get.details');
+
+//configuration
+Route::post('/admin/post/create/configuration',[AdminConfigurationFieldController::class,'setNewConfiguration'])->name('admin.post.create.configuration');
+Route::post('/admin/post/get/configuration',[AdminConfigurationFieldController::class,'getConfigurationFields'])->name('admin.post.get.configuration');

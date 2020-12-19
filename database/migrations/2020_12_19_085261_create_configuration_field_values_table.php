@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateConfigurationFieldValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('configuration_field_values', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description');
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('configuration_field_id');
+            $table->string('value');
             $table->timestamps();
 
-            //foreign
-            $table->foreign('category_id')->references('id')->on('categories');
+            //fk
+            $table->foreign('configuration_field_id')->references('id')->on('configuration_fields');
         });
     }
 
@@ -32,6 +31,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('configuration_field_values');
     }
 }

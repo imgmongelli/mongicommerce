@@ -5,6 +5,8 @@ namespace Mongi\Mongicommerce\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
+use Mongi\Mongicommerce\Models\ConfigurationField;
+use Mongi\Mongicommerce\Models\ConfigurationFieldValue;
 use Mongi\Mongicommerce\Models\Detail;
 use Mongi\Mongicommerce\Models\DetailValue;
 
@@ -12,7 +14,11 @@ class AdminDetailController extends Controller
 {
     public function page(){
         $types_details = config('mongicommerce.details');
-        return view('mongicommerce::admin.pages.details.create_details',['types' =>$types_details ]);
+        $configuration_field = config('mongicommerce.description_field');
+        return view('mongicommerce::admin.pages.details.create_details',[
+                            'types' =>$types_details,
+                            'configuration_field' => $configuration_field
+                    ]);
     }
 
     public function setNewDetail(Request $r){
@@ -46,6 +52,8 @@ class AdminDetailController extends Controller
         return response()->json(true);
     }
 
+
+
     public function getDetails(Request $r){
         $category_id = $r->get('category_id');
         $details = Detail::where('category_id',$category_id)->get();
@@ -65,6 +73,7 @@ class AdminDetailController extends Controller
 
     public function generateDetailHtml($detail,$values){
         $type = $detail->type;
+        $html = '';
 
         if($type === 'select'){
             $html = '';
@@ -95,18 +104,6 @@ class AdminDetailController extends Controller
                 $html .= '<label class="custom-control-label" for="defaultradio_'.$value->id.'">'.$value->value.'</label>';
                 $html .= '</div>';
             }
-        }
-
-        if($type === 'text'){
-            $html = '<input data-detail_id="'.$detail->id .'" type="text" class="form-control mongifield" id="text_' . $detail->id . '">';
-        }
-
-        if($type === 'number'){
-            $html = '<input data-detail_id="'.$detail->id .'" type="number" class="form-control mongifield" id="number_' . $detail->id . '">';
-        }
-
-        if($type === 'textarea'){
-            $html = '<textarea data-detail_id="'.$detail->id .'" class="form-control mongifield" id="textarea_'.$detail->id.'"></textarea>';
         }
 
         return $html;
