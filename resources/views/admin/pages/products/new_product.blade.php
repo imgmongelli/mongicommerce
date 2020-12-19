@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-7">
-            <div  class="panel">
+            <div class="panel">
                 <div class="panel-hdr">
                     <h2>
                         Informazioni Base
@@ -29,7 +29,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nome prodotto</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" id="product_name" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -38,31 +38,13 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
-                                    <textarea name="" id="" class="form-control" rows="10"></textarea>
+                                    <textarea name="" id="product_description" class="form-control"
+                                              rows="10"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Specifiche prodotto
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div id="div_configurarion_field" class="panel-content">
-
-                    </div>
-                </div>
-
             </div>
         </div>
         <div class="col-md-5">
@@ -97,31 +79,13 @@
                                     <span class="help-block">Categoria da associare ai dettagli</span>
                                 </div>
                             </div>
+                            <button onclick="saveProduct()" class="mt-3 btn btn-primary btn-block">Crea prodotto</button>
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            <div class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Dettagli prodotto
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div id="div_details" class="panel-content">
-
-                    </div>
-                    <button style=" width:90%;" class="m-3 btn btn-primary">Crea prodotto</button>
-                </div>
-
-            </div>
         </div>
     </div>
 @endsection
@@ -145,92 +109,36 @@
                 }
             });
         }
+
         $(function () {
             getCategories();
         });
 
-        $('#categories').change(function () {
-            getDetails();
-            getConfigurationField();
-        });
-        function getDetails() {
-            let url = '{{route('admin.post.get.details')}}';
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {
-                    category_id: $('#categories').val()
-                },
-                'statusCode': {
-                    422: function (response) {
-                    }
-                },
-                success: function (response) {
-                    generateDetails(response);
-                }
-            });
-        }
-        function generateDetails(details) {
-            if (details.length > 0) {
-                let html = '';
-                $.each(details, function (index, value) {
-                    html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
-                    html += '<div class="form-group">';
-                    html += '<label class="form-label" for="name">' + value.name + '</label>';
-                    html += value.html;
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-                $('#div_details').html(html);
-            } else {
-                $('#div_details').html('');
-            }
-
-        }
-
-        function getConfigurationField() {
-            let url = '{{route('admin.post.get.configuration')}}';
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {
-                    category_id: $('#categories').val()
-                },
-                'statusCode': {
-                    422: function (response) {
-                    }
-                },
-                success: function (response) {
-                    generateConfigurationField(response);
-                }
-            });
-        }
-        function generateConfigurationField(details) {
-            if (details.length > 0) {
-                let html = '';
-                $.each(details, function (index, value) {
-                    html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
-                    html += '<div class="form-group">';
-                    html += '<label class="form-label" for="name">' + value.name + '</label>';
-                    html += value.html;
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-                $('#div_configurarion_field').html(html);
-            } else {
-                $('#div_configurarion_field').html('');
-            }
-        }
-
         function saveProduct() {
+            let details = [];
+            let url = '{{route('admin.post.product.new')}}';
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                    product_name: $('#product_name').val(),
+                    product_description: $('#product_description').val(),
+                    category_id: $('#categories').val(),
+                },
+                'statusCode': {
+                    422: function (response) {
+                        error422(response);
+                    }
+                },
+                success: function (response) {
+                    let product_id = response.product_id;
+                    let path = '{{route('admin.product.new.variante','')}}';
+                    success("Prodotto inserito con successo! per inserire le varianti clicca <a href='"+path+"/"+product_id+"'>qui</a>");
+                }
+            });
+
 
         }
-
-
-
     </script>
 @endsection

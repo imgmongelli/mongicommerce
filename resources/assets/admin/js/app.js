@@ -37,7 +37,7 @@ function error422(response) {
 function success(message,reload,path){
     Swal.fire({
         title: 'Ottimo lavoro',
-        text: message,
+        html: message,
         icon: 'success',
         showCancelButton: false,
         confirmButtonColor: '#3085d6',
