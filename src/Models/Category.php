@@ -29,4 +29,8 @@ class Category extends Model
         return $this->children_rec()->with('children');
     }
 
+    public function configuration_fields(){
+        return $this->hasMany(ConfigurationField::class);
+    }
+
 }

@@ -284,6 +284,55 @@
 
         }
 
+
+        function saveProduct() {
+            let details = [];
+            let configuration_fields = [];
+            let url = '{{route('admin.post.product.variation.new')}}';
+
+
+
+            $.each($('.mongifield'), function (index, value) {
+                let detail_id = $(this).data('detail_id');
+                let detail_value = $(this).val();
+                if (detail_value !== '') {
+                    details.push({'detail_id': detail_id, 'detail_value': detail_value});
+                }
+            });
+
+            $.each($('.mongiconfigurationfield'), function (index, value) {
+                let configuration_field_id = $(this).data('configuration_id');
+                let configuration_field_value = $(this).val();
+                if (configuration_field_value !== '') {
+                    configuration_fields.push({'configuration_field_id': configuration_field_id, 'configuration_field_value': configuration_field_value});
+                }
+            });
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                    product_name: $('#product_name').val(),
+                    product_description: $('#product_description').val(),
+                    category_id: $('#categories').val(),
+                    quantity: $('#quantity').val(),
+                    price: $('#price').val(),
+                    product_id : product_id,
+                    details: JSON.stringify(details),
+                    configuration_fields : JSON.stringify(configuration_fields)
+                },
+                'statusCode': {
+                    422: function (response) {
+                        error422(response);
+                    }
+                },
+                success: function (response) {
+                    success("Nuova variante inserita con successo",true);
+                }
+            });
+
+        }
+
         function getConfigurationField() {
             let url = '{{route('admin.post.get.configuration')}}';
             $.ajax({
@@ -316,46 +365,10 @@
                     html += '</div>';
                 });
                 $('#div_configurarion_field').html(html);
+                $('#div_configurarion_field').show();
             } else {
-                $('#div_configurarion_field').html('');
+                $('#div_configurarion_field').hide();
             }
-        }
-
-        function saveProduct() {
-            let details = [];
-            let url = '{{route('admin.post.product.variation.new')}}';
-            $.each($('.mongifield'), function (index, value) {
-                let detail_id = $(this).data('detail_id');
-                let detail_value = $(this).val();
-                if (detail_value !== '') {
-                    details.push({'detail_id': detail_id, 'detail_value': detail_value});
-                }
-            });
-
-            console.log(details);
-
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {
-                    product_name: $('#product_name').val(),
-                    product_description: $('#product_description').val(),
-                    category_id: $('#categories').val(),
-                    quantity: $('#quantity').val(),
-                    price: $('#price').val(),
-                    product_id : product_id,
-                    details: JSON.stringify(details),
-                },
-                'statusCode': {
-                    422: function (response) {
-                        error422(response);
-                    }
-                },
-                success: function (response) {
-                    success("Nuova variante inserita con successo",true);
-                }
-            });
-
         }
     </script>
     <script>

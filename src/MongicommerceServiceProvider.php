@@ -3,8 +3,10 @@
 namespace Mongi\Mongicommerce;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mongi\Mongicommerce\Console\InstallPackage;
+use Mongi\Mongicommerce\Models\AdminSetting;
 
 class MongicommerceServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,9 @@ class MongicommerceServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'mongicommerce');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        //inject global information into views
+        View::share('mongicommerce', AdminSetting::first());
 
         if ($this->app->runningInConsole()) {
 
@@ -54,6 +59,7 @@ class MongicommerceServiceProvider extends ServiceProvider
 
             // Registering package commands.
             // $this->commands([]);
+
         }
     }
 

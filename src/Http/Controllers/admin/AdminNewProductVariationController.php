@@ -6,7 +6,9 @@ namespace Mongi\Mongicommerce\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
+use Mongi\Mongicommerce\Models\ConfigurationField;
 use Mongi\Mongicommerce\Models\Product;
+use Mongi\Mongicommerce\Models\ProductConfigurationField;
 use Mongi\Mongicommerce\Models\ProductItem;
 use Mongi\Mongicommerce\Models\ProductItemDetail;
 
@@ -29,6 +31,7 @@ class AdminNewProductVariationController extends Controller
         $product_id = $r->get('product_id');
 
         $details = json_decode($r->get('details'),true);
+        $configuration_fields = json_decode($r->get('configuration_fields'),true);
         $quantity = $r->get('quantity');
         $price = $r->get('price');
         $product_name = $r->get('product_name');
@@ -53,6 +56,19 @@ class AdminNewProductVariationController extends Controller
             $product_detail->product_detail_value_id = $detail_obj->detail_value;
             $product_detail->save();
         }
+
+        foreach ($configuration_fields as $conf_field){
+            $conf_fields_obj = (object) $conf_field;
+            $configuration_field = new ProductConfigurationField();
+            $configuration_field->product_item_id = $product_item->id;
+            $configuration_field->config_field_id = $conf_fields_obj->configuration_field_id;
+            $configuration_field->value = $conf_fields_obj->configuration_field_value;
+            $configuration_field->save();
+        }
+
+
+        //ceare la tabella ProductConfigurationField
+        //id, product_item_id, configuration_field_id, configuration_field_value
 
     }
 }

@@ -53,9 +53,9 @@ class AdminConfigurationFieldController extends Controller
         $html = '';
         if($type === 'textarea'){
             $html = '';
-            $html .= '<textarea data-detail_id="'.$field->id .'" class="form-control mongifield"></textarea>';
+            $html .= '<textarea data-configuration_id="'.$field->id .'" class="form-control mongiconfigurationfield"></textarea>';
         }else{
-            $html .= '<input type="'.$type.'" data-detail_id="'.$field->id .'" class="form-control mongifield">';
+            $html .= '<input type="'.$type.'" data-configuration_id="'.$field->id .'" class="form-control mongiconfigurationfield">';
         }
         return $html;
     }

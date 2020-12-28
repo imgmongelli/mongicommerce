@@ -6,6 +6,7 @@ namespace Mongi\Mongicommerce\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Mongi\Mongicommerce\Seedeers\DetailTypeSeeder;
+use Mongi\Mongicommerce\Seedeers\SettingsSeeder;
 
 class InstallPackage extends Command
 {
@@ -34,7 +35,7 @@ class InstallPackage extends Command
         $this->info('Installig Tables');
         Artisan::call('migrate:refresh');
         $this->info('Installig Options');
-        #$this->call(DetailTypeSeeder::class);
+        $this->call(SettingsSeeder::class);
         $this->info('Terminate successfully');
     }
 }
