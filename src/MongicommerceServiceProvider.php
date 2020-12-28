@@ -3,6 +3,7 @@
 namespace Mongi\Mongicommerce;
 
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mongi\Mongicommerce\Console\InstallPackage;
@@ -23,8 +24,11 @@ class MongicommerceServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-        //inject global information into views
-        View::share('mongicommerce', AdminSetting::first());
+        if(Schema::hasTable('admin_settings')){
+            //inject global information into views
+            View::share('mongicommerce', AdminSetting::first());
+        }
+
 
         if ($this->app->runningInConsole()) {
 
