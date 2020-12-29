@@ -116,9 +116,11 @@
                     </div>
                 </div>
                 <div class="panel-container show">
+
+                    <div id="div_details" class="panel-content"></div>
                     <div class="col-md-12 mt-2">
                         <div class="form-group">
-                            <label class="form-label" for="name">Quantità</label>
+                            <label class="form-label" for="name">Disponibilità prodotti</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
@@ -129,7 +131,7 @@
                                 </div>
                                 <input type="number" id="quantity" class="form-control">
                             </div>
-                            <span class="help-block">Quantità per prodotti con questa varietà</span>
+                            <span class="help-block">Disponibilità del prodotto con questa varietà</span>
                         </div>
                     </div>
                     <div class="col-md-12 mt-2">
@@ -147,9 +149,6 @@
                             </div>
                             <span class="help-block">Quantità per prodotti con questa varietà</span>
                         </div>
-                    </div>
-                    <div id="div_details" class="panel-content">
-
                     </div>
                     <button style=" width:90%;" onclick="saveProduct()" class="m-3 btn btn-primary">Crea prodotto
                     </button>
