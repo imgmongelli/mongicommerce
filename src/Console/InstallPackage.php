@@ -5,8 +5,9 @@ namespace Mongi\Mongicommerce\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Mongi\Mongicommerce\Seedeers\DetailTypeSeeder;
 use Mongi\Mongicommerce\Seedeers\SettingsSeeder;
+use Mongi\Mongicommerce\Seedeers\StasusesOrderSeeder;
+use Mongi\Mongicommerce\Seedeers\TypesPaymentSeeder;
 
 class InstallPackage extends Command
 {
@@ -16,7 +17,7 @@ class InstallPackage extends Command
 
     public function handle()
     {
-        $this->info('Installing Mongicommerce...');
+        $this->alert('Installing Mongicommerce...');
 
         $this->info('Publishing configuration...');
 
@@ -32,10 +33,18 @@ class InstallPackage extends Command
         ]);
 
 
-        $this->info('Installig Tables');
+        $this->alert('clean tables and installig new tables');
         Artisan::call('migrate:refresh');
-        $this->info('Installig Options');
+
+        $this->info('Installig settings e-commerce');
         $this->call(SettingsSeeder::class);
-        $this->info('Terminate successfully');
+
+        $this->info('Installig Statuses');
+        $this->call(StasusesOrderSeeder::class);
+
+        $this->info('Installig types Payments');
+        $this->call(TypesPaymentSeeder::class);
+
+        $this->alert('Terminate successfully');
     }
 }

@@ -1,6 +1,6 @@
 @extends('mongicommerce::admin.template.layout')
-@section('title','Lista Prodotti')
-@section('title_icon',"fa-books")
+@section('title','Lista Ordini')
+@section('title_icon',"fa-shopping-cart")
 @section('subtitle','')
 @section('description','Mostra lista dei prodotti inseriti')
 @section('css')
@@ -38,7 +38,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $product)
+                            @foreach($orders as $product)
                                 <tr>
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->name}}</td>

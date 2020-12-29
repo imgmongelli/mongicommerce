@@ -1,6 +1,6 @@
 @extends('mongicommerce::admin.template.layout')
 @section('title','Crea un nuovo prodotto')
-@section('title_icon',"fa-shopping-cart")
+@section('title_icon',"fa-books")
 @section('subtitle','per il tuo negozio online')
 @section('description','Potrai inserire i prodotti che i clienti visualizzeranno nel tuo negozio online')
 @section('css')

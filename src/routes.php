@@ -6,6 +6,7 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminDetailController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminOrdersController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminProductsListController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
@@ -20,7 +21,8 @@ Route::get('/admin/settings',[AdminSettingsController::class,'page'])->name('adm
 Route::get('/admin/prodotto/crea-prodotto',[AdminNewProductController::class,'page'])->name('admin.product.new');
 Route::get('/admin/prodotti',[AdminProductsListController::class,'page'])->name('admin.product.list');
 Route::get('/admin/prodotto-variante/{id_product}',[AdminNewProductVariationController::class,'page'])->name('admin.product.new.variante');
-
+//orders
+Route::get('/admin/ordini',[AdminOrdersController::class,'page'])->name('admin.orders.list');
 
 
 

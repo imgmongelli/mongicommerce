@@ -43,24 +43,24 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Dashboard</span>
                 </a>
             </li>
-
+            <li class="nav-title">Impostazioni prodotti</li>
             <li>
                 <a href="{{route('admin.category.new')}}" title="Blank Project">
                     <i class="fal fa-tags"></i>
                     <span class="nav-link-text" data-i18n="nav.blankpage">Categorie</span>
                 </a>
             </li>
-            <li class="nav-title">Sezione Dettagli</li>
+
             <li>
                 <a href="{{route('admin.details')}}" title="Blank Project">
                     <i class="fal fa-list"></i>
                     <span class="nav-link-text" data-i18n="nav.blankpage">Dettagli</span>
                 </a>
             </li>
-            <li class="nav-title">Sezione Prodotti</li>
+            <li class="nav-title">Negozio</li>
             <li>
                 <a href="#" title="Category" data-filter-tags="category">
-                    <i class="fal fa-shopping-cart"></i>
+                    <i class="fal fa-books"></i>
                     <span class="nav-link-text" data-i18n="nav.category">Prodotti</span>
                 </a>
                 <ul>
@@ -75,6 +75,12 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{route('admin.orders.list')}}" title="Blank Project">
+                    <i class="fal fa-shopping-cart"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Ordini</span>
+                </a>
             </li>
 
             {{--

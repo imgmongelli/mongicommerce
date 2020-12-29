@@ -1,6 +1,6 @@
 @extends('mongicommerce::admin.template.layout')
 @section('title','Crea una variante per il prodotto ')
-@section('title_icon',"fa-shopping-cart")
+@section('title_icon',"fa-books")
 @section('subtitle',$product->name)
 @section('description',$product->description)
 @section('css')
