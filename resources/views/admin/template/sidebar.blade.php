@@ -123,17 +123,17 @@
         </a>
         <ul class="list-table m-auto nav-footer-buttons">
             <li>
-                <a href="{{route('admin.settings')}}" data-toggle="tooltip" data-placement="top" title="Chat logs">
+                <a href="{{route('admin.settings')}}" data-toggle="tooltip" data-placement="top" title="Impostazioni">
                     <i class="fal fa-cogs"></i>
                 </a>
             </li>
             <li>
-                <a href="{{route('admin.updatepackage')}}" data-toggle="tooltip" data-placement="top" title="Support Chat">
+                <a href="{{route('admin.updatepackage')}}" data-toggle="tooltip" data-placement="top" title="Update application">
                     <i class="fal fa-redo"></i>
                 </a>
             </li>
             <li>
-                <a href="{{route('shop')}}" data-toggle="tooltip" data-placement="top" title="Make a call">
+                <a href="{{route('shop')}}" target="_blank" data-toggle="tooltip" data-placement="top" title="vai al negozio">
                     <i class="fal fa-desktop"></i>
                 </a>
             </li>
