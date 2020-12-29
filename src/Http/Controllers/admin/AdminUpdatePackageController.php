@@ -10,6 +10,5 @@ class AdminUpdatePackageController
 {
     public function update(){
         exec('composer update mongi/mongicommerce');
-        Artisan::call('mongi:install');
     }
 }
