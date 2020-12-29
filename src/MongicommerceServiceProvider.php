@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mongi\Mongicommerce\Console\InstallPackage;
+use Mongi\Mongicommerce\Libraries\Template;
 use Mongi\Mongicommerce\Models\AdminSetting;
+use Mongi\Mongicommerce\Models\Category;
 
 class MongicommerceServiceProvider extends ServiceProvider
 {
@@ -29,6 +31,11 @@ class MongicommerceServiceProvider extends ServiceProvider
             View::share('mongicommerce', AdminSetting::first());
         }
 
+        if(Schema::hasTable('categories')){
+            //inject global information into views
+            View::share('categories', Template::getStructureCategories());
+        }
+
 
         if ($this->app->runningInConsole()) {
 
@@ -37,21 +44,28 @@ class MongicommerceServiceProvider extends ServiceProvider
                 File::delete($config_file);
             }
 
+            // Publishing the config file.
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('mongicommerce.php'),
             ], 'config');
 
-
+            if(file_exists(resource_path('/views/mongicommerce'))){
+                File::deleteDirectory(resource_path('/views/mongicommerce'));
+            }
             // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/mongicommerce'),
-            ], 'views');*/
+            $this->publishes([
+                __DIR__.'/../resources/views/shop' => resource_path('/views/mongicommerce'),
+            ], 'views');
 
+            if(file_exists(public_path('/mongicommerce/template'))){
+                File::deleteDirectory(public_path('/mongicommerce/template'));
+            }
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../resources/assets' => public_path('/mongicommerce/template'),
             ], 'assets');
 
+            // Registering package commands.
             $this->commands([
                 InstallPackage::class
             ]);
@@ -60,9 +74,6 @@ class MongicommerceServiceProvider extends ServiceProvider
             /*$this->publishes([
                 __DIR__.'/../resources/lang' => resource_path('lang/vendor/mongicommerce'),
             ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
 
         }
     }

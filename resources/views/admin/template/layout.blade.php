@@ -1838,6 +1838,9 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <script src="{{js('vendors.bundle.js')}}"></script>
 <script src="{{js('app.bundle.js')}}"></script>
 <script src="{{js('notifications/sweetalert2/sweetalert2.bundle.js')}}"></script>
+<script>
+    let url_update_package = '{{route('admin.updatepackage')}}';
+</script>
 <script src="{{js('app.js')}}"></script>
 @yield('js')
 <!--This page contains the basic JS and CSS files to get started on your project. If you need aditional addon's or plugins please see scripts located at the bottom of each page in order to find out which JS/CSS files to add.-->

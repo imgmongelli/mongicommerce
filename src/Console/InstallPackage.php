@@ -32,6 +32,11 @@ class InstallPackage extends Command
             '--tag' => "assets"
         ]);
 
+        $this->call('vendor:publish', [
+            '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
+            '--tag' => "views"
+        ]);
+
 
         $this->alert('clean tables and installig new tables');
         Artisan::call('migrate:refresh');

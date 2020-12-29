@@ -9,14 +9,14 @@ const formatter = new Intl.NumberFormat('it-IT', {
 });
 
 
-var dynamicColors = function() {
+var dynamicColors = function () {
     var r = Math.floor(Math.random() * 255);
     var g = Math.floor(Math.random() * 255);
     var b = Math.floor(Math.random() * 255);
     return "rgb(" + r + "," + g + "," + b + ")";
 };
 
-function error(message){
+function error(message) {
     Swal.fire({
         title: 'Attenzione!',
         html: message,
@@ -29,12 +29,12 @@ function error422(response) {
     let errors = response.responseJSON.errors;
     let message_error = '';
     $.each(errors, function (key, value) {
-        message_error += "C'è un problema per il campo ("+key+")"+"<br>";
+        message_error += "C'è un problema per il campo (" + key + ")" + "<br>";
     });
     error(message_error);
 }
 
-function success(message,reload,path){
+function success(message, reload, path) {
     Swal.fire({
         title: 'Ottimo lavoro',
         html: message,
@@ -47,7 +47,7 @@ function success(message,reload,path){
         if (reload === true && path === undefined) {
             location.reload()
         }
-        if(reload === true && path !== undefined){
+        if (reload === true && path !== undefined) {
             location.href = path;
         }
     })
@@ -59,14 +59,14 @@ $.ajaxSetup({
     }
 });
 
-function uploadFile(url, data,reload = true, success, xhrpercent ) {
+function uploadFile(url, data, reload = true, success, xhrpercent) {
 
     // data = typeof data !== 'undefined' ? data : {}; //default value for data
 
     var formdata = new FormData();
-    $.each(data,function (index,values) {
-        $.each(values,function (i,value) {
-            formdata.append(index+'['+i+']', value);
+    $.each(data, function (index, values) {
+        $.each(values, function (i, value) {
+            formdata.append(index + '[' + i + ']', value);
         });
     });
 
@@ -91,7 +91,7 @@ function uploadFile(url, data,reload = true, success, xhrpercent ) {
         complete: function (response) {
             if (response.status === 200) {
                 //$('#percentuale').html("Attendi...");
-                if(reload){
+                if (reload) {
                     location.reload();
                 }
 
@@ -124,7 +124,7 @@ function uploadFile(url, data,reload = true, success, xhrpercent ) {
             var max = e.total;
             var current = e.loaded;
             var Percentage = (current * 100) / max;
-            $('#percentuale').html(Number(Percentage).toFixed(0)+'%');
+            $('#percentuale').html(Number(Percentage).toFixed(0) + '%');
             if (Percentage === 100) {
                 if (typeof xhrpercent !== 'undefined') {
                     xhrpercent(e);
@@ -136,20 +136,20 @@ function uploadFile(url, data,reload = true, success, xhrpercent ) {
 
 }
 
-function getMesi(){
+function getMesi() {
     return {
-        1:'Gennaio',
-        2:'Febbraio',
-        3:'Marzo',
-        4:'Aprile',
-        5:'Maggio',
-        6:'Giugno',
-        7:'Luglio',
-        8:'Agosto',
-        9:'Settembre',
-        10:'Ottobre',
-        11:'Novembre',
-        12:'Dicembre',
+        1: 'Gennaio',
+        2: 'Febbraio',
+        3: 'Marzo',
+        4: 'Aprile',
+        5: 'Maggio',
+        6: 'Giugno',
+        7: 'Luglio',
+        8: 'Agosto',
+        9: 'Settembre',
+        10: 'Ottobre',
+        11: 'Novembre',
+        12: 'Dicembre',
     };
 }
 
@@ -160,6 +160,20 @@ function hexToRgb(hex) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16)
     } : null;
+}
+
+function updatePackage() {
+    $.ajax({
+        method: 'POST',
+        url: url_update_package,
+        'statusCode': {
+            422: function (response) {
+            }
+        },
+        success: function (response) {
+            console.log(response);
+        }
+    });
 }
 
 

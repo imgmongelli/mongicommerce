@@ -128,8 +128,8 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Support Chat">
-                    <i class="fal fa-life-ring"></i>
+                <a href="javascript:void(0);" onclick="updatePackage();" data-toggle="tooltip" data-placement="top" title="Support Chat">
+                    <i class="fal fa-redo"></i>
                 </a>
             </li>
             <li>
