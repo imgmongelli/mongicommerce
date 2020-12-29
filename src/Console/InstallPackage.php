@@ -37,7 +37,7 @@ class InstallPackage extends Command
             '--tag' => "views"
         ]);
 
-
+/*
         $this->alert('clean tables and installig new tables');
         Artisan::call('migrate:refresh');
 
@@ -49,7 +49,7 @@ class InstallPackage extends Command
 
         $this->info('Installig types Payments');
         $this->call(TypesPaymentSeeder::class);
-
+*/
         $this->alert('Terminate successfully');
     }
 }

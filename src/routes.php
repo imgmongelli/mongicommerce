@@ -58,4 +58,4 @@ Route::post('/admin/prodotto/crea-variante-prodotto',[AdminNewProductVariationCo
 
 
 //refresh
-Route::post('/admin/update',[AdminUpdatePackageController::class,'update'])->name('admin.updatepackage');
+Route::get('/admin/update',[AdminUpdatePackageController::class,'update'])->name('admin.updatepackage');

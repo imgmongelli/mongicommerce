@@ -128,7 +128,7 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);" onclick="updatePackage();" data-toggle="tooltip" data-placement="top" title="Support Chat">
+                <a href="{{route('admin.updatepackage')}}" data-toggle="tooltip" data-placement="top" title="Support Chat">
                     <i class="fal fa-redo"></i>
                 </a>
             </li>
