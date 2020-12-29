@@ -9,23 +9,23 @@ use Mongi\Mongicommerce\Seedeers\SettingsSeeder;
 use Mongi\Mongicommerce\Seedeers\StasusesOrderSeeder;
 use Mongi\Mongicommerce\Seedeers\TypesPaymentSeeder;
 
-class InstallPackage extends Command
+class UpdatePackage extends Command
 {
-    protected $signature = 'mongicommerce:install';
+    protected $signature = 'mongicommerce:update';
 
-    protected $description = 'Install mongicommerce';
+    protected $description = 'Update mongicommerce';
 
     public function handle()
     {
-        $this->alert('Installing Mongicommerce...');
+        $this->alert('Updating Mongicommerce...');
 
-        $this->info('Installing configuration...');
+        $this->info('Updating configuration...');
 
         $this->call('vendor:publish', [
             '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
             '--tag' => "config"
         ]);
-        $this->info('Installing Admin Template');
+        $this->info('Updating Admin Template');
 
         $this->call('vendor:publish', [
             '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
@@ -37,19 +37,6 @@ class InstallPackage extends Command
             '--tag' => "views"
         ]);
 
-
-        $this->alert('clean tables and installig new tables');
-        Artisan::call('migrate:refresh');
-
-        $this->info('Installig settings e-commerce');
-        $this->call(SettingsSeeder::class);
-
-        $this->info('Installig Statuses');
-        $this->call(StasusesOrderSeeder::class);
-
-        $this->info('Installig types Payments');
-        $this->call(TypesPaymentSeeder::class);
-
-        $this->alert('Terminate successfully');
+        $this->alert('Update successfully');
     }
 }

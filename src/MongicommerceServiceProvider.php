@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Mongi\Mongicommerce\Console\InstallPackage;
+use Mongi\Mongicommerce\Console\UpdatePackage;
 use Mongi\Mongicommerce\Libraries\Template;
 use Mongi\Mongicommerce\Models\AdminSetting;
 use Mongi\Mongicommerce\Models\Category;
@@ -67,7 +68,8 @@ class MongicommerceServiceProvider extends ServiceProvider
 
             // Registering package commands.
             $this->commands([
-                InstallPackage::class
+                InstallPackage::class,
+                UpdatePackage::class
             ]);
 
             // Publishing the translation files.
