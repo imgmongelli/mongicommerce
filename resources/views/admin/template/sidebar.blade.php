@@ -133,8 +133,8 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="Make a call">
-                    <i class="fal fa-phone"></i>
+                <a href="{{route('shop')}}" data-toggle="tooltip" data-placement="top" title="Make a call">
+                    <i class="fal fa-desktop"></i>
                 </a>
             </li>
         </ul>
