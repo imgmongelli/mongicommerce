@@ -120,7 +120,7 @@
                     <div id="div_details" class="panel-content"></div>
                     <div class="col-md-12 mt-2">
                         <div class="form-group">
-                            <label class="form-label" for="name">Disponibilità prodotti</label>
+                            <label class="form-label" for="name">Disponibilità prodotto (n°pezzi)</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
