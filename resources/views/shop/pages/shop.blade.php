@@ -1,6 +1,6 @@
 @extends('mongicommerce.template.layout')
 @section('title',$category_name)
-@section('description','Questa è una breve descrizione')
+@section('description',$category_description)
 @section('css')
 @endsection
 
@@ -18,7 +18,7 @@
                     <p class="badge badge-danger">{{$product->category->name}}</p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-primary">Acquista</a>
+                    <a href="{{route('shop.single.product',$product->id)}}" class="btn btn-primary">Acquista</a>
                 </div>
             </div>
         </div>

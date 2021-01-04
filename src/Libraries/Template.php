@@ -4,8 +4,12 @@
 namespace Mongi\Mongicommerce\Libraries;
 
 
+use Illuminate\Http\Request;
 use Mongi\Mongicommerce\Models\Category;
+use Mongi\Mongicommerce\Models\Detail;
 use Mongi\Mongicommerce\Models\Product;
+use Mongi\Mongicommerce\Models\ProductItem;
+use Mongi\Mongicommerce\Models\ProductItemDetail;
 
 
 class Template
@@ -56,5 +60,62 @@ class Template
             }
         }
         return $products;
+    }
+
+    public static function getDetailsFields(Product $product){
+        $element = '<div class="row">';
+
+        foreach($product->details->groupBy('product_detail_id') as $key => $details){
+            $element.= self::generateDetailHtml(Detail::find($key),$details,$product->id);
+        }
+        $element.= '<button class="btn btn-primary mt-3">Salva nel carrello</button>';
+        $element.= '<p class="show_error_product" style="color: red; display: none;">Prodotto non disponibile</p>';
+        $element .= '</div>';
+        return $element;
+    }
+
+    public static function generateDetailHtml($detail,$values,$product_id){
+        $type = $detail->type;
+        $html = '';
+        $filters = Session()->get('filters');
+        if($type === 'select'){
+            $html = '<label>'.$detail->name.'</label>';
+            $html .= '<select onchange="getVariationProduct()" data-product_id="'.$product_id.'" data-detail_id="'.$detail->id .'" class="form-control mongifield_into_product">';
+            $html .= '<option value="">Seleziona</option>';
+            $selected = '';
+            foreach ($values as $value){
+                if(isset($filters[$detail->id])){
+                    if($filters[$detail->id] == $value->detail->id){
+                        $selected = 'selected';
+                    }else{
+                        $selected = '';
+                    }
+                }
+                $html .= '<option '.$selected.' value="'.$value->detail->id.'">'.$value->detail->value.'</option>';
+            }
+            $html .= '</select>';
+        }
+
+        if($type === 'checkbox'){
+            $html = '';
+            foreach($values as $value){
+                $html .= '<div class="custom-control custom-checkbox mongifield">';
+                $html .= '<input data-detail_id="'.$detail->id .'" type="checkbox" class="custom-control-input mongifield" id="defaultUnchecked_'.$value->id.'">';
+                $html .= '<label class="custom-control-label" for="defaultUnchecked_'.$value->id.'">'.$value->value.'</label>';
+                $html .= '</div>';
+            }
+        }
+
+        if($type === 'radio'){
+            $html = '';
+            foreach($values as $value){
+                $html .= '<div class="custom-control custom-radio mongifield">';
+                $html .= '<input name="radio_'.$value->detail_id.'" data-detail_id="'.$detail->id .'" type="radio" class="custom-control-input mongifield" id="defaultradio_'.$value->id.'">';
+                $html .= '<label class="custom-control-label" for="defaultradio_'.$value->id.'">'.$value->value.'</label>';
+                $html .= '</div>';
+            }
+        }
+
+        return $html;
     }
 }

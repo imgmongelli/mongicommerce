@@ -11,13 +11,14 @@ use Mongi\Mongicommerce\Models\Product;
 
 class ShopController extends Controller
 {
-    public function page($id=null){
-        $products = Template::getProducts($id);
-        $category = Category::find($id);
+    public function page($category_id=null){
+        $products = Template::getProducts($category_id);
+        $category = Category::find($category_id);
         $category_name = '';
+        $category_description = '';
         if($category){
             $category_name = $category->name;
         };
-        return view('mongicommerce.pages.shop',compact('products','category_name'));
+        return view('mongicommerce.pages.shop',compact('products','category_name','category_description'));
     }
 }

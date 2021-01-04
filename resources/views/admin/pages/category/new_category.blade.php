@@ -41,7 +41,7 @@
                             <span class="help-block">Nome delle categoria</span>
                         </div>
                         <div class="form-group">
-                            <label class="form-label" for="sub-category">Sotto categoria</label>
+                            <label class="form-label" for="sub-category">Categoria Madre</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text py-1 px-3">
@@ -55,7 +55,7 @@
                                     <option value="">Seleziona</option>
                                 </select>
                             </div>
-                            <span class="help-block">Some help content goes here</span>
+                            <span class="help-block">Seleziona una categoria a cui far appartenere la nuova</span>
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="description">Descrizione</label>
