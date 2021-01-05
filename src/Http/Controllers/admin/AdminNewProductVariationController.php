@@ -5,6 +5,7 @@ namespace Mongi\Mongicommerce\Http\Controllers\admin;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Models\ConfigurationField;
 use Mongi\Mongicommerce\Models\Product;
@@ -26,6 +27,7 @@ class AdminNewProductVariationController extends Controller
             'category_id' => 'required',
             'quantity' => 'required',
             'price' => 'required',
+            'image' => 'required',
             'details' => 'required|min:4',
         ]);
         $product_id = $r->get('product_id');
@@ -36,6 +38,7 @@ class AdminNewProductVariationController extends Controller
         $price = $r->get('price');
         $product_name = $r->get('product_name');
         $product_description = $r->get('product_description');
+        $get_image = $r->get('image');
 
         $product = Product::find($product_id);
 
@@ -43,9 +46,26 @@ class AdminNewProductVariationController extends Controller
         $product_item->product_id = $product->id;
         $product_item->name = $product_name;
         $product_item->description = $product_description;
-        $product_item->img = null;
+        $product_item->image = null;
         $product_item->price = $price;
         $product_item->quantity = $quantity;
+        $product_item->save();
+
+        $base64_str = substr($get_image, strpos($get_image, ",")+1);
+        $image = base64_decode($base64_str);
+        $destinationPath = public_path().'/uploads/products_img/'.$product_item->product_id.'/'.$product_item->id.'/';
+        $destinationPathDB = url('/').'/uploads/products_img/'.$product_item->product_id.'/'.$product_item->id.'/';
+
+        if(!File::isDirectory($destinationPath)){
+            File::makeDirectory($destinationPath, $mode = 0777, true, true);
+        }
+
+        $image_name = time().'.'.'jpeg';
+        $path_file = $destinationPath.$image_name;
+        $dbPath = $destinationPathDB.$image_name;
+        file_put_contents($path_file, $image);
+
+        $product_item->image = $dbPath;
         $product_item->save();
 
         foreach($details as $detail){

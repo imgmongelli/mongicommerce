@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <img src="https://placehold.it/600x400" alt="">
+            <img src="{{$product->image}}" alt="">
             <p>{{$product->description}}</p>
 
 
