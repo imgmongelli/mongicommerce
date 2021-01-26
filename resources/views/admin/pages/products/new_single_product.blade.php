@@ -1,10 +1,9 @@
 @extends('mongicommerce::admin.template.layout')
-@section('title','Crea una variante per il prodotto ')
-@section('title_icon',"fa-books")
-@section('subtitle',$product->name)
-@section('description',$product->description)
+@section('title','Crea un singolo prodotto')
+@section('title_icon',"fa-book")
+@section('subtitle','')
+@section('description','Sarà possibile creare un singolo prodotto')
 @section('css')
-    <link rel="stylesheet" media="screen, print" href="{{css('datagrid/datatables/datatables.bundle.css')}}">
     <link rel="stylesheet" media="screen, print" href="{{css('formplugins/cropperjs/cropper.css')}}">
     <link rel="stylesheet" media="screen, print" href="{{css('fa-solid.css')}}">
 @endsection
@@ -32,7 +31,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nome prodotto</label>
-                                    <input type="text" value="{{$product->name}}" id="product_name" class="form-control">
+                                    <input type="text" value="" id="product_name" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -42,10 +41,12 @@
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
                                     <textarea name="" id="product_description" class="form-control"
-                                              rows="10">{{$product->description}}</textarea>
+                                              rows="10"></textarea>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -576,7 +577,9 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        <select class="form-control" disabled name="categories" id="categories"></select>
+                                        <select class="form-control" name="categories" id="categories">
+                                            <option value="">Seleziona</option>
+                                        </select>
                                     </div>
                                     <span class="help-block">Categoria da associare ai dettagli</span>
                                 </div>
@@ -615,7 +618,7 @@
                     </div>
                 </div>
                 <div class="panel-container show">
-                    <div id="div_details" class="panel-content"></div>
+
                     <div class="col-md-12 mt-2">
 
                         <div class="form-group">
@@ -658,70 +661,24 @@
 
             </div>
 
+
         </div>
     </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Varianti per questo prodotto
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        <!-- datatable start -->
-                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                            <thead>
-                            <tr>
-                                <th>Nome Prodotto</th>
-                                <th>Descrizione Prodotto</th>
-                                <th>Dettagli</th>
-                                <th>Prezzo</th>
-                                <th>Quantità</th>
-                                <th>Azioni</th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($items as $item)
-                                <tr>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->description}}</td>
-                                    <td>
-                                        @foreach($item->details as $detail)
-                                            <span class="badge badge-danger">{{$detail->detail->value}}</span>
-                                        @endforeach
-                                    </td>
-                                    <td><input value="{{$item->price}}" class="form-control" type="number"></td>
-                                    <td><input value="{{$item->quantity}}" class="form-control" type="number"></td>
-                                    <td><button class="btn btn-dark"><i class="fal fa-trash"></i></button></td>
-                                </tr>
-                            @endforeach
-
-
-
-                            </tbody>
-                        </table>
-                        <!-- datatable end -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 @section('js')
-    <script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
+
     <script src="{{js('formplugins/cropperjs/cropper.js')}}"></script>
     <script src="{{js('custom_cropper.js')}}"></script>
     <script>
-        let product_id = '{{$product->id}}';
-        let category_id = '{{$product->category_id}}';
+
+        $(function () {
+            getCategories();
+            $('#categories').change(function () {
+                getConfigurationField();
+            });
+        });
+
         function getCategories() {
             let url_get_categories = '{{route('admin.post.get.categories')}}';
             $.ajax({
@@ -734,70 +691,16 @@
                 },
                 success: function (response) {
                     $.each(response, function (index, value) {
-                        if(category_id  == value.id){
-                            $('#categories').append($("<option />").val(value.id).text(value.name));
-                        }
-
+                        $('#categories').append($("<option />").val(value.id).text(value.name));
                     });
-                    getDetails();
-                    getConfigurationField();
                 }
             });
-        }
-
-        $(function () {
-            getCategories();
-        });
-        function getDetails() {
-            let url = '{{route('admin.post.get.details')}}';
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {
-                    category_id: $('#categories').val()
-                },
-                'statusCode': {
-                    422: function (response) {
-                    }
-                },
-                success: function (response) {
-                    generateDetails(response);
-                }
-            });
-        }
-        function generateDetails(details) {
-            if (details.length > 0) {
-                let html = '';
-                $.each(details, function (index, value) {
-                    html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
-                    html += '<div class="form-group">';
-                    html += '<label class="form-label" for="name">' + value.name + '</label>';
-                    html += value.html;
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-                $('#div_details').html(html);
-            } else {
-                $('#div_details').html('');
-            }
-
         }
         function saveProduct() {
             let details = [];
             let configuration_fields = [];
-            let url = '{{route('admin.post.product.variation.new')}}';
+            let url = '{{route('admin.post.new.single.product')}}';
             let result = $image.cropper("getCroppedCanvas",{maxWidth: 670, maxHeight: 670, fillColor: "#fff"}, "");
-
-
-            $.each($('.mongifield'), function (index, value) {
-                let detail_id = $(this).data('detail_id');
-                let detail_value = $(this).val();
-                if (detail_value !== '') {
-                    details.push({'detail_id': detail_id, 'detail_value': detail_value});
-                }
-            });
 
             $.each($('.mongiconfigurationfield'), function (index, value) {
                 let configuration_field_id = $(this).data('configuration_id');
@@ -816,8 +719,6 @@
                     category_id: $('#categories').val(),
                     quantity: $('#quantity').val(),
                     price: $('#price').val(),
-                    product_id : product_id,
-                    details: JSON.stringify(details),
                     configuration_fields : JSON.stringify(configuration_fields),
                     image : result.toDataURL(uploadedImageType)
                 },
@@ -868,17 +769,6 @@
                 $('#panel_configuration_field').hide();
             }
         }
-    </script>
-    <script>
-        $(document).ready(function()
-        {
-            // initialize datatable
-            $('#dt-basic-example').dataTable(
-                {
-                    responsive: true,
-                });
-        });
-
     </script>
 
 

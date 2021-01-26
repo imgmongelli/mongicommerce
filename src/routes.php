@@ -4,6 +4,7 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminDetailController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewSingleProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminOrdersController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminProductsListController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
@@ -34,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
     //products
     Route::get('/admin/prodotto/crea-prodotto',[AdminNewProductController::class,'page'])->name('admin.product.new');
     Route::get('/admin/prodotti',[AdminProductsListController::class,'page'])->name('admin.product.list');
+    Route::get('/admin/prodotto/crea-singolo-prodotto',[AdminNewSingleProductController::class,'page'])->name('admin.new.single.product');
     Route::get('/admin/prodotto-variante/{id_product}',[AdminNewProductVariationController::class,'page'])->name('admin.product.new.variante');
     //orders
     Route::get('/admin/ordini',[AdminOrdersController::class,'page'])->name('admin.orders.list');
@@ -58,6 +60,7 @@ Route::group(['middleware' => ['web']], function () {
     //product
     Route::post('/admin/prodotto/crea-prodotto',[AdminNewProductController::class,'createNewProduct'])->name('admin.post.product.new');
     Route::post('/admin/prodotto/crea-variante-prodotto',[AdminNewProductVariationController::class,'createNewVariation'])->name('admin.post.product.variation.new');
+    Route::post('/admin/prodotto/crea-singolo-prodotto',[AdminNewSingleProductController::class,'createNewSingleProduct'])->name('admin.post.new.single.product');
 
 
     //refresh

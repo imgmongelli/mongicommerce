@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->text('image')->nullable();
             $table->unsignedBigInteger('category_id');
+            $table->boolean('single_product')->default(false);
             $table->timestamps();
 
             //foreign

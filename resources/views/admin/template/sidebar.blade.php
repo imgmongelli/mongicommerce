@@ -57,25 +57,26 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Dettagli</span>
                 </a>
             </li>
-            <li class="nav-title">Negozio</li>
+            <li class="nav-title">Prodotti</li>
             <li>
-                <a href="#" title="Category" data-filter-tags="category">
-                    <i class="fal fa-books"></i>
-                    <span class="nav-link-text" data-i18n="nav.category">Prodotti</span>
+                <a href="{{route('admin.new.single.product')}}" title="Blank Project">
+                    <i class="fal fa-book"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Nuovo singolo prodotto</span>
                 </a>
-                <ul>
-                    <li>
-                        <a href="{{route('admin.product.new')}}" title="Menu child"  data-filter-tags="utilities menu child">
-                            <span class="nav-link-text" >Crea prodotto</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.product.list')}}" title="Menu child"  data-filter-tags="utilities menu child">
-                            <span class="nav-link-text" >Lista prodotti</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
+            <li>
+                <a href="{{route('admin.product.new')}}" title="Blank Project">
+                    <i class="fal fa-books"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Nuovo prodotto con variante</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('admin.product.list')}}" title="Menu child" >
+                    <i class="fal fa-list"></i>
+                    <span class="nav-link-text" >Lista prodotti</span>
+                </a>
+            </li>
+            <li class="nav-title">Negozio</li>
             <li>
                 <a href="{{route('admin.orders.list')}}" title="Blank Project">
                     <i class="fal fa-shopping-cart"></i>

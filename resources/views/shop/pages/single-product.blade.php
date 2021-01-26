@@ -14,7 +14,11 @@
 
         </div>
         <div class="col-md-4">
+            {{$product->category->name}}
+            {{$product->price}}
             {!! $details_fields !!}
+            {!! $configuration_fields !!}
+            {!! $btn_cart !!}
         </div>
 
 

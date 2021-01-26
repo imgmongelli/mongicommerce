@@ -52,55 +52,8 @@
             </div>
         </div>
     </div>
-
-    <div id="whole_div_details" style="display: none;" class="row">
-        <div class="col-md-12">
-            <div id="panel-3" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Campi dettagli
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content" id="div_details">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="whole_div_configuration_field" style="display: none;" class="row">
-        <div class="col-md-12">
-            <div id="panel-3" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Campi specifiche
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content" id="div_configuration_field">
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div id="panel-3" class="panel">
                 <div class="panel-hdr">
                     <h2>
@@ -116,7 +69,7 @@
                 <div class="panel-container show">
                     <div class="panel-content">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nome campo</label>
                                     <div class="input-group">
@@ -132,27 +85,7 @@
                                     <span class="help-block">Nome del campo </span>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label" for="name">Tipo dettaglio</label>
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text py-1 px-3">
-                                                <span class="icon-stack">
-                                                   <i class="fal fa-brackets-curly"></i>
-                                                </span>
-                                            </span>
-                                        </div>
-                                        <select class="form-control" name="type" id="type">
-                                            <option value="">Seleziona</option>
-                                            @foreach($types as $k => $type)
-                                                <option value="{{$k}}">{{$k}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <span class="help-block">Nome del campo </span>
-                                </div>
-                            </div>
+
                         </div>
                         <div id="div_values"  class="row">
                             <div class="col-md-12">
@@ -172,13 +105,7 @@
                 </div>
             </div>
         </div>
-
-    </div>
-
-
-
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div id="panel-3" class="panel">
                 <div class="panel-hdr">
                     <h2>
@@ -237,8 +164,55 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div id="whole_div_details" style="display: none;" class="row">
+        <div class="col-md-12">
+            <div id="panel-3" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Campi dettagli
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content" id="div_details">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="whole_div_configuration_field" style="display: none;" class="row">
+        <div class="col-md-12">
+            <div id="panel-3" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Campi specifiche
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content" id="div_configuration_field">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 @endsection
 @section('js')
@@ -323,7 +297,7 @@
                 data: {
                     category: $('#categories').val(),
                     name: $('#name_detail').val(),
-                    type: $('#type').val(),
+                    type: 'select',
                     values: $('#values_type').val()
                 },
                 'statusCode': {
@@ -334,6 +308,7 @@
                 success: function (response) {
                     getDetails();
                     $('#name_detail').val('');
+                    $('.js-example-basic-single').val('').trigger('change');
                     success('Dettaglio creato con successo', false);
                 }
             });

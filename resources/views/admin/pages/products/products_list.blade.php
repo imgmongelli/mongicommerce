@@ -47,7 +47,11 @@
                                     <td>{{$product->created_at->format('d/m/Y')}}</td>
                                     <td>{{$product->updated_at->format('d/m/Y')}}</td>
                                     <td>
-                                        <a href="{{route('admin.product.new.variante',$product->id)}}" class="btn btn-danger">Varianti</a>
+                                        @if($product->single_product)
+                                            <a href="#" class="btn btn-dark">Modifica</a>
+                                        @else
+                                            <a href="{{route('admin.product.new.variante',$product->id)}}" class="btn btn-danger">Varianti</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

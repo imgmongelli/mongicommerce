@@ -15,11 +15,14 @@ class ShopSingleProductController extends Controller
 {
      public function page($id,$product_item_id = null){
          $product = Product::find($id);
-         $details_fields = Template::getDetailsFields($product);
-         if($product_item_id != null){
-             $product = ProductItem::find($product_item_id);
+         if($product_item_id == null){
+             return redirect()->route('shop.single.product',[$product->id,$product->items->first()->id]);
          }
+         $details_fields = Template::getDetailsFields($product,$product_item_id);
+         $configuration_fields = Template::getConfigurationFields($product_item_id);
+         $btn_cart = Template::buttonCart($product_item_id);
 
-         return view('mongicommerce.pages.single-product',compact('product','details_fields'));
+
+         return view('mongicommerce.pages.single-product',compact('product','details_fields','configuration_fields','btn_cart'));
      }
 }

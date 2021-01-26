@@ -11,4 +11,8 @@ class ProductConfigurationField extends Model
 {
     use HasFactory;
 
+    public function field(){
+        return $this->belongsTo(ConfigurationField::class,'config_field_id');
+    }
+
 }
