@@ -10,6 +10,7 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminProductsListController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminUpdatePackageController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopSingleProductController;
@@ -21,9 +22,11 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/shop/{id?}',[ShopController::class,'page'])->name('shop');
     Route::get('/prodotto/{id}/{item_id?}',[ShopSingleProductController::class,'page'])->name('shop.single.product');
+    Route::get('/cart/',[ShopCartController::class,'page'])->name('shop.cart');
 
     Route::post('/shop/get/product-information',[ShopShowVariationProductController::class,'getData'])->name('shop.get.product.information');
-
+    Route::post('/shop/addtocart',[ShopCartController::class,'addToCart'])->name('shop.addtocart');
+    Route::post('/shop/getcartelements',[ShopCartController::class,'getCartElements'])->name('shop.getcartelements');
 
     /*****************
      *------GET------*

@@ -41,6 +41,7 @@ class InstallPackage extends Command
         $this->alert('clean tables and installig new tables');
         Artisan::call('migrate:refresh');
 
+
         $this->info('Installig settings e-commerce');
         $this->call(SettingsSeeder::class);
 
@@ -49,6 +50,9 @@ class InstallPackage extends Command
 
         $this->info('Installig types Payments');
         $this->call(TypesPaymentSeeder::class);
+
+        $this->info('Installig breeze');
+        Artisan::call('breeze:install');
 
         $this->alert('Terminate successfully');
     }

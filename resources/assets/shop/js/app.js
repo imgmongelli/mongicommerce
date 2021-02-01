@@ -4,6 +4,8 @@ $.ajaxSetup({
     }
 });
 
+updateCart();
+
 function getVariationProduct() {
     let data = [];
     let product_id = '';
@@ -45,5 +47,46 @@ function getVariationProduct() {
 
 function addToCart(el) {
     let product_item_id = $(el).data('product_item_id');
-    alert();
+    let route_add_to_cart = url_add_to_cart;
+
+    $.ajax({
+        method: 'POST',
+        url: route_add_to_cart,
+        data: {
+            product_item_id: product_item_id,
+        },
+        'statusCode': {
+            422: function (response) {
+                //get first error to show it on top of pagse
+                bootoast.toast({
+                    message: response.responseJSON.errors,
+                    position: 'top',
+                    icon: 'exclamation-sign',
+                    type: 'error',
+                    animationDuration: 300,
+                });
+            }
+        },
+        success: function (response) {
+            updateCart();
+            bootoast.toast({
+                message: 'Hai aggiunto il prodotto al tuo carrello! Continua oppure <br> vai al <a href="' + url_cart_page + '"> <span class="fa fa-shopping-cart" aria-hidden="true"></span>  Carrello</a>',
+                position: 'rightTop',
+                icon: 'exclamation-sign',
+                type: 'warning',
+                animationDuration: 300,
+            });
+        }
+    });
+
+}
+
+function updateCart() {
+    $.ajax({
+        method: 'POST',
+        url: url_get_cart_elements,
+        success: function (response) {
+            $('.space_cart').text(response);
+        }
+    });
 }

@@ -9,42 +9,23 @@
     <meta name="author" content="">
 
     <title>@yield('title')</title>
+    <script src="https://kit.fontawesome.com/23e0351c87.js" crossorigin="anonymous"></script>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.css')}}">
     @yield('css')
+
 
 </head>
 
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">{{$mongicommerce->shop_name}}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Shop
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    @foreach($categories as $category)
-                        <a class="dropdown-item" href="{{route('shop',$category['id'])}}">{{$category['text']}}</a>
-                    @endforeach
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
-        </ul>
-    </div>
+    @include('mongicommerce.template.menu')
 </nav>
 
 
@@ -81,7 +62,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
     let url_get_product_variation_information = '{{route('shop.get.product.information')}}';
+    let url_add_to_cart = '{{route('shop.addtocart')}}';
+    let url_get_cart_elements = '{{route('shop.getcartelements')}}';
+    let url_cart_page = '{{route('shop.cart')}}';
 </script>
+<script src="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.js')}}"></script>
 <script src="{{asset('mongicommerce/template/shop/js/app.js')}}"></script>
 @yield('js')
 

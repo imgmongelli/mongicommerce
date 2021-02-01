@@ -1,13 +1,4 @@
 {
-    "name": "mongi/mongicommerce",
-    "description": "An elegant e-commerce package powered for the laravel framework.",
-    "keywords": [
-        "mongi",
-        "mongicommerce"
-    ],
-    "homepage": "https://github.com/mongi/mongicommerce",
-    "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "Gianluca Mongelli",
@@ -15,14 +6,6 @@
             "role": "Developer"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {
-        "php": "^7.3"
-    },
-    "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^8.0"
-    },
     "autoload": {
         "classmap": [
             "src/Models"
@@ -39,14 +22,10 @@
             "Mongi\\Mongicommerce\\Tests\\": "tests"
         }
     },
-    "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
-    },
     "config": {
         "sort-packages": true
     },
+    "description": "An elegant e-commerce package powered for the laravel framework.",
     "extra": {
         "laravel": {
             "providers": [
@@ -56,5 +35,26 @@
                 "Mongicommerce": "Mongi\\Mongicommerce\\MongicommerceFacade"
             }
         }
-    }
+    },
+    "homepage": "https://github.com/mongi/mongicommerce",
+    "keywords": [
+        "mongi",
+        "mongicommerce"
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "name": "mongi/mongicommerce",
+    "require": {
+        "php": "^7.4",
+        "laravel/breeze": "dev-master"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "type": "library"
 }

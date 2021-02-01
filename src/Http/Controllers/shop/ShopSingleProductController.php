@@ -1,15 +1,9 @@
 <?php
-
-
 namespace Mongi\Mongicommerce\Http\Controllers\shop;
-
 
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Libraries\Template;
 use Mongi\Mongicommerce\Models\Product;
-
-use Mongi\Mongicommerce\Models\ProductItem;
-use Mongi\Mongicommerce\Models\ProductItemDetail;
 
 class ShopSingleProductController extends Controller
 {
@@ -21,8 +15,6 @@ class ShopSingleProductController extends Controller
          $details_fields = Template::getDetailsFields($product,$product_item_id);
          $configuration_fields = Template::getConfigurationFields($product_item_id);
          $btn_cart = Template::buttonCart($product_item_id);
-
-
          return view('mongicommerce.pages.single-product',compact('product','details_fields','configuration_fields','btn_cart'));
      }
 }
