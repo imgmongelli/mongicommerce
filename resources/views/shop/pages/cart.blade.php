@@ -37,11 +37,12 @@
             <div id="section_cart"></div>
 
             <div style="float: right;" class="row">
-                <div class="col-md-6 btn-wrap">
-                    <a href="{{route('shop.shipment')}}" class="btn btn-primary">Prosegui</a>
-                </div>
+
                 <div class="col-md-6 total">
                     <p>Totale: <span id="sum_cart"></span></p>
+                </div>
+                <div class="col-md-6 btn-wrap">
+                    <a href="{{route('shop.shipment')}}" class="btn btn-primary">Prosegui</a>
                 </div>
             </div>
         </div>

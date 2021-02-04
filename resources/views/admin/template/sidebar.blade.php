@@ -83,6 +83,13 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Ordini</span>
                 </a>
             </li>
+            <li class="nav-title">Clienti</li>
+            <li>
+                <a href="#" title="Blank Project">
+                    <i class="fal fa-users"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Lista Clienti</span>
+                </a>
+            </li>
 
             {{--
             <!-- Example of open and active states -->

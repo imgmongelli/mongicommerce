@@ -1,11 +1,13 @@
 @extends('mongicommerce.template.layout')
-@section('title','pagamento')
-@section('description',"Concludi l'ordine")
+@section('title','Spedizione')
+@section('description',"INSERISCI I DATI DI SPEDIZIONE")
 @section('css')
 @endsection
 @section('content')
     <div class="row">
         <div class="col-md-6">
+            @auth
+            @else
             <fieldset>
                 <legend>EFFETTUA IL LOGIN</legend>
                 <form method="POST" action="{{ route('login') }}">
@@ -37,6 +39,7 @@
                 </form>
             </fieldset>
             <hr>
+            @endauth
             <fieldset>
                 <legend>INSERISCI I DATI DI SPEDIZIONE</legend>
                 <!-- Text input-->
