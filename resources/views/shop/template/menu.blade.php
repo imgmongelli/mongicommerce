@@ -15,7 +15,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{route('shop.cart')}}">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge badge-success space_cart">0</span>
             </a>

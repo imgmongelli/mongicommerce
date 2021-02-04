@@ -1,6 +1,7 @@
 <?php
 namespace Mongi\Mongicommerce\Http\Controllers\shop;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
@@ -73,6 +74,23 @@ class ShopCartController extends Controller
 
     }
 
+    public static function calculateTotalPrice(array $cart)
+    {
+        $info_totale = [];
+        $total = [];
+        $totale_weight = [];
+        foreach ($cart as $element) {
+            $total[] = $element['total'];
+            $totale_weight[] = $element['sum_weight'];
+        }
+        $info_totale = [
+            'total' => array_sum($total),
+            'totale_weight' => array_sum($totale_weight)
+        ];
+
+        return $info_totale;
+    }
+
     public static function getCountableCart($arr)
     {
         if (!is_null($arr)) {
@@ -94,6 +112,84 @@ class ShopCartController extends Controller
         } else {
             $products_in_cart = Cart::where('user_id', Auth::user()->id)->count();
             return response()->json($products_in_cart);
+        }
+    }
+
+    public function getCartProducts()
+    {
+        $products = [];
+        if (!Auth::check()) {
+            $ids = [];
+            session()->forget('products.ids');
+            $productsCart = session('cart');
+            if(isset($productsCart)){
+                foreach ($productsCart as $id => $count) {
+                    $product = ProductItem::where('id', $id)->first();
+                    $ids[] = $id;
+                    $products[] = [
+                        'detail' => $product,
+                        'single_price' => $product->price,
+                        'count' => $count,
+                        'single_weight' => $product->weight,
+                        'sum_weight' => $product->weight * $count,
+                        'total' => $product->price * $count
+                    ];
+                }
+            }
+            session()->put('products.ids',$ids);
+
+        } else {
+            $productsCart = Cart::where('user_id', Auth::user()->id)->get();
+            foreach ($productsCart as $element) {
+                $product = ProductItem::where('id', $element->product_item_id)->first();
+                $products[] = [
+                    'detail' => $product,
+                    'single_price' => $product->price,
+                    'count' => $element->quantity,
+                    'single_weight' => 0,
+                    'sum_weight' => 0,
+                    'total' => $product->price * $element->quantity
+                ];
+            }
+        }
+
+        return response()->json(['product' => $products , 'total' => self::calculateTotalPrice($products)]);
+    }
+
+    public function incrementOrDecrementElementInCart(Request $r){
+        $product_id = $r->get('product_id');
+        $operator = $r->get('operator');
+        $product = ProductItem::find($product_id);
+        if (!Auth::check()) {
+            $cart = session('cart');
+            $count_product_in_session = $cart[$product_id];
+            if($product->quantity > $count_product_in_session || $operator < 0){
+                if($count_product_in_session > 1 || $operator > 0){
+                    $cart[$product_id] = $count_product_in_session + $operator;
+                    session()->put('cart',$cart);
+                }
+            }
+        }else{
+            $cart = Cart::where('product_item_id',$product_id)->first();
+            if($product->quantity > $cart->quantity || $operator < 0){
+                if($cart->quantity > 1 || $operator > 0){
+                    $cart->quantity = $cart->quantity + $operator;
+                    $cart->save();
+                }
+            }
+        }
+
+    }
+
+    public function deleteFromCart(Request $r){
+        $product_id = $r->get('product_id');
+        if (!Auth::check()) {
+            $cart_in_session = session('cart');
+            unset($cart_in_session[$product_id]);
+            session()->put('cart',$cart_in_session);
+        }else{
+            Cart::where('product_item_id',$product_id)->delete();
+            return true;
         }
     }
 }

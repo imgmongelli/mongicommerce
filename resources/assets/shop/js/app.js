@@ -90,3 +90,9 @@ function updateCart() {
         }
     });
 }
+
+const formatter = new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 2
+});

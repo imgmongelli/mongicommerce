@@ -2,6 +2,7 @@
 
 namespace Mongi\Mongicommerce;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -19,6 +20,12 @@ class MongicommerceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Blade::directive('money', function ($amount){
+            #return $fmt->formatCurrency($amount,"EUR");
+            /*return "<?= $fmt->formatCurrency($amount,'EUR'); ?>";*/
+            return "<?= abs($amount) > 1000 ? '€ ' .number_format($amount, 0, ',', '.') : '€ ' . number_format($amount, 2, ',', '.') ?>";
+
+        });
         /*
          * Optional methods to load your package assets
          */

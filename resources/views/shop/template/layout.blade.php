@@ -65,6 +65,10 @@
     let url_add_to_cart = '{{route('shop.addtocart')}}';
     let url_get_cart_elements = '{{route('shop.getcartelements')}}';
     let url_cart_page = '{{route('shop.cart')}}';
+
+    let url_get_cart_product = '{{route('getcartproducts')}}';
+    let url_increment_number_product_in_cart = '{{route('increment_number_product_in_cart')}}';
+    let url_delete_from_cart = '{{route('delete_from_cart')}}';
 </script>
 <script src="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.js')}}"></script>
 <script src="{{asset('mongicommerce/template/shop/js/app.js')}}"></script>

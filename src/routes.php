@@ -11,9 +11,13 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminUpdatePackageController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopCheckoutController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopPaymentController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopShipmentController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopSingleProductController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopSummaryController;
 
 Route::group(['middleware' => ['web']], function () {
     /*****************
@@ -22,12 +26,23 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/shop/{id?}',[ShopController::class,'page'])->name('shop');
     Route::get('/prodotto/{id}/{item_id?}',[ShopSingleProductController::class,'page'])->name('shop.single.product');
-    Route::get('/cart/',[ShopCartController::class,'page'])->name('shop.cart');
+    Route::get('page/shop/cart/',[ShopCartController::class,'page'])->name('shop.cart');
+    Route::get('page/shop/summary/',[ShopSummaryController::class,'page'])->name('shop.summary');
+    Route::get('page/shop/shipment/',[ShopShipmentController::class,'page'])->name('shop.shipment');
+    Route::get('page/shop/payment/',[ShopPaymentController::class,'page'])->name('shop.payment');
+
 
     Route::post('/shop/get/product-information',[ShopShowVariationProductController::class,'getData'])->name('shop.get.product.information');
     Route::post('/shop/addtocart',[ShopCartController::class,'addToCart'])->name('shop.addtocart');
     Route::post('/shop/getcartelements',[ShopCartController::class,'getCartElements'])->name('shop.getcartelements');
 
+    Route::post('/shop/getcartproducts/',[ShopCartController::class,'getCartProducts'])->name('getcartproducts');
+    Route::post('shop/increment_number_product_in_cart/',[ShopCartController::class,'incrementOrDecrementElementInCart'])->name('increment_number_product_in_cart');
+    Route::post('/shop/delete_from_cart',[ShopCartController::class,'deleteFromCart'])->name('delete_from_cart');
+    Route::post('/shop/save_cache_details_order',[ShopCheckoutController::class,'saveDetailsInSession'])->name('save_cache_details_order');
+
+
+    Route::get('page/shop/checkout/',[ShopCheckoutController::class,'page'])->name('shop.checkout');
     /*****************
      *------GET------*
      *****************/
