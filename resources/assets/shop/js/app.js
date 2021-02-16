@@ -17,7 +17,7 @@ function getVariationProduct() {
         product_id = $(element).data('product_id');
         if (detail_value !== "") {
             flash_data[detail_id] = detail_value;
-            data.push({'product_detail_id': detail_id, 'product_detail_value_id': detail_value});
+            data.push({ 'product_detail_id': detail_id, 'product_detail_value_id': detail_value });
         }
 
     });
@@ -58,13 +58,7 @@ function addToCart(el) {
         'statusCode': {
             422: function (response) {
                 //get first error to show it on top of pagse
-                bootoast.toast({
-                    message: response.responseJSON.errors,
-                    position: 'top',
-                    icon: 'exclamation-sign',
-                    type: 'error',
-                    animationDuration: 300,
-                });
+                error422(response);
             }
         },
         success: function (response) {
@@ -79,6 +73,21 @@ function addToCart(el) {
         }
     });
 
+}
+
+function error422(response) {
+    let errors = response.responseJSON.errors;
+    let message_error = '';
+    $.each(errors, function (key, value) {
+        message_error += "C'è un problema per il campo (" + key + ")" + "<br>";
+    });
+    bootoast.toast({
+        message: message_error,
+        position: 'top',
+        icon: 'exclamation-sign',
+        type: 'error',
+        animationDuration: 300,
+    });
 }
 
 function updateCart() {

@@ -1,35 +1,59 @@
 <?php
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminCategoryController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminDetailController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewSingleProductController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminOrdersController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminProductsListController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
-use Mongi\Mongicommerce\Http\Controllers\admin\AdminUpdatePackageController;
-use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopCheckoutController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
+use Mongi\Mongicommerce\Http\Controllers\auth\ShopLoginController;
+use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
+use Mongi\Mongicommerce\Http\Controllers\auth\ShopLogoutController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopOrdersController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopPaymentController;
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopShipmentController;
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopSingleProductController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopSummaryController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminDetailController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminOrdersController;
+use Mongi\Mongicommerce\Http\Controllers\auth\ShopRegisterController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopCheckoutController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopShipmentController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminCategoryController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopSingleProductController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminProductsListController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminUpdatePackageController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewSingleProductController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopUserController;
 
 Route::group(['middleware' => ['web']], function () {
     /*****************
      *-----SHOP------*
      *****************/
 
+     /*
+     AUTH
+     */
+    Route::get('/page/register', [ShopRegisterController::class, 'create'])->name('shop.register');
+    Route::get('/page/login', [ShopLoginController::class, 'page'])->name('shop.redirect.login');
+
+    Route::post('/page/shop/login', [ShopLoginController::class, 'store'])->name('shop.login');
+    Route::post('/page/login', [ShopLoginController::class, 'storeAndRedirect'])->name('shop.redirect.login');
+    Route::post('/page/register', [ShopRegisterController::class, 'store'])->name('shop.register');
+    Route::get('/logout', [ShopLogoutController::class, 'destroy'])->name('logout');
+    /*
+    USER ACCOUNT
+    */
+    Route::get('/page/shop/user/orders', [ShopOrdersController::class, 'page'])->name('shop.user.orders');
+    Route::get('/page/shop/user/settings', [ShopUserController::class, 'page'])->name('shop.user.settings');
+
+
     Route::get('/shop/{id?}',[ShopController::class,'page'])->name('shop');
     Route::get('/prodotto/{id}/{item_id?}',[ShopSingleProductController::class,'page'])->name('shop.single.product');
     Route::get('page/shop/cart/',[ShopCartController::class,'page'])->name('shop.cart');
     Route::get('page/shop/summary/',[ShopSummaryController::class,'page'])->name('shop.summary');
     Route::get('page/shop/shipment/',[ShopShipmentController::class,'page'])->name('shop.shipment');
+    Route::get('page/shop/checkout/',[ShopCheckoutController::class,'page'])->name('shop.checkout');
     Route::get('page/shop/payment/',[ShopPaymentController::class,'page'])->name('shop.payment');
+
 
 
     Route::post('/shop/get/product-information',[ShopShowVariationProductController::class,'getData'])->name('shop.get.product.information');
@@ -37,12 +61,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/shop/getcartelements',[ShopCartController::class,'getCartElements'])->name('shop.getcartelements');
 
     Route::post('/shop/getcartproducts/',[ShopCartController::class,'getCartProducts'])->name('getcartproducts');
-    Route::post('shop/increment_number_product_in_cart/',[ShopCartController::class,'incrementOrDecrementElementInCart'])->name('increment_number_product_in_cart');
+    Route::post('/shop/increment_number_product_in_cart/',[ShopCartController::class,'incrementOrDecrementElementInCart'])->name('increment_number_product_in_cart');
     Route::post('/shop/delete_from_cart',[ShopCartController::class,'deleteFromCart'])->name('delete_from_cart');
     Route::post('/shop/save_cache_details_order',[ShopCheckoutController::class,'saveDetailsInSession'])->name('save_cache_details_order');
+    Route::post('/shop/gotocheckout',[ShopShipmentController::class,'goToCheckout'])->name('shop.gotocheckout');
+    Route::post('/shop/pay',[ShopPaymentController::class,'pay'])->name('shop.pay');
+    Route::post('/shop/normalpayment',[ShopPaymentController::class,'normalPayment'])->name('shop.normalpayment');
 
-
-    Route::get('page/shop/checkout/',[ShopCheckoutController::class,'page'])->name('shop.checkout');
     /*****************
      *------GET------*
      *****************/

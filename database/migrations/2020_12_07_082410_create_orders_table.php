@@ -27,6 +27,13 @@ class CreateOrdersTable extends Migration
 
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('payment_type_id');
+
+            $table->string('telephone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('cap')->nullable();
+
             $table->timestamps();
 
             //fk

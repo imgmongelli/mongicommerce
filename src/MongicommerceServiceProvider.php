@@ -20,6 +20,7 @@ class MongicommerceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         Blade::directive('money', function ($amount){
             #return $fmt->formatCurrency($amount,"EUR");
             /*return "<?= $fmt->formatCurrency($amount,'EUR'); ?>";*/

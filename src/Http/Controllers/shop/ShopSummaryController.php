@@ -1,7 +1,6 @@
 <?php
 namespace Mongi\Mongicommerce\Http\Controllers\shop;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Models\Cart;
@@ -36,17 +35,18 @@ class ShopSummaryController extends Controller
         } else {
             $productsCart = Cart::where('user_id', Auth::user()->id)->get();
             foreach ($productsCart as $element) {
-                $product = ProductItem::where('id', $element->product_id)->first();
+                $product = ProductItem::where('id', $element->product_item_id)->first();
+
                 $products[] = [
                     'detail' => $product,
                     'single_price' => floatval($product->price),
                     'count' => $element->quantity,
                     'single_weight' => $product->weight,
-                    'sum_weight' => $element->count * $product->weight,
-                    'total' => $product->price * $element->count
+                    'sum_weight' => $element->quantity * $product->weight,
+                    'total' => $product->price * $element->quantity
                 ];
 
-                $total += $product->price * $element->count;
+                $total += $product->price * $element->quantity;
             }
         }
             $shipping_price = 0;

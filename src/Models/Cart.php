@@ -4,8 +4,9 @@
 namespace Mongi\Mongicommerce\Models;
 
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cart extends Model
 {
@@ -16,6 +17,10 @@ class Cart extends Model
 
     public function user(){
         return $this->belongsTo(User::class,'user_id');
+    }
+
+    static function emptyCart(){
+        self::where('user_id',Auth::user()->id)->delete();
     }
 
 

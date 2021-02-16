@@ -10,6 +10,14 @@ class AdminSetting extends Model
 {
     use HasFactory;
 
+    public static function getStripeApiKey(){
+        $globalSetting = self::first();
+        return $globalSetting->stripe_api_key;
+    }
 
+    public static function getStripeApiSecretKey(){
+        $globalSetting = self::first();
+        return $globalSetting->stripe_api_secret;
+    }
 
 }

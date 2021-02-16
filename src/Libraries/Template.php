@@ -1,17 +1,16 @@
 <?php
-
-
 namespace Mongi\Mongicommerce\Libraries;
 
-
 use Illuminate\Http\Request;
-use Mongi\Mongicommerce\Models\Category;
+use Mongi\Mongicommerce\Models\Cart;
+use Mongi\Mongicommerce\Models\User;
 use Mongi\Mongicommerce\Models\Detail;
-use Mongi\Mongicommerce\Models\DetailValue;
 use Mongi\Mongicommerce\Models\Product;
-use Mongi\Mongicommerce\Models\ProductConfigurationField;
+use Mongi\Mongicommerce\Models\Category;
+use Mongi\Mongicommerce\Models\DetailValue;
 use Mongi\Mongicommerce\Models\ProductItem;
 use Mongi\Mongicommerce\Models\ProductItemDetail;
+use Mongi\Mongicommerce\Models\ProductConfigurationField;
 
 
 class Template
@@ -128,5 +127,24 @@ class Template
 
 
         return $html;
+    }
+
+    public static function MoveSessionToCart($user_id){
+        $user = User::find($user_id);
+        $elements_in_cart = session('cart');
+        if(!empty($elements_in_cart)){
+            if(Cart::where('user_id',$user->id)->count() <= 0){
+                foreach($elements_in_cart as $product_id => $count){
+                    $cart = new Cart();
+                    $cart->user_id = $user->id;
+                    $cart->product_item_id = $product_id;
+                    $cart->quantity = $count;
+                    $cart->save();
+                }
+            }
+
+            session()->forget('products.ids');
+            session()->forget('cart');
+        }
     }
 }

@@ -39,7 +39,7 @@ class InstallPackage extends Command
 
 
         $this->alert('clean tables and installig new tables');
-        Artisan::call('migrate:refresh');
+        Artisan::call('migrate:fresh');
 
 
         $this->info('Installig settings e-commerce');
