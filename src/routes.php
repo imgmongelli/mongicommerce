@@ -26,6 +26,7 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
 
+
 Route::group(['middleware' => ['web']], function () {
     /*****************
      *-----SHOP------*
