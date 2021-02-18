@@ -50,20 +50,20 @@ class MongicommerceServiceProvider extends ServiceProvider
 
             $config_file = config_path('mongicommerce.php');
 
-
-            if(file_exists($config_file)){
-                File::delete($config_file);
-                error_log('Cancello il file di configurazione');
-            }
             /*
+                if(file_exists($config_file)){
+                    File::delete($config_file);
+                    error_log('Cancello il file di configurazione');
+                }
 
-            if(file_exists(resource_path('/views/mongicommerce'))){
-                File::deleteDirectory(resource_path('/views/mongicommerce'));
-            }
 
-            if(file_exists(public_path('/mongicommerce/template'))){
-                File::deleteDirectory(public_path('/mongicommerce/template'));
-            }
+                if(file_exists(resource_path('/views/mongicommerce'))){
+                    File::deleteDirectory(resource_path('/views/mongicommerce'));
+                }
+
+                if(file_exists(public_path('/mongicommerce/template'))){
+                    File::deleteDirectory(public_path('/mongicommerce/template'));
+                }
             */
 
             // Publishing the config file.
