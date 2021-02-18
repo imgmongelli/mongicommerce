@@ -53,22 +53,26 @@ class MongicommerceServiceProvider extends ServiceProvider
                 File::delete($config_file);
             }
 
+            if(file_exists(resource_path('/views/mongicommerce'))){
+                File::deleteDirectory(resource_path('/views/mongicommerce'));
+            }
+
+            if(file_exists(public_path('/mongicommerce/template'))){
+                File::deleteDirectory(public_path('/mongicommerce/template'));
+            }
+
             // Publishing the config file.
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('mongicommerce.php'),
             ], 'config');
 
-            if(file_exists(resource_path('/views/mongicommerce'))){
-                File::deleteDirectory(resource_path('/views/mongicommerce'));
-            }
+
             // Publishing the views.
             $this->publishes([
                 __DIR__.'/../resources/views/shop' => resource_path('/views/mongicommerce'),
             ], 'views');
 
-            if(file_exists(public_path('/mongicommerce/template'))){
-                File::deleteDirectory(public_path('/mongicommerce/template'));
-            }
+
             // Publishing assets.
             $this->publishes([
                 __DIR__.'/../resources/assets' => public_path('/mongicommerce/template'),
