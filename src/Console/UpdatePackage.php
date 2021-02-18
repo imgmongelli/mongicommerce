@@ -26,7 +26,7 @@ class UpdatePackage extends Command
             '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
             '--tag' => "config"
         ]);
-        /*
+
         $this->info('Updating Admin Template');
 
         $this->call('vendor:publish', [
@@ -38,7 +38,7 @@ class UpdatePackage extends Command
             '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
             '--tag' => "views"
         ]);
-        */
+        
         $this->alert('Update successfully');
     }
 }
