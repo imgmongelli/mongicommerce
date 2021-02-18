@@ -17,7 +17,7 @@ class UpdatePackage extends Command
 
     public function handle()
     {
-        /*
+
         $this->alert('Updating Mongicommerce...');
 
         $this->info('Updating configuration...');
@@ -37,7 +37,7 @@ class UpdatePackage extends Command
             '--provider' => "Mongi\Mongicommerce\MongicommerceServiceProvider",
             '--tag' => "views"
         ]);
-        */
+         
         $this->alert('Update successfully');
     }
 }
