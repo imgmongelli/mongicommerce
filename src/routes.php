@@ -1,6 +1,7 @@
 <?php
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopUserController;
 use Mongi\Mongicommerce\Http\Controllers\auth\ShopLoginController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
 use Mongi\Mongicommerce\Http\Controllers\auth\ShopLogoutController;
@@ -13,16 +14,17 @@ use Mongi\Mongicommerce\Http\Controllers\auth\ShopRegisterController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCheckoutController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopShipmentController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminCategoryController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminClientsController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminSettingsController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopSingleProductController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminOrderDetailsController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminProductsListController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminUpdatePackageController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewSingleProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopUserController;
 
 Route::group(['middleware' => ['web']], function () {
     /*****************
@@ -68,6 +70,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/shop/pay',[ShopPaymentController::class,'pay'])->name('shop.pay');
     Route::post('/shop/normalpayment',[ShopPaymentController::class,'normalPayment'])->name('shop.normalpayment');
 
+
+
+
+    #ADMIN
+
     /*****************
      *------GET------*
      *****************/
@@ -82,6 +89,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/prodotto-variante/{id_product}',[AdminNewProductVariationController::class,'page'])->name('admin.product.new.variante');
     //orders
     Route::get('/admin/ordini',[AdminOrdersController::class,'page'])->name('admin.orders.list');
+    Route::get('/admin/ordine/{order_id}',[AdminOrderDetailsController::class,'page'])->name('admin.order');
+     Route::get('/admin/clienti',[AdminClientsController::class,'page'])->name('admin.clients');
 
 
 

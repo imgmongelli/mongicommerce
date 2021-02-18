@@ -26,7 +26,8 @@ class ShopPaymentController extends Controller
     public function page(){
             $total = session('checkout.total');
             $api_stripe_key = AdminSetting::getStripeApiKey();
-            return view('mongicommerce.pages.payment',compact('total','api_stripe_key'));
+            $iban = AdminSetting::getIban();
+            return view('mongicommerce.pages.payment',compact('total','api_stripe_key','iban'));
     }
 
     public function pay(Request $request){
@@ -158,8 +159,8 @@ class ShopPaymentController extends Controller
         $order = new Order();
         $order->user_id = Auth::user()->id;
         $order->total_price = $total;
-        $order->shipping_price = $cost_shipping;
-        $order->order_weight = $order_weight;
+        $order->shipping_price = 0;
+        $order->order_weight = 0;
         $order->status_id = $orderStatus;
         $order->note_delivery = $note_delivery;
         $order->payment_type_id = $typePayment;

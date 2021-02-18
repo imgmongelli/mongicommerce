@@ -4,8 +4,11 @@
 namespace Mongi\Mongicommerce\Models;
 
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Mongi\Mongicommerce\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Mongi\Mongicommerce\Models\ProductItem;
+use Mongi\Mongicommerce\Models\TypePayment;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -18,7 +21,7 @@ class Order extends Model
     }
 
     public function typePayment(){
-        return $this->belongsTo(TypePayment::class,'type_payment_id');
+        return $this->belongsTo(TypePayment::class,'payment_type_id');
     }
 
     public function user(){
@@ -26,6 +29,6 @@ class Order extends Model
     }
 
     public function products(){
-        return $this->belongsToMany(Product::class,'order_products','order_id','product_id')->withPivot('number_products');
+        return $this->belongsToMany(ProductItem::class,'product_order','order_id','product_item_id')->withPivot('number_products');
     }
 }

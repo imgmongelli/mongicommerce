@@ -87,7 +87,7 @@
             <input id="iban" name="div" type="radio"> <strong>Bonifico bancario</strong>
             <div style="display:none;" id="iban_block">
                 <blockquote>
-                    IT15O0871639510000004093838<br>
+                    {{$iban}}<br>
                     Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
                     Mirum est notare quam littera gothica, quam nunc putamus parum claram.
                 </blockquote>

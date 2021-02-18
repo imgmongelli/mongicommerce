@@ -20,4 +20,9 @@ class AdminSetting extends Model
         return $globalSetting->stripe_api_secret;
     }
 
+    public static function getIban(){
+        $globalSetting = self::first();
+        return $globalSetting->iban;
+    }
+
 }
