@@ -48,7 +48,8 @@
         "php": "^7.4",
         "laravel/breeze": "dev-master",
         "stripe/stripe-php": "^7.66",
-        "doctrine/dbal": "@dev"
+        "doctrine/dbal": "@dev",
+        "laravel/laravel": "^7.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
