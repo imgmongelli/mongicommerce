@@ -43,6 +43,14 @@ class Template
         return $childs;
     }
 
+    public static function  getCategoryTree($parent_id = null, $spacing = '', $tree_array = array()) {
+        $categories = Category::select('id', 'name', 'parent_id')->where('parent_id' ,'=', $parent_id)->orderBy('parent_id')->get();
+        foreach ($categories as $item){
+            $tree_array[] = ['id' => $item->id, 'name' =>$spacing . $item->name] ;
+            $tree_array = self::getCategoryTree($item->id, $spacing . '- ', $tree_array);
+        }
+        return $tree_array;
+    }
 
     /**
      * @param Int $id
