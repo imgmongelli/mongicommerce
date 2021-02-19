@@ -58,14 +58,14 @@ class Template
     }
 
     public static function getDetailsFields(Product $product,$product_item_id){
-        $element = '<div class="row">';
+        $element = '';
 
         foreach($product->details->groupBy('product_detail_id') as $key => $details){
 
             $element.= self::generateDetailHtml(Detail::find($key),$details->groupBy('product_detail_value_id'),$product->id,$product_item_id);
         }
         $element.= '<p class="show_error_product" style="color: red; display: none;">Prodotto non disponibile</p>';
-        $element .= '</div>';
+        $element .= '';
         return $element;
     }
 
