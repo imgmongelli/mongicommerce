@@ -60,7 +60,7 @@ class Template
         if($id === null){
             $products = Product::all();
         }else{
-            $products = Category::find($id)->products;
+            $products = Category::where('id',$id)->orWhere('parent_id',$id)->first()->products;
         }
         return $products;
     }
