@@ -36,6 +36,14 @@ class Product extends Model
         return ProductItem::find($product_item_id)->image;
     }
 
+    public static function getDescription($product_item_id){
+        return ProductItem::find($product_item_id)->description;
+    }
+
+    public static function getName($product_item_id){
+        return ProductItem::find($product_item_id)->name;
+    }
+
 
 
 }
