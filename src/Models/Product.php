@@ -28,6 +28,10 @@ class Product extends Model
         return $this->hasManyThrough(ProductItemDetail::class,ProductItem::class);
     }
 
+    public static function getPrice($product_item_id){
+        return ProductItem::find($product_item_id)->price;
+    }
+
 
 
 }
