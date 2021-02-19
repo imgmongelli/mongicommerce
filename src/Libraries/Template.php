@@ -58,7 +58,7 @@ class Template
     }
 
     public static function getDetailsFields(Product $product,$product_item_id){
-        $element = '<div class="row">';
+        $element = '<div class="row col">';
 
         foreach($product->details->groupBy('product_detail_id') as $key => $details){
 
