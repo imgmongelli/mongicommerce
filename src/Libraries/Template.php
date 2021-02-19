@@ -85,7 +85,7 @@ class Template
 
     public static function getConfigurationFields($product_item_id){
         $configurationFields = ProductConfigurationField::where('product_item_id',$product_item_id)->get();
-        $element = '<div class="row">';
+        $element = '<div class="col row">';
         foreach ($configurationFields as $field){
                 $element .= self::generateHtmlField($field->field->type,$field->value,$field->field->name);
 
