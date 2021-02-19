@@ -73,12 +73,12 @@ class Template
         if($type !== 'textarea'){
             $html = '';
             $html .= "<label>{$label}</label>";
-            $html .= "<input class='form-control' type='{$type}' value='{$value}'>";
+            $html .= "<input disabled class='form-control' type='{$type}' value='{$value}'>";
             return $html;
         }else{
             $html = '';
             $html .= "<label>{$label}</label>";
-            $html .= "<textarea class='form-control'>{$value}</textarea>";
+            $html .= "<textarea disabled class='form-control'>{$value}</textarea>";
             return $html;
         }
     }
