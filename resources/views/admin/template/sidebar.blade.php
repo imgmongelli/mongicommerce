@@ -25,7 +25,7 @@
             <div class="info-card-text">
                 <a href="#" class="d-flex align-items-center text-white">
                     <span class="text-truncate text-truncate-sm d-inline-block">
-                        Gianlucone
+                        {{Auth::user()->first_name}}
                     </span>
                 </a>
                 <span class="d-inline-block text-truncate text-truncate-sm">Bari, Italia</span>
