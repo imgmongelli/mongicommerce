@@ -5,7 +5,7 @@ namespace Mongi\Mongicommerce\Console;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-class DeletePublicShop extends Command
+class DeletePublicShopFile extends Command
 {
     protected $signature = 'mongicommerce:deleteshop';
 
