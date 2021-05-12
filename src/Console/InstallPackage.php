@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Mongi\Mongicommerce\Seedeers\SettingsSeeder;
 use Mongi\Mongicommerce\Seedeers\StasusesOrderSeeder;
 use Mongi\Mongicommerce\Seedeers\TypesPaymentSeeder;
+use Mongi\Mongicommerce\Seedeers\UserAdminSeeder;
 
 class InstallPackage extends Command
 {
@@ -50,6 +51,9 @@ class InstallPackage extends Command
 
         $this->info('Installig types Payments');
         $this->call(TypesPaymentSeeder::class);
+    
+        $this->info('Installig Admins');
+        $this->call(UserAdminSeeder::class);
 
         $this->info('Installig breeze');
         Artisan::call('breeze:install');

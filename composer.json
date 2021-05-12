@@ -45,7 +45,7 @@
     "minimum-stability": "dev",
     "name": "mongi/mongicommerce",
     "require": {
-        "php": "^7.4",
+        "php": ">=7.4",
         "laravel/breeze": "dev-master",
         "stripe/stripe-php": "^7.66"
     },
