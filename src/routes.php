@@ -1,6 +1,7 @@
 <?php
-
-use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
+    
+    use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
+    use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopUserController;
 use Mongi\Mongicommerce\Http\Controllers\auth\ShopLoginController;
@@ -37,6 +38,7 @@ Route::group(['middleware' => ['web']], function () {
     /*
      AUTH
      */
+    Route::get('/',[DefaultController::class,'page'])->name('shop.landing');
     Route::get('/page/register', [ShopRegisterController::class, 'create'])->name('shop.register');
     Route::get('/page/login', [ShopLoginController::class, 'page'])->name('shop.redirect.login');
 

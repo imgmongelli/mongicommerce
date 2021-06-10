@@ -61,6 +61,7 @@ class MongicommerceServiceProvider extends ServiceProvider
 
 
             // Publishing the views.
+            
             $this->publishes([
                 __DIR__ . '/../resources/views/shop' => resource_path('/views/mongicommerce'),
             ], 'views');
@@ -70,7 +71,7 @@ class MongicommerceServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/assets' => public_path('/mongicommerce/template'),
             ], 'assets');
-
+          
             // Registering package commands.
             $this->commands([
                 InstallPackage::class,

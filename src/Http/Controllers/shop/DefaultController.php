@@ -5,6 +5,7 @@ use Mongi\Mongicommerce\Http\Controllers\Controller;
 class DefaultController extends Controller
 {
     public function page(){
-        return view('mongicommerce.pages.default');
+        #dd(asset('mongicommerce/template/shop/css/animate.css'));
+        return view('mongicommerce.pages.landing');
     }
 }
