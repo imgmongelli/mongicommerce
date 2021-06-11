@@ -5,7 +5,8 @@
 @endsection
 @section('content')
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 mt-4">
         <fieldset>
             <legend>DETTAGLI ACCOUNT</legend>
             <!-- Text input-->
