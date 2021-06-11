@@ -12,13 +12,13 @@
     <!-- Title Tag  -->
     <title>Eshop - eCommerce HTML5 Template.</title>
     <!-- Favicon -->
-    
+
     <link rel="icon" type="image/png" href="{{asset('mongicommerce/template/shop/images/favicon.png')}}">
     <!-- Web Font -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
-    
+
     <!-- StyleSheet -->
-    
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="{{asset('mongicommerce/template/shop/css/bootstrap.css')}}">
     <!-- Magnific Popup -->
@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{asset('mongicommerce/template/shop/css/owl-carousel.css')}}">
     <!-- Slicknav -->
     <link rel="stylesheet" href="{{asset('mongicommerce/template/shop/css/slicknav.min.css')}}">
-    
+
     <!-- Eshop StyleSheet -->
     <link rel="stylesheet" href=" {{asset('mongicommerce/template/shop/css/reset.css')}}">
     <link rel="stylesheet" href=" {{asset('mongicommerce/template/shop/css/style.css')}}">
@@ -290,7 +290,6 @@
 
 <!-- Slider Area -->
 @yield('content')
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
