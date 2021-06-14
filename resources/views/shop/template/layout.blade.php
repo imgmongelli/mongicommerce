@@ -97,7 +97,7 @@
                                 </li>
                             @else
                                 <li>
-                                    <i class="ti-power-off"></i><a href="#">Login</a>
+                                    <i class="ti-power-off"></i><a href="{{route('shop.redirect.login')}}">Login</a>
                                 </li>
                             @endauth
                         </ul>

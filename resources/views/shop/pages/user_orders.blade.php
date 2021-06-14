@@ -16,9 +16,9 @@
     <p>{{ Session::get('success') }}</p>
 </div>
 @endif
-<div class="container h-50">
+<div class="container">
     <div class="row">
-        <div class="col-md-12 mt-md-4">
+        <div class="col-md-12 mt-md-5 mb-md-2">
             <table id="orders" class="table table-bordered table-hover table-striped w-100">
                 <thead>
                     <tr>
@@ -47,6 +47,16 @@
         </div>
     </div>
 </div>
+@if(count($orders) === 0)
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 promo text-center mt-5 mb-5">
+                <h2>Non è presente alcun ordine.</h2>
+            </div>
+        </div>
+    </div>
+@endif
+
 @endsection
 @section('js')
 @endsection
