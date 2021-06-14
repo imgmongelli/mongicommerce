@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="IT-it">
+<html lang="IT-it" style="height: 100%; margin:0;">
 <head>
     <title>@yield('title')</title>
     <!-- Meta Tag -->
@@ -289,7 +289,10 @@
 <!--/ End Header -->
 
 <!-- Slider Area -->
-@yield('content')
+<div class="wrapper">
+    @yield('content')
+    <div class="push"></div>
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
