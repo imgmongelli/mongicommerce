@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-
-    <div class="row">
+<div class="container">
+    <div class="row mt-5 mb-5">
         <div class="col-md-8">
             <img src="{{$image}}" alt="">
             <p>{{$product->description}}</p>
@@ -23,6 +23,7 @@
 
 
     </div>
+</div>
 @endsection
 @section('js')
 @endsection

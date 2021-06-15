@@ -5,8 +5,8 @@
 @endsection
 
 @section('content')
-
-    <div class="row">
+<div class="container">
+    <div class="row mt-5">
 
         @foreach($products as $product)
         <div class="col-md-4 mb-5">
@@ -24,6 +24,7 @@
         </div>
         @endforeach
     </div>
+</div>
 @endsection
 @section('js')
 @endsection
