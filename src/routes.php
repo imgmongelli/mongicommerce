@@ -1,5 +1,6 @@
 <?php
     
+    use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
     use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
     use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
@@ -97,6 +98,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/ordini', [AdminOrdersController::class, 'page'])->name('admin.orders.list')->middleware('admin');
     Route::get('/admin/ordine/{order_id}', [AdminOrderDetailsController::class, 'page'])->name('admin.order')->middleware('admin');
     Route::get('/admin/clienti', [AdminClientsController::class, 'page'])->name('admin.clients')->middleware('admin');
+    Route::get('/admin/volantini', [AdminVolantiniController::class, 'page'])->name('admin.volantini')->middleware('admin');
 
 
 

@@ -90,6 +90,13 @@
                     <span class="nav-link-text" data-i18n="nav.blankpage">Lista Clienti</span>
                 </a>
             </li>
+    
+            <li>
+                <a href="{{route('admin.volantini')}}" title="Blank Project">
+                    <i class="fal fa-file"></i>
+                    <span class="nav-link-text" data-i18n="nav.blankpage">Volantini</span>
+                </a>
+            </li>
 
             {{--
             <!-- Example of open and active states -->
