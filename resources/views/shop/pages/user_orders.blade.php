@@ -50,7 +50,7 @@
 @if(count($orders) === 0)
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 promo text-center mt-5 mb-5">
+            <div class="col-sm-12 promo text-center mt-5 mb-4">
                 <h2>Non è presente alcun ordine.</h2>
             </div>
         </div>

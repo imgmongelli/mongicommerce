@@ -4882,6 +4882,7 @@ Version:1.0
 ===============================*/
 .footer{
 	background:#222;
+    flex-shrink: 0;
 }
 .footer .about {
 	padding-right: 50px;
@@ -4984,18 +4985,16 @@ Version:1.0
 ===============================*/
 
 /*=============================
-	21. Start Content CSS
+	22. Start Content CSS
 ===============================*/
 .wrapper {
-    min-height: 100%;
-
-    /* Equal to height of footer */
-    /* But also accounting for potential margin-bottom of last child */
-    margin-bottom: -478px;
+    flex: 1 0 auto;
 }
 
-.push {
-    height: 500px;
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 /*=============================
 	End Content CSS
