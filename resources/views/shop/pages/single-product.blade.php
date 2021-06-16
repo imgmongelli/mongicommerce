@@ -19,6 +19,7 @@
             {!! $details_fields !!}
             {!! $configuration_fields !!}
             {!! $btn_cart !!}
+            <img width="150" src="{{$qr}}">
         </div>
 
 
