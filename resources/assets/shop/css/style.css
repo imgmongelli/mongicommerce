@@ -34,6 +34,7 @@ Version:1.0
 19. Contact CSS
 20. 404 Error CSS
 21. Footer CSS
+22. Content CSS
 ========================================*/
 .color-plate {
 	position: fixed;
@@ -4881,6 +4882,7 @@ Version:1.0
 ===============================*/
 .footer{
 	background:#222;
+    flex-shrink: 0;
 }
 .footer .about {
 	padding-right: 50px;
@@ -4982,3 +4984,18 @@ Version:1.0
 	End Footer CSS
 ===============================*/
 
+/*=============================
+	22. Start Content CSS
+===============================*/
+.wrapper {
+    flex: 1 0 auto;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+/*=============================
+	End Content CSS
+===============================*/

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="IT-it">
+<html lang="IT-it" style="height: 100%;">
 <head>
     <title>@yield('title')</title>
     <!-- Meta Tag -->
@@ -97,7 +97,7 @@
                                 </li>
                             @else
                                 <li>
-                                    <i class="ti-power-off"></i><a href="#">Login</a>
+                                    <i class="ti-power-off"></i><a href="{{route('shop.redirect.login')}}">Login</a>
                                 </li>
                             @endauth
                         </ul>
@@ -289,7 +289,9 @@
 <!--/ End Header -->
 
 <!-- Slider Area -->
-@yield('content')
+<div class="wrapper">
+    @yield('content')
+</div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

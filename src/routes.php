@@ -1,6 +1,7 @@
 <?php
     
     use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
+
     use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
     use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
@@ -123,7 +124,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/admin/prodotto/crea-variante-prodotto', [AdminNewProductVariationController::class, 'createNewVariation'])->name('admin.post.product.variation.new');
     Route::post('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'createNewSingleProduct'])->name('admin.post.new.single.product');
 
+    //settings
+    Route::post('/admin/settings/update', [AdminSettingsController::class, 'update'])->name('admin.post.settings.update');
 
     //refresh
     Route::get('/admin/update', [AdminUpdatePackageController::class, 'update'])->name('admin.updatepackage');
+
 });
