@@ -9,6 +9,9 @@ Version:1.0
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
+.btn-primary{
+	color: #fff !important;
+}
 html {
 	font-family: 'Poppins', sans-serif;
 	-moz-text-size-adjust: 100%;
