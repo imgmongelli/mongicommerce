@@ -33,14 +33,15 @@
             <div class="row">
                 <!-- Single Banner  -->
                 @foreach( $volantini as $volantino)
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <div class="single-banner">
-                            <img src="https://via.placeholder.com/600x370" alt="#">
-                            <div class="content">
-                                <h3>{{$volantino->name}}</h3>
-                                <a href="{{$volantino->path}}">VIsualizza volantino</a>
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <a href="{{$volantino->path}}">
+                            <div class="single-banner">
+                                <img src="{{asset('mongicommerce/template/shop/images/mock_volantino.png')}}" alt="#">
+                                <div class="content text-center">
+                                    <h3 style="background-color: #FFF;">{{$volantino->name}}</h3>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 @endforeach
             </div>

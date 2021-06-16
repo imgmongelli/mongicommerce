@@ -9,20 +9,30 @@
     <div class="row mt-5 mb-5">
         <div class="col-md-8">
             <img src="{{$image}}" alt="">
-            <p>{{$product->description}}</p>
+            
 
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             {{$product->category->name}}
             {{$price}}
             {!! $details_fields !!}
             {!! $configuration_fields !!}
             {!! $btn_cart !!}
-            <img width="150" src="{{$qr}}">
+            
+        </div>
+        <div class="col-md-1">
+            <img width="100%" src="{{$qr}}">
         </div>
 
 
+    </div>
+    <h4>Descrizione prodotto</h4>
+    <div class="row mt-3 mb-4">
+        <div class="col-md-12">
+            <p>{{$product->description}}</p>
+        </div>
+       
     </div>
 </div>
 @endsection

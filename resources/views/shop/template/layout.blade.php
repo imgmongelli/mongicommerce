@@ -317,6 +317,7 @@
                             <a href="index.html"><img src="{{asset('mongicommerce/template/shop/images/logo2.png')}}" alt="#"></a>
                         </div>
                         <p class="text">POR FESR Lazio 2014-2020 - Mis.3.5.1 – Progetto Lazio Open Innovation Center – Zagarolo</p>
+                        <img width="150" src="{{asset('mongicommerce/template/shop/images/img.png')}}" alt="#">
                         <p class="call">Chiamaci<span><a href="{{$mongicommerce->telephone}}">{{$mongicommerce->telephone}}</a></span></p>
                     </div>
                     <!-- End Single Widget -->
