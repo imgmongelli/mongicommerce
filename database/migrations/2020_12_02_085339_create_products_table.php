@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->text('image')->nullable();
+            $table->boolean('is_home')->default(false);
             $table->unsignedBigInteger('category_id');
             $table->boolean('single_product')->default(false);
             $table->timestamps();

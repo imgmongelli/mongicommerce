@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 class Volantino extends Model
 {
     use HasFactory;
+    
+    protected $table = 'volantini';
 
 
 }

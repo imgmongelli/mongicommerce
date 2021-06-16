@@ -11,6 +11,7 @@ use Mongi\Mongicommerce\Models\DetailValue;
 use Mongi\Mongicommerce\Models\ProductItem;
 use Mongi\Mongicommerce\Models\ProductItemDetail;
 use Mongi\Mongicommerce\Models\ProductConfigurationField;
+use Mongi\Mongicommerce\Models\Volantino;
 
 
 class Template
@@ -154,5 +155,9 @@ class Template
             session()->forget('products.ids');
             session()->forget('cart');
         }
+    }
+    
+    public static function getVolantini(){
+        return Volantino::all();
     }
 }
