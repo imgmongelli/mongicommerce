@@ -44,6 +44,7 @@
     <link rel="stylesheet" href=" {{asset('mongicommerce/template/shop/css/reset.css')}}">
     <link rel="stylesheet" href=" {{asset('mongicommerce/template/shop/css/style.css')}}">
     <link rel="stylesheet" href=" {{asset('mongicommerce/template/shop/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.css')}}">
     @yield('css')
 
 
