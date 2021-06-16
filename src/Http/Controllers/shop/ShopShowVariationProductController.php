@@ -19,6 +19,7 @@ class ShopShowVariationProductController extends Controller
 
         $informations = $r->get('informations');
         $product_id = $r->get('product_id');
+        
         $flash_data = $r->get('flash_data');
         session()->flash('filters', $flash_data);
 

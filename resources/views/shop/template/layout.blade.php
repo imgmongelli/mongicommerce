@@ -48,19 +48,7 @@
 
 
 </head>
-<body class="js">
-
-<!-- Preloader -->
-<div class="preloader">
-    <div class="preloader-inner">
-        <div class="preloader-icon">
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</div>
-<!-- End Preloader -->
-
+<body>
 
 <!-- Header -->
 <header class="header shop">
@@ -272,7 +260,6 @@
                                                 </ul>
                                             </li>
                                             <li><a href="{{route('shop')}}">Shop</a></li>
-                                            <li><a href="#">Contattaci</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -416,8 +403,6 @@
 <script src=" {{asset('mongicommerce/template/shop/js/popper.min.js')}}"></script>
 <!-- Bootstrap JS -->
 <script src=" {{asset('mongicommerce/template/shop/js/bootstrap.min.js')}}"></script>
-<!-- Color JS -->
-<script src=" {{asset('mongicommerce/template/shop/js/colors.js')}}"></script>
 <!-- Slicknav JS -->
 <script src=" {{asset('mongicommerce/template/shop/js/slicknav.min.js')}}"></script>
 <!-- Owl Carousel JS -->
@@ -429,7 +414,7 @@
 <!-- Countdown JS -->
 <script src=" {{asset('mongicommerce/template/shop/js/finalcountdown.min.js')}}"></script>
 <!-- Nice Select JS -->
-<script src=" {{asset('mongicommerce/template/shop/js/nicesellect.js')}}"></script>
+{{--<script src=" {{asset('mongicommerce/template/shop/js/nicesellect.js')}}"></script>--}}
 <!-- Flex Slider JS -->
 <script src=" {{asset('mongicommerce/template/shop/js/flex-slider.js')}}"></script>
 <!-- ScrollUp JS -->
@@ -439,8 +424,9 @@
 <!-- Easing JS -->
 <script src=" {{asset('mongicommerce/template/shop/js/easing.js')}}"></script>
 <!-- Active JS -->
-<script src=" {{asset('mongicommerce/template/shop/js/active.js')}}"></script>
+{{--<script src=" {{asset('mongicommerce/template/shop/js/active.js')}}"></script>--}}
 
+<script src="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.js')}}"></script>
 <script>
     let url_get_product_variation_information = '{{route('shop.get.product.information')}}';
     let url_add_to_cart = '{{route('shop.addtocart')}}';
@@ -451,7 +437,7 @@
     let url_increment_number_product_in_cart = '{{route('increment_number_product_in_cart')}}';
     let url_delete_from_cart = '{{route('delete_from_cart')}}';
 </script>
-<script src="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.js')}}"></script>
+
 <script src="{{asset('mongicommerce/template/shop/js/app.js')}}"></script>
 @yield('js')
 </body>
