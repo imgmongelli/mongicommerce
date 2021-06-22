@@ -166,11 +166,6 @@
         </div>
     </div>
     <div id="whole_div_details" style="display: none;" class="row">
-        <div class="container-fluid mt-2 mb-2 pl-4">
-            <div class="row">
-                <h1>Dettagli già inseriti</h1>
-            </div>
-        </div>
         <div class="col-md-12">
             <div id="panel-3" class="panel">
                 <div class="panel-hdr">

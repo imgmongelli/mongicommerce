@@ -17,21 +17,8 @@
                     <p class="card-text">{{$product->description}}</p>
                     <p class="badge badge-danger">{{$product->category->name}}</p>
                 </div>
-                <div class="card-footer container-fluid">
-                    <div class="row">
-                        <div class="col-5">
-                            <a href="{{route('shop.single.product',$product->id)}}" class="btn btn-primary">Acquista</a>
-                        </div>
-                        <div class="col-5">
-                            @foreach($dict as $dic)
-                                @if($product->id == array_keys($dic))
-                                    <h4 class="card-title">€ {{$product->price}}</h4>
-                                @endif
-                            @endforeach
-                        </div>
-
-                    </div>
-
+                <div class="card-footer">
+                    <a href="{{route('shop.single.product',$product->id)}}" class="btn btn-primary">Acquista</a>
                 </div>
             </div>
         </div>
