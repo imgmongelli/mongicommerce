@@ -316,37 +316,20 @@
                         <div class="logo">
                             <a href="index.html"><img src="{{asset('mongicommerce/template/shop/images/logo2.png')}}" alt="#"></a>
                         </div>
-                        <p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+                        <p class="text">POR FESR Lazio 2014-2020 - Mis.3.5.1 – Progetto Lazio Open Innovation Center – Zagarolo</p>
+                        <img width="150" src="{{asset('mongicommerce/template/shop/images/img.png')}}" alt="#">
                         <p class="call">Chiamaci<span><a href="{{$mongicommerce->telephone}}">{{$mongicommerce->telephone}}</a></span></p>
                     </div>
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
-                    <div class="single-footer links">
-                        <h4>Informazioni</h4>
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Faq</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Help</a></li>
-                        </ul>
-                    </div>
+                    
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
-                    <div class="single-footer links">
-                        <h4>Customer Service</h4>
-                        <ul>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Money-back</a></li>
-                            <li><a href="#">Returns</a></li>
-                            <li><a href="#">Shipping</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                        </ul>
-                    </div>
+                    
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">

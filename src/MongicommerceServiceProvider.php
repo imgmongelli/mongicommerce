@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Mongi\Mongicommerce\Console\UpdateAdmin;
+use Mongi\Mongicommerce\Console\UpdateLayout;
 use Mongi\Mongicommerce\Models\Category;
 use Mongi\Mongicommerce\Libraries\Template;
 use Mongi\Mongicommerce\Models\AdminSetting;
@@ -53,7 +55,7 @@ class MongicommerceServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
 
-
+            
             // Publishing the config file.
             $this->publishes([
                 __DIR__ . '/../config/config.php' => config_path('mongicommerce.php'),
@@ -71,11 +73,28 @@ class MongicommerceServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/../resources/assets' => public_path('/mongicommerce/template'),
             ], 'assets');
-          
+            
+            #ADMIN
+            // Publishing assets.
+            $this->publishes([
+                __DIR__ . '/../resources/assets/admin' => public_path('/mongicommerce/template/admin'),
+            ], 'assets_admin');
+            #SHOP
+            
+            $this->publishes([
+                __DIR__ . '/../resources/assets/shop' => public_path('/mongicommerce/template/shop'),
+            ], 'assets_shop');
+    
+            $this->publishes([
+                __DIR__ . '/../resources/views/shop/template' => resource_path('/views/mongicommerce/template/'),
+            ], 'views_layout');
+            
             // Registering package commands.
             $this->commands([
                 InstallPackage::class,
-                UpdatePackage::class
+                UpdatePackage::class,
+                UpdateAdmin::class,
+                UpdateLayout::class
             ]);
 
             // Publishing the translation files.

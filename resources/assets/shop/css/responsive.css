@@ -936,7 +936,7 @@ Version:1.0
 }
 .shop-list .list-content .btn {
 	height: auto;
-	line-height: auto;
+	/*line-height: auto*/;
 	padding: 12px 32px;
 }
 .single-product {
@@ -1454,11 +1454,9 @@ Version:1.0
 }
 .shop .nice-select {
 	width: 100%;
-	display: ;
 	margin-top: 4px;
 }
 .shop .view-mode {
-	float: right;
 	float: none;
 	display: block;
 	width: 100%;
@@ -1466,14 +1464,8 @@ Version:1.0
 .shop .view-mode li {
 	display: inline-block;
 	margin-right: 5px;
-	display: inline-block;
-	margin: 0;
-	mar0-t: mar;
 	margin-top: 4px;
 	width: 100%;
-	display: block;
-	display: inline-block;
-	display: ;
 }
 .shop .view-mode li a {
 	width: 80px;
@@ -1481,7 +1473,6 @@ Version:1.0
 	background: transparent;
 	border: 1px solid #77777775;
 	text-align: center;
-	display: block;
 	line-height: 32px;
 	color: #888;
 	border-radius: 0px;

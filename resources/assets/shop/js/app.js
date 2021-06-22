@@ -58,7 +58,7 @@ function addToCart(el) {
         'statusCode': {
             422: function (response) {
                 //get first error to show it on top of pagse
-                error422(response);
+                error422Badge(response);
             }
         },
         success: function (response) {
@@ -105,3 +105,14 @@ const formatter = new Intl.NumberFormat('it-IT', {
     currency: 'EUR',
     minimumFractionDigits: 2
 });
+
+function error422Badge(response) {
+    let error_message = response.responseJSON.errors;
+    bootoast.toast({
+        message: error_message,
+        position: 'top',
+        icon: 'exclamation-sign',
+        type: 'error',
+        animationDuration: 300,
+    });
+}

@@ -17,7 +17,10 @@ composer require mongi/mongicommerce
 ## Usage
 
 ``` php
- php artisan mongicommerce:install
+  php artisan mongicommerce:install        Install mongicommerce
+  php artisan mongicommerce:update         Update mongicommerce pay attention because rewrite everything
+  php artisan mongicommerce:update_admin   Update mongicommerce admin template
+  php artisan mongicommerce:update_layout  Update only shops layout and assets
 ```
 
 ### Testing

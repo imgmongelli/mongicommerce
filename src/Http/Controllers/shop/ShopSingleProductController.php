@@ -20,7 +20,8 @@ class ShopSingleProductController extends Controller
          $image = Product::getImage($product_item_id);
          $description = Product::getDescription($product_item_id);
          $name = Product::getName($product_item_id);
+         $qr = "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=".url()->current();
 
-         return view('mongicommerce.pages.single-product',compact('product','details_fields','configuration_fields','btn_cart','price','image','description','name'));
+         return view('mongicommerce.pages.single-product',compact('product','details_fields','configuration_fields','btn_cart','price','image','description','name','qr'));
      }
 }
