@@ -163,6 +163,7 @@
                 email_reclami : $('#email_reclami').val()
             },
             success:function (response){
+                success("Impostazioni modificate correttamente",true);
             }
         })
     })
