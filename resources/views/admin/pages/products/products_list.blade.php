@@ -33,6 +33,7 @@
                                 <th>Categoria</th>
                                 <th>Creato</th>
                                 <th>Modificato</th>
+                                <th>In evidenza</th>
                                 <th>Azioni</th>
 
                             </tr>
@@ -46,11 +47,12 @@
                                     <td>{{$product->category->name}}</td>
                                     <td>{{$product->created_at->format('d/m/Y')}}</td>
                                     <td>{{$product->updated_at->format('d/m/Y')}}</td>
+                                    <td><input data-id="{{$product->id}}" type="checkbox" {!! $product->is_home == true ? 'checked':'' !!} onclick="saveInHome(this)"></td>
                                     <td>
                                         @if($product->single_product)
-                                            <a href="#" class="btn btn-dark">Modifica</a>
+                                            <button data-id="{{$product->id}}" onclick="deleteProduct(this)" class="btn btn-danger">Elimina</button>
                                         @else
-                                            <a href="{{route('admin.product.new.variante',$product->id)}}" class="btn btn-danger">Varianti</a>
+                                            <a href="{{route('admin.product.new.variante',$product->id)}}" class="btn btn-warning">Varianti</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -78,5 +80,35 @@
                     responsive: true,
                 });
         });
+
+        function saveInHome(el) {
+            let product_id = $(el).data('id');
+            let is_checked = $(el).is(':checked');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.update.inHome')}}",
+                data:{
+                    product_id : product_id,
+                    is_checked : is_checked
+                },
+                success:function (response){
+                    success("Prodotto aggiornato",true);
+                }
+            })
+        }
+
+        function deleteProduct(el) {
+            let product_id = $(el).data('id');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.delete.product')}}",
+                data:{
+                    product_id : product_id
+                },
+                success:function (response){
+                    success("Prodotto eliminato correttamente",true);
+                }
+            })
+        }
     </script>
 @endsection

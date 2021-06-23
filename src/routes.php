@@ -1,6 +1,7 @@
 <?php
-    
-    use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
+
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminCreatePrivateListController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
 
     use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
     use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
@@ -100,7 +101,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/ordine/{order_id}', [AdminOrderDetailsController::class, 'page'])->name('admin.order')->middleware('admin');
     Route::get('/admin/clienti', [AdminClientsController::class, 'page'])->name('admin.clients')->middleware('admin');
     Route::get('/admin/volantini', [AdminVolantiniController::class, 'page'])->name('admin.volantini')->middleware('admin');
-
+    //private list
+    Route::get('/admin/lista/privata', [AdminCreatePrivateListController::class, 'page'])->name('admin.private.list')->middleware('admin');
 
 
     /*****************
@@ -123,6 +125,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/admin/prodotto/crea-prodotto', [AdminNewProductController::class, 'createNewProduct'])->name('admin.post.product.new');
     Route::post('/admin/prodotto/crea-variante-prodotto', [AdminNewProductVariationController::class, 'createNewVariation'])->name('admin.post.product.variation.new');
     Route::post('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'createNewSingleProduct'])->name('admin.post.new.single.product');
+    Route::post('/admin/prodotto/update/in-home', [AdminProductsListController::class, 'inHome'])->name('admin.update.inHome')->middleware('admin');
+    Route::post('/admin/prodotto/delete', [AdminProductsListController::class, 'deleteProduct'])->name('admin.delete.product')->middleware('admin');
 
     //settings
     Route::post('/admin/settings/update', [AdminSettingsController::class, 'update'])->name('admin.post.settings.update');
@@ -130,4 +134,10 @@ Route::group(['middleware' => ['web']], function () {
     //refresh
     Route::get('/admin/update', [AdminUpdatePackageController::class, 'update'])->name('admin.updatepackage');
 
+    //volantino
+    Route::post('/admin/volantino/delete', [AdminVolantiniController::class, 'deleteVolantino'])->name('admin.delete.volantino')->middleware('admin');
+
+    //private list
+    Route::post('/admin/create/lista/privata', [AdminCreatePrivateListController::class, 'createList'])->name('admin.create.private.list')->middleware('admin');
+    Route::post('/admin/delete/lista/privata', [AdminCreatePrivateListController::class, 'deleteList'])->name('admin.delete.list')->middleware('admin');
 });
