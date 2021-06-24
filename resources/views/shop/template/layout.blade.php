@@ -103,7 +103,7 @@
                 <div class="col-lg-2 col-md-2 col-12">
                     <!-- Logo -->
                     <div class="logo">
-                        <a href="index.html"><img src="{{asset('mongicommerce/template/shop/images/logo.png')}}" alt="logo"></a>
+                        <a href="{{route('shop.landing')}}"><img src="{{asset('mongicommerce/template/shop/images/logo.png')}}" alt="logo"></a>
                     </div>
                     <!--/ End Logo -->
                     <!-- Search Form -->
@@ -314,7 +314,7 @@
                     <!-- Single Widget -->
                     <div class="single-footer about">
                         <div class="logo">
-                            <a href="index.html"><img src="{{asset('mongicommerce/template/shop/images/logo2.png')}}" alt="#"></a>
+                            <a href="{{route('shop.landing')}}"><img src="{{asset('mongicommerce/template/shop/images/logo2.png')}}" alt="#"></a>
                         </div>
                         <p class="text">POR FESR Lazio 2014-2020 - Mis.3.5.1 – Progetto Lazio Open Innovation Center – Zagarolo</p>
                         <img width="150" src="{{asset('mongicommerce/template/shop/images/img.png')}}" alt="#">
@@ -324,12 +324,12 @@
                 </div>
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
-                    
+
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
-                    
+
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">

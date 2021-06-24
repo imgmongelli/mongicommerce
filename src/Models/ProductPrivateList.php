@@ -13,5 +13,9 @@ class ProductPrivateList extends Model
 
     protected $table = 'product_private_list';
 
+    public function infoProduct(){
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
 
 }

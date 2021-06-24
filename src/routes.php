@@ -6,6 +6,7 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
     use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
     use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopPrivateListController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopUserController;
 use Mongi\Mongicommerce\Http\Controllers\auth\ShopLoginController;
 use Mongi\Mongicommerce\Http\Controllers\admin\DashboardController;
@@ -63,6 +64,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('page/shop/shipment/', [ShopShipmentController::class, 'page'])->name('shop.shipment');
     Route::get('page/shop/checkout/', [ShopCheckoutController::class, 'page'])->name('shop.checkout');
     Route::get('page/shop/payment/', [ShopPaymentController::class, 'page'])->name('shop.payment');
+    Route::get('page/shop/private-list/{list_id}', [ShopPrivateListController::class, 'page'])->name('shop.private.list');
 
 
 

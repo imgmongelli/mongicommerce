@@ -13,5 +13,9 @@ class PrivateList extends Model
 
     protected $table = 'private_list';
 
+    public function products(){
+        return $this->hasMany(ProductPrivateList::class, 'lista_id');
+    }
+
 
 }

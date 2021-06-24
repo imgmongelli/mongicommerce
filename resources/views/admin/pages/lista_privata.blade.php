@@ -90,7 +90,8 @@
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nome Prodotto</th>
+                            <th>Nome lista</th>
+                            <th>Link lista</th>
                             <th>Azioni</th>
 
                         </tr>
@@ -100,6 +101,7 @@
                             <tr>
                                 <td>{{$list->id}}</td>
                                 <td>{{$list->name}}</td>
+                                <td>{{route('shop.private.list', $list->id_list)}}</td>
                                 <td>
                                     <button data-id="{{$list->id}}" onclick="deleteList(this)" class="btn btn-danger">Elimina</button>
                                 </td>
