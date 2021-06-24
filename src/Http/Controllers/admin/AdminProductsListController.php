@@ -31,9 +31,9 @@ class AdminProductsListController extends Controller
         $product_id = $r->product_id;
         $product_item = ProductItem::where('product_id', $product_id);
         $product_item_id = $product_item->first()->id;
-        $product_conf = ProductConfigurationField::where('product_item_id', $product_item_id)->delete();
+        ProductConfigurationField::where('product_item_id', $product_item_id)->delete();
         $product_item->delete();
-        $product = Product::find($product_id)->delete();
+        Product::find($product_id)->delete();
         return true;
     }
 

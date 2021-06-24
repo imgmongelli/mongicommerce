@@ -88,9 +88,26 @@ class AdminNewProductVariationController extends Controller
             $configuration_field->save();
         }
 
-
         //ceare la tabella ProductConfigurationField
         //id, product_item_id, configuration_field_id, configuration_field_value
 
+    }
+
+    public function deleteVariation(Request $r){
+        $item_id = $r->item_id;
+        ProductItemDetail::where('product_item_id', $item_id)->delete();
+        ProductItem::find($item_id)->delete();
+        return true;
+    }
+
+    public function editVariation(Request $r){
+        $item_id = $r->item_id;
+        $item_qta = $r->item_qta;
+        $item_price = $r->item_price;
+        $product_item = ProductItem::find($item_id);
+        $product_item->price = $item_price;
+        $product_item->quantity = $item_qta;
+        $product_item->save();
+        return true;
     }
 }

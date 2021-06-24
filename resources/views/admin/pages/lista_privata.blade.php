@@ -55,7 +55,19 @@
 </div>
 <div class="row mt-5">
     <div class="col-md-12">
-        <input type="text" class="form-control" id="list_name">
+        <div class="form-group">
+            <label class="form-label" for="name">Nome lista</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text py-1 px-3">
+                        <span class="icon-stack">
+                           <i class="fal fa-comment-edit"></i>
+                        </span>
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="list_name">
+            </div>
+        </div>
         <button class="btn btn-primary btn-block" onclick="saveList()">Crea lista</button>
     </div>
 </div>

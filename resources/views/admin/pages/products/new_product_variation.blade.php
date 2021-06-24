@@ -698,9 +698,12 @@
                                             <span class="badge badge-danger">{{$detail->detail->value}}</span>
                                         @endforeach
                                     </td>
-                                    <td><input value="{{$item->price}}" class="form-control" type="number"></td>
-                                    <td><input value="{{$item->quantity}}" class="form-control" type="number"></td>
-                                    <td><button class="btn btn-dark"><i class="fal fa-trash"></i></button></td>
+                                    <td><input id="item_price_{{$loop->index}}" value="{{$item->price}}" class="form-control" type="number"></td>
+                                    <td><input id="item_qta_{{$loop->index}}" value="{{$item->quantity}}" class="form-control" type="number"></td>
+                                    <td>
+                                        <button class="btn btn-dark" data-id="{{$item->id}}" onclick="deleteVariation(this)"><i class="fal fa-trash"></i></button>
+                                        <button class="btn btn-danger" data-id="{{$item->id}}" onclick="editVariation(this, {{$loop->index}})"><i class="fal fa-save"></i></button>
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -867,6 +870,36 @@
             } else {
                 $('#panel_configuration_field').hide();
             }
+        }
+
+        function deleteVariation(el){
+            let item_id = $(el).data('id');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.post.product.variation.delete')}}",
+                data:{
+                    item_id : item_id
+                },
+                success:function (response){
+                    success("Variante eliminata correttamente",true);
+                }
+            })
+        }
+
+        function editVariation(el, index){
+            let item_id = $(el).data('id');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.post.product.variation.edit')}}",
+                data:{
+                    item_id : item_id,
+                    item_qta : $('#item_qta_' + index).val(),
+                    item_price : $('#item_price_' + index).val()
+                },
+                success:function (response){
+                    success("Modifiche apportate correttamente",true);
+                }
+            })
         }
     </script>
     <script>

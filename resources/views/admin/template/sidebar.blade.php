@@ -100,7 +100,7 @@
 
             <li>
                 <a href="{{route('admin.private.list')}}" title="Blank Project">
-                    <i class="fal fa-file"></i>
+                    <i class="fal fa-list"></i>
                     <span class="nav-link-text" data-i18n="nav.blankpage">Lista privata</span>
                 </a>
             </li>
