@@ -83,6 +83,7 @@ class Template
             $html .= "<h5>{$label}</h5>";
             $html .= "<div class='divtext'>{$value}</div>";
             $html .= "<hr>";
+
             return $html;
     }
 
