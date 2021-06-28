@@ -19,7 +19,7 @@ class CreateProductItemsTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->text('image')->nullable();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->decimal('price');
             $table->integer('quantity')->nullable();
             $table->timestamps();
