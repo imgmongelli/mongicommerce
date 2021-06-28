@@ -79,22 +79,16 @@ class Template
     }
 
     public static function generateHtmlField($type,$value,$label){
-        if($type !== 'textarea'){
             $html = '';
-            $html .= "<label>{$label}</label>";
-            $html .= "<input disabled class='form-control' type='{$type}' value='{$value}'>";
+            $html .= "<h5>{$label}</h5>";
+            $html .= "<div class='divtext'>{$value}</div>";
+            $html .= "<hr>";
             return $html;
-        }else{
-            $html = '';
-            $html .= "<label>{$label}</label>";
-            $html .= "<textarea disabled class='form-control'>{$value}</textarea>";
-            return $html;
-        }
     }
 
     public static function getConfigurationFields($product_item_id){
         $configurationFields = ProductConfigurationField::where('product_item_id',$product_item_id)->get();
-        $element = '<div class="col row">';
+        $element = '<div>';
         foreach ($configurationFields as $field){
                 $element .= self::generateHtmlField($field->field->type,$field->value,$field->field->name);
 
@@ -156,7 +150,7 @@ class Template
             session()->forget('cart');
         }
     }
-    
+
     public static function getVolantini(){
         return Volantino::all();
     }
