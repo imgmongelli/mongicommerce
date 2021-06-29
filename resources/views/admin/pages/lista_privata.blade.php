@@ -30,7 +30,8 @@
                                 <th>Nome Prodotto</th>
                                 <th>Descrizione Prodotto</th>
                                 <th>Categoria</th>
-                                <th>Azioni</th>
+                                <th>Solo per lista</th>
+                                <th>Aggiungi</th>
 
                             </tr>
                             </thead>
@@ -41,6 +42,7 @@
                                     <td>{{$product->name}}</td>
                                     <td>{{$product->description}}</td>
                                     <td>{{$product->category->name}}</td>
+                                    <td><input class="product-list-reserved" data-id="{{$product->id}}" type="checkbox"></td>
                                     <td><input class="product-list" data-id="{{$product->id}}" type="checkbox"></td>
                                 </tr>
                             @endforeach
@@ -126,11 +128,19 @@
                 arrayList.push($(el).data('id'));
             }
         })
+        let arrayReserved = [];
+        $('.product-list-reserved').each(function (index, el){
+            if($(el).is(':checked')){
+                arrayReserved.push($(el).data('id'));
+            }
+        })
+
         $.ajax({
             method:'post',
             url:"{{route('admin.create.private.list')}}",
             data:{
                 products : arrayList,
+                reserved : arrayReserved,
                 list_name : $('#list_name').val()
             },
             success:function (response){

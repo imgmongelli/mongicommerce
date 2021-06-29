@@ -22,6 +22,7 @@ class AdminCreatePrivateListController extends Controller
     public function createList(Request $r){
         $name_list = $r->list_name;
         $array_list = $r->products;
+        $reserved = $r->reserved;
         $new_list = new PrivateList();
         $new_list->name = $name_list;
         $new_list->id_list = md5(Carbon::now());
@@ -31,6 +32,11 @@ class AdminCreatePrivateListController extends Controller
             $new_product_list->lista_id = $new_list->id;
             $new_product_list->product_id = $product_id;
             $new_product_list->save();
+        }
+        foreach ($reserved as $res_id) {
+            $product = Product::where('id', $res_id)->first();
+            $product->is_reserved = true;
+            $product->save();
         }
         return true;
     }
