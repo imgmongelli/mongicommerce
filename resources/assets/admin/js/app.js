@@ -176,4 +176,22 @@ function updatePackage() {
     });
 }
 
+function changeStatus(el, order_id){
+    let status_value = $(el).val();
+    $.ajax({
+        method: 'POST',
+        url: url_update_status_order,
+        'statusCode': {
+            422: function (response) {
+            }
+        },
+        data:{
+            status: status_value,
+            order_id: order_id
+        },
+        success: function (response) {
+        }
+    });
+}
+
 

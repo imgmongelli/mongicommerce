@@ -10,6 +10,7 @@ use Mongi\Mongicommerce\Models\PrivateList;
 use Mongi\Mongicommerce\Models\Product;
 use Mongi\Mongicommerce\Models\ProductConfigurationField;
 use Mongi\Mongicommerce\Models\ProductItem;
+use Mongi\Mongicommerce\Models\ProductPrivateList;
 
 class AdminProductsListController extends Controller
 {
@@ -30,9 +31,12 @@ class AdminProductsListController extends Controller
     public function deleteProduct(Request $r){
         $product_id = $r->product_id;
         $product_item = ProductItem::where('product_id', $product_id);
-        $product_item_id = $product_item->first()->id;
-        ProductConfigurationField::where('product_item_id', $product_item_id)->delete();
-        $product_item->delete();
+        if($product_item->count() > 0){
+            $product_item_id = $product_item->first()->id;
+            ProductConfigurationField::where('product_item_id', $product_item_id)->delete();
+            $product_item->delete();
+        }
+        ProductPrivateList::where('product_id', $product_id)->delete();
         Product::find($product_id)->delete();
         return true;
     }

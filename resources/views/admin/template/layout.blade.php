@@ -228,11 +228,11 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                                                                      title='gotbootstrap.com'
                                                                                      target='_blank'>Imgmongelli</a></span>
                 </div>
-               
+
             </footer>
             <!-- END Page Footer -->
             <!-- BEGIN Shortcuts -->
-         
+
             <!-- END Shortcuts -->
             <!-- BEGIN Color profile -->
             <!-- this area is hidden and will not be seen on screens or screen readers -->
@@ -1088,6 +1088,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 <script src="{{js('notifications/sweetalert2/sweetalert2.bundle.js')}}"></script>
 <script>
     let url_update_package = '{{route('admin.updatepackage')}}';
+    let url_update_status_order = "{{route('admin.orders.update.status')}}";
 </script>
 <script src="{{js('app.js')}}"></script>
 @yield('js')

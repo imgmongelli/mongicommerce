@@ -28,7 +28,7 @@
                         {{Auth::user()->first_name}}
                     </span>
                 </a>
-                <span class="d-inline-block text-truncate text-truncate-sm">Bari, Italia</span>
+                <span class="d-inline-block text-truncate text-truncate-sm">{{Auth::user()->email}}</span>
             </div>
             <img src="{{img('card-backgrounds/cover-2-lg.png')}}" class="cover" alt="cover">
 

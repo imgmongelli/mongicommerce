@@ -132,7 +132,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/admin/prodotto/elimina-variante-prodotto', [AdminNewProductVariationController::class, 'deleteVariation'])->name('admin.post.product.variation.delete');
     Route::post('/admin/prodotto/modifica-variante-prodotto', [AdminNewProductVariationController::class, 'editVariation'])->name('admin.post.product.variation.edit');
 
-
     //settings
     Route::post('/admin/settings/update', [AdminSettingsController::class, 'update'])->name('admin.post.settings.update');
 
@@ -145,4 +144,10 @@ Route::group(['middleware' => ['web']], function () {
     //private list
     Route::post('/admin/create/lista/privata', [AdminCreatePrivateListController::class, 'createList'])->name('admin.create.private.list')->middleware('admin');
     Route::post('/admin/delete/lista/privata', [AdminCreatePrivateListController::class, 'deleteList'])->name('admin.delete.list')->middleware('admin');
+
+    //orders
+    Route::post('/admin/post/status-order-update', [AdminOrdersController::class, 'updateStatus'])->name('admin.orders.update.status')->middleware('admin');
+
+    //category
+    Route::post('/admin/post/delete/category', [AdminCategoryController::class, 'deleteCategory'])->name('admin.post.delete.category')->middleware('admin');
 });

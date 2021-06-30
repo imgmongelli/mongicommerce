@@ -102,6 +102,26 @@
         </div>
     </div>
 
+    <div id="delete-category-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminazione categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Sei sicuro di voler eliminare la categoria e i suoi figli?</p>
+                    <input hidden id="input-category-id" type="text">
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-button" type="button" class="btn btn-primary">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script src="{{js('jstree/jstree.js')}}"></script>
@@ -140,7 +160,7 @@
                         "plugins": ["types", "themes", "json_data", "ui"]
                     }).bind('select_node.jstree rename_node.jstree', function (e, data) {
                         let type = e.type;
-
+                        console.log(type);
                         if (type === 'rename_node') {
                             console.log(data);
                             let new_text = data.text;
@@ -152,14 +172,39 @@
                         } else if(type === 'select_node'){
                             //let node = data.instance.get_node(data.selected);
                             //data.instance.edit(node);
+                            $('#input-category-id').val(data.instance.get_node(data.selected).id);
+                            $('#delete-category-modal').modal('show');
                             console.log(data.instance.get_node(data.selected));
-
                         }
 
                     });
                 }
             });
         }
+
+        $('#confirm-button').click(function (){
+            $.ajax({
+                method: 'POST',
+                url: "{{route('admin.post.delete.category')}}",
+                data: {
+                    category_id: $('#input-category-id').val()
+                },
+                'statusCode': {
+                    422: function (response) {
+                    }
+                },
+                success: function (response) {
+                    console.log(response);
+                    //$('#trtrtr').jstree(true).refresh();
+                    $('#delete-category-modal').modal('hide');
+                    if(response.error === undefined){
+                        success('Categoria eliminata correttamente.', true);
+                    }else{
+                        error(response.error);
+                    }
+                }
+            });
+        })
 
         function updateTree() {
             $.ajax({

@@ -7,6 +7,10 @@ namespace Mongi\Mongicommerce\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Models\Category;
+use Mongi\Mongicommerce\Models\ConfigurationField;
+use Mongi\Mongicommerce\Models\Detail;
+use Mongi\Mongicommerce\Models\DetailValue;
+use Mongi\Mongicommerce\Models\Product;
 
 class AdminCategoryController extends Controller
 {
@@ -69,6 +73,37 @@ class AdminCategoryController extends Controller
             ];
         }
         return $childs;
+    }
+
+    public function deleteCategory(Request $r){
+        $category_id = $r->category_id;
+        $products = Product::where('category_id', $category_id)->count();
+        if($products > 0) {
+            return ['error' => 'Per questa categoria ci sono '.$products.' prodotti. Elimina prima i prodotti per questa categoria.'];
+        }
+        $parent_categories = Category::where('parent_id', $category_id)->get();
+        foreach ($parent_categories as $category){
+            $products = Product::where('category_id', $category->id)->count();
+            if($products > 0){
+                return ['error' => 'Per questa categoria '.$category->name .' ci sono '.$products.' prodotti. Elimina prima i prodotti per questa categoria.'];
+            } else{
+                ConfigurationField::where('category_id', $category->id)->delete();
+                $details = Detail::where('category_id', $category->id);
+                foreach ($details->get() as $detail){
+                    DetailValue::find($detail->id)->delete();
+                }
+                $details->delete();
+                Category::find($category->id)->delete();
+            }
+        }
+        ConfigurationField::where('category_id', $category_id)->delete();
+        $details = Detail::where('category_id', $category_id);
+        foreach ($details->get() as $detail){
+            DetailValue::find($detail->id)->delete();
+        }
+        $details->delete();
+        Category::find($category_id)->delete();
+        return true;
     }
 
 
