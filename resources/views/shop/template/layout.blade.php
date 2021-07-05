@@ -108,14 +108,14 @@
                     <!--/ End Logo -->
                     <!-- Search Form -->
                     <div class="search-top">
-                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
-                        <!-- Search Form -->
-                        <div class="search-top">
-                            <form class="search-form">
-                                <input type="text" placeholder="Search here..." name="search">
-                                <button value="search" type="submit"><i class="ti-search"></i></button>
-                            </form>
-                        </div>
+{{--                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>--}}
+{{--                        <!-- Search Form -->--}}
+{{--                        <div class="search-top">--}}
+{{--                            <form class="search-form">--}}
+{{--                                <input type="text" placeholder="Search here..." name="search">--}}
+{{--                                <button value="search" type="submit"><i class="ti-search"></i></button>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
                         <!--/ End Search Form -->
                     </div>
                     <!--/ End Search Form -->
@@ -127,11 +127,15 @@
                 <div class="col-lg-2 col-md-3 col-12">
                     <div class="right-bar">
                         <!-- Search Form -->
+{{--                        <div class="sinlge-bar">--}}
+{{--                            <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>--}}
+{{--                        </div>--}}
                         <div class="sinlge-bar">
-                            <a href="#" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
-                        </div>
-                        <div class="sinlge-bar">
-                            <a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                            @auth
+                                <a href="{{route('shop.user.settings')}}" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                            @else
+                                <a href="{{route('shop.redirect.login')}}" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
+                            @endauth
                         </div>
                         <div class="sinlge-bar shopping">
                             <a href="{{route('shop.cart')}}" class="single-icon"><i class="ti-bag"></i> <span class="total-count space_cart">0</span></a>
@@ -253,14 +257,51 @@
                                     <div class="nav-inner">
                                         <ul class="nav main-menu menu navbar-nav">
                                             <li><a href="{{route('shop.landing')}}">Home</a></li>
-                                            <li><a href="#">Categorie</a>
-                                                <ul class="dropdown">
-                                                    @foreach($categories as $category)
-                                                        <li><a href="{{route('shop',$category['id'])}}">{{$category['name']}}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
-                                            <li><a href="{{route('shop')}}">Shop</a></li>
+                                            <li><a href="#">Categorie<i class="ti-angle-down"></i></a>
+                                                @if(count($categories) <= 10)
+                                                    <ul class="dropdown">
+                                                        @foreach($categories as $category)
+                                                            <li><a href="{{route('shop',$category['id'])}}">
+                                                                    @if(str_starts_with($category['name'], '-'))
+                                                                        {{$category['name']}}
+                                                                    @else
+                                                                        <strong>{{$category['name']}}</strong>
+                                                                    @endif
+                                                                </a></li>
+                                                        @endforeach
+                                                        @else
+                                                            <ul class="dropdown double-col">
+                                                                <div class="d-flex justify-content-between">
+                                                                    <div class="d-flex flex-column col-6" style="border-right: 1px solid rgba(0, 0, 0, 0.1)">
+                                                                        @for ($i = 0; $i < count($categories)/2; $i++)
+                                                                            <li><a href="{{route('shop',$categories[$i]['id'])}}">
+                                                                                    @if(str_starts_with($categories[$i]['name'], '-'))
+                                                                                        {{$categories[$i]['name']}}
+                                                                                    @else
+                                                                                        <strong>{{$categories[$i]['name']}}</strong>
+                                                                                    @endif
+                                                                                </a></li>
+                                                                        @endfor
+                                                                    </div>
+                                                                    <div class="d-flex flex-column col-6">
+                                                                        @for ($i; $i < count($categories); $i++)
+                                                                            <li><a href="{{route('shop',$categories[$i]['id'])}}">
+                                                                                    @if(str_starts_with($categories[$i]['name'], '-'))
+                                                                                        {{$categories[$i]['name']}}
+                                                                                    @else
+                                                                                        <strong>{{$categories[$i]['name']}}</strong>
+                                                                                    @endif
+                                                                                </a></li>
+                                                                        @endfor
+                                                                    </div>
+                                                                </div>
+                                                                @endif
+
+                                                            </ul>
+                                                            </li>
+                                                            <li><a href="{{route('shop')}}">Shop</a></li>
+                                                    </ul>
+                                    </div>
                                         </ul>
                                     </div>
                                 </div>
@@ -324,12 +365,29 @@
                 </div>
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
-
+                    <div class="single-footer social">
+                        <h4>Sitemap</h4>
+                        <div class="contact">
+                            <ul>
+                                <li><a href="{{route('shop.landing')}}">Home</a></li>
+                                <li><a href="{{route('shop')}}">Negozio</a></li>
+                                <li><a href="{{route('shop.redirect.login')}}">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-2 col-md-6 col-12">
                     <!-- Single Widget -->
-
+                    <div class="single-footer social">
+                        <h4>Link utili</h4>
+                        <div class="contact">
+                            <ul>
+                                <li><a href="">Dove siamo</a></li>
+                                <li><a href="">Terms & Privacy</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     <!-- End Single Widget -->
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -348,7 +406,6 @@
                         <ul>
                             <li><a href="#"><i class="ti-facebook"></i></a></li>
                             <li><a href="#"><i class="ti-twitter"></i></a></li>
-                            <li><a href="#"><i class="ti-flickr"></i></a></li>
                             <li><a href="#"><i class="ti-instagram"></i></a></li>
                         </ul>
                     </div>
@@ -408,7 +465,7 @@
 <!-- Easing JS -->
 <script src=" {{asset('mongicommerce/template/shop/js/easing.js')}}"></script>
 <!-- Active JS -->
-{{--<script src=" {{asset('mongicommerce/template/shop/js/active.js')}}"></script>--}}
+<script src=" {{asset('mongicommerce/template/shop/js/active.js')}}"></script>
 
 <script src="{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.js')}}"></script>
 <script>

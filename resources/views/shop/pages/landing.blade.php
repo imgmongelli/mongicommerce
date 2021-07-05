@@ -60,19 +60,20 @@
 
 
     <!-- Start Most Popular -->
-    <div class="product-area most-popular section">
+    <div class="product-area section">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Prodotti</h2>
+                        <h2>Prodotti in evidenza</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
+                @foreach($productsInHome as $product)
                 <div class="col-lg-3 col-md-6 col-12">
-                    <div class="popular-slider">
-                        @foreach($productsInHome as $product)
+                    <div class="product-info">
+
                             <div class="single-product">
                                 <div class="product-img">
                                     <a href="{{route('shop.single.product',$product->id)}}">
@@ -96,10 +97,9 @@
                                 </div>
                             </div>
 
-                        @endforeach
-
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>

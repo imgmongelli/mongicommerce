@@ -276,6 +276,11 @@ Version:1.0
 	left: 0;
 	margin: 0;
 }
+
+.double-col{
+    width: 500px!important;
+}
+
 .header .nav li:hover .dropdown{
 	opacity:1;
 	visibility:visible;
@@ -5001,4 +5006,29 @@ body {
 ===============================*/
 .divtext{
     overflow: auto;
+}
+
+/*=============================
+	Media Screen CSS
+===============================*/
+
+@media screen and (max-width: 768px) {
+    .slicknav_menu .slicknav_icon-bar {
+        background-color: #00AB9C!important;
+        box-shadow: none;
+        text-shadow: none;
+    }
+    .slicknav_nav .slicknav_arrow {
+        color: #00AB9C!important;
+    }
+    .slicknav_nav li:hover a {
+        color: #00AB9C!important;
+        background: transparent;
+    }
+    .header.shop .list-main li i {
+        color: #00AB9C!important;
+    }
+    .double-col {
+        width: auto!important;
+    }
 }
