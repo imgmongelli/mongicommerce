@@ -134,7 +134,6 @@
                 arrayReserved.push($(el).data('id'));
             }
         })
-
         $.ajax({
             method:'post',
             url:"{{route('admin.create.private.list')}}",

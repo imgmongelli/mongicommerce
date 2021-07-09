@@ -35,7 +35,6 @@
                                 <th>Modificato</th>
                                 <th>In evidenza</th>
                                 <th>Azioni</th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -51,13 +50,55 @@
                                     <td>
                                         @if($product->single_product)
                                             <button data-id="{{$product->id}}" onclick="deleteProduct(this)" class="btn btn-danger">Elimina</button>
+                                            <button data-id="{{$product->id}}" onclick="showMore(this)" class="btn btn-secondary">Dettagli</button>
                                         @else
                                             <a href="{{route('admin.product.new.variante',$product->id)}}" class="btn btn-warning">Varianti</a>
                                         @endif
+
                                     </td>
                                 </tr>
                             @endforeach
 
+
+
+                            </tbody>
+                        </table>
+                        <!-- datatable end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="show_product_detail" style="display: none">
+        <div class="col-xl-12">
+            <div id="panel-1" class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Dettagli prodotto selezionato
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <!-- datatable start -->
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome Prodotto</th>
+                                <th>Descrizione Prodotto</th>
+                                <th>Categoria</th>
+                                <th>Quantità disponibile</th>
+                                <th>Prezzo</th>
+                                <th>Creato</th>
+                                <th>Modificato</th>
+                            </tr>
+                            </thead>
+                            <tbody id="product_detail">
 
 
                             </tbody>
@@ -107,6 +148,32 @@
                 },
                 success:function (response){
                     success("Prodotto eliminato correttamente",true);
+                }
+            })
+        }
+
+        function showMore(el) {
+            let product_id = $(el).data('id');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.detail.product')}}",
+                data:{
+                    product_id : product_id
+                },
+                success:function (response){
+                    let html = '';
+                    html += '<tr>';
+                    html += '<td>' + response[0].id + '</td>';
+                    html += '<td>' + response[0].name + '</td>';
+                    html += '<td>' + response[0].description + '</td>';
+                    html += '<td>' + response[0].category + '</td>';
+                    html += '<td>' + response[0].quantity + '</td>';
+                    html += '<td>€ ' + response[0].price + '</td>';
+                    html += '<td>' + response[0].created_at + '</td>';
+                    html += '<td>' + response[0].updated_at + '</td>';
+                    html += '</tr>';
+                    $('#product_detail').html(html);
+                    $('#show_product_detail').show();
                 }
             })
         }

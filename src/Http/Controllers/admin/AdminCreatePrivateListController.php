@@ -33,11 +33,14 @@ class AdminCreatePrivateListController extends Controller
             $new_product_list->product_id = $product_id;
             $new_product_list->save();
         }
-        foreach ($reserved as $res_id) {
-            $product = Product::where('id', $res_id)->first();
-            $product->is_reserved = true;
-            $product->save();
+        if($reserved) {
+            foreach ($reserved as $res_id) {
+                $product = Product::where('id', $res_id)->first();
+                $product->is_reserved = true;
+                $product->save();
+            }
         }
+
         return true;
     }
 
