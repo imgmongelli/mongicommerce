@@ -80,4 +80,15 @@ class AdminNewSingleProductController extends Controller
         }
 
     }
+
+    public function editSingleProduct(Request $r){
+        $item_id = $r->item_id;
+        $item_qta = $r->item_qta;
+        $item_price = $r->item_price;
+        $product_item = ProductItem::find($item_id);
+        $product_item->price = $item_price;
+        $product_item->quantity = $item_qta;
+        $product_item->save();
+        return true;
+    }
 }

@@ -93,9 +93,10 @@
                                 <th>Descrizione Prodotto</th>
                                 <th>Categoria</th>
                                 <th>Quantità disponibile</th>
-                                <th>Prezzo</th>
+                                <th>Prezzo(€)</th>
                                 <th>Creato</th>
                                 <th>Modificato</th>
+                                <th>Azioni</th>
                             </tr>
                             </thead>
                             <tbody id="product_detail">
@@ -167,13 +168,31 @@
                     html += '<td>' + response[0].name + '</td>';
                     html += '<td>' + response[0].description + '</td>';
                     html += '<td>' + response[0].category + '</td>';
-                    html += '<td>' + response[0].quantity + '</td>';
-                    html += '<td>€ ' + response[0].price + '</td>';
+                    html += '<td><input id="quantity_' + response[0].id + '" value="' + response[0].quantity +'" class="form-control" type="number"></td>';
+                    html += '<td><input id="price_' + response[0].id + '"value="' + response[0].price +'" class="form-control" type="number"></td>';
                     html += '<td>' + response[0].created_at + '</td>';
                     html += '<td>' + response[0].updated_at + '</td>';
+                    html += '<td><button class="btn btn-danger" data-id="'+ response[0].id + '" onclick="editVariation(this)">Salva</button></td>';
                     html += '</tr>';
                     $('#product_detail').html(html);
                     $('#show_product_detail').show();
+                }
+            })
+        }
+
+        function editVariation(el){
+            let item_id = $(el).data('id');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.post.single.product.edit')}}",
+                data:{
+                    item_id : item_id,
+                    item_qta : $('#quantity_' + item_id).val(),
+                    item_price : $('#price_' + item_id).val()
+                },
+                success:function (response){
+                    success("Modifiche apportate correttamente", false);
+
                 }
             })
         }
