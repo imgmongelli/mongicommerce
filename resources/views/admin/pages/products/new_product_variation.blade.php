@@ -640,13 +640,29 @@
                                 <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
                                                 <span class="icon-stack">
-                                                   <i class="fal fa-abacus"></i>
+                                                   <i class="fal fa-euro-sign"></i>
                                                 </span>
                                             </span>
                                 </div>
                                 <input type="number" id="price" class="form-control">
                             </div>
                             <span class="help-block">Quantità per prodotti con questa varietà</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Peso (Kg)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                            <span class="input-group-text py-1 px-3">
+                                                <span class="icon-stack">
+                                                   <i class="fal fa-weight-hanging"></i>
+                                                </span>
+                                            </span>
+                                </div>
+                                <input type="number" id="weight" class="form-control">
+                            </div>
+                            <span class="help-block">Peso indicativo prodotto (0.0 Kg)</span>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -684,6 +700,7 @@
                                 <th>Dettagli</th>
                                 <th>Prezzo</th>
                                 <th>Quantità</th>
+                                <th>Peso (Kg)</th>
                                 <th>Azioni</th>
 
                             </tr>
@@ -700,6 +717,7 @@
                                     </td>
                                     <td><input id="item_price_{{$loop->index}}" value="{{$item->price}}" class="form-control" type="number"></td>
                                     <td><input id="item_qta_{{$loop->index}}" value="{{$item->quantity}}" class="form-control" type="number"></td>
+                                    <td><input id="item_weight_{{$loop->index}}" value="{{$item->weight}}" class="form-control" type="number"></td>
                                     <td>
                                         <button class="btn btn-dark" data-id="{{$item->id}}" onclick="deleteVariation(this)"><i class="fal fa-trash"></i></button>
                                         <button class="btn btn-danger" data-id="{{$item->id}}" onclick="editVariation(this, {{$loop->index}})"><i class="fal fa-save"></i></button>
@@ -819,6 +837,7 @@
                     category_id: $('#categories').val(),
                     quantity: $('#quantity').val(),
                     price: $('#price').val(),
+                    weight: $('#weight').val(),
                     product_id : product_id,
                     details: JSON.stringify(details),
                     configuration_fields : JSON.stringify(configuration_fields),
@@ -894,7 +913,8 @@
                 data:{
                     item_id : item_id,
                     item_qta : $('#item_qta_' + index).val(),
-                    item_price : $('#item_price_' + index).val()
+                    item_price : $('#item_price_' + index).val(),
+                    item_weight: $('#item_weight_' + index).val()
                 },
                 success:function (response){
                     success("Modifiche apportate correttamente",true);

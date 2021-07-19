@@ -27,6 +27,14 @@ class CreateAdminSettingsTable extends Migration
             $table->string('telephone')->default('3240537258');
             $table->string('claim_email')->default('gianluca.mongelli@gmail.com');
             $table->string('piva')->default('12345678901');
+            $table->double('free_delivery')->default('100');
+            $table->double('min_delivery')->default('7');
+            $table->boolean('is_by_weight')->default(false);
+            $table->double('delivery_less_5')->default('7');
+            $table->double('delivery_less_10')->default('11.50');
+            $table->double('delivery_less_20')->default('16.50');
+            $table->double('delivery_less_30')->default('21.50');
+            $table->double('delivery_less_50')->default('25');
             $table->timestamps();
         });
     }

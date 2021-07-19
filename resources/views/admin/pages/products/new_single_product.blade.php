@@ -643,13 +643,29 @@
                                 <div class="input-group-prepend">
                                             <span class="input-group-text py-1 px-3">
                                                 <span class="icon-stack">
-                                                   <i class="fal fa-abacus"></i>
+                                                   <i class="fal fa-euro-sign"></i>
                                                 </span>
                                             </span>
                                 </div>
                                 <input type="number" id="price" class="form-control">
                             </div>
                             <span class="help-block">Quantità per prodotti con questa varietà</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-2">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Peso (Kg)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                            <span class="input-group-text py-1 px-3">
+                                                <span class="icon-stack">
+                                                   <i class="fal fa-weight-hanging"></i>
+                                                </span>
+                                            </span>
+                                </div>
+                                <input type="number" id="weight" class="form-control">
+                            </div>
+                            <span class="help-block">Peso indicativo prodotto (0.0 Kg)</span>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -719,6 +735,7 @@
                     category_id: $('#categories').val(),
                     quantity: $('#quantity').val(),
                     price: $('#price').val(),
+                    weight: $('#weight').val(),
                     configuration_fields : JSON.stringify(configuration_fields),
                     image : result.toDataURL(uploadedImageType)
                 },

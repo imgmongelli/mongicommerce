@@ -52,6 +52,7 @@ class AdminProductsListController extends Controller
             'description' => $product_item->description,
             'quantity' =>$product_item->quantity,
             'price' => $product_item->price,
+            'weight' => $product_item->weight,
             'updated_at' => $product_item->updated_at->format('d/m/Y'),
             'created_at' => $product_item->created_at->format('d/m/Y')
         ];

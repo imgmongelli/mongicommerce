@@ -142,6 +142,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //volantino
     Route::post('/admin/volantino/delete', [AdminVolantiniController::class, 'deleteVolantino'])->name('admin.delete.volantino')->middleware('admin');
+    Route::post('/admin/volantino/upload', [AdminVolantiniController::class, 'uploadVolantino'])->name('admin.upload.volantino')->middleware('admin');
 
     //private list
     Route::post('/admin/create/lista/privata', [AdminCreatePrivateListController::class, 'createList'])->name('admin.create.private.list')->middleware('admin');

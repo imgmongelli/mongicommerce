@@ -5008,6 +5008,11 @@ body {
     overflow: auto;
 }
 
+.custom-link:hover{
+    text-decoration: underline;
+    color: #52b0ea;
+}
+
 /*=============================
 	Media Screen CSS
 ===============================*/

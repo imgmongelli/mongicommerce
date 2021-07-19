@@ -94,6 +94,7 @@
                                 <th>Categoria</th>
                                 <th>Quantità disponibile</th>
                                 <th>Prezzo(€)</th>
+                                <th>Peso(Kg)</th>
                                 <th>Creato</th>
                                 <th>Modificato</th>
                                 <th>Azioni</th>
@@ -170,6 +171,7 @@
                     html += '<td>' + response[0].category + '</td>';
                     html += '<td><input id="quantity_' + response[0].id + '" value="' + response[0].quantity +'" class="form-control" type="number"></td>';
                     html += '<td><input id="price_' + response[0].id + '"value="' + response[0].price +'" class="form-control" type="number"></td>';
+                    html += '<td><input id="weight_' + response[0].id + '"value="' + response[0].weight +'" class="form-control" type="number"></td>';
                     html += '<td>' + response[0].created_at + '</td>';
                     html += '<td>' + response[0].updated_at + '</td>';
                     html += '<td><button class="btn btn-danger" data-id="'+ response[0].id + '" onclick="editVariation(this)">Salva</button></td>';
@@ -188,7 +190,8 @@
                 data:{
                     item_id : item_id,
                     item_qta : $('#quantity_' + item_id).val(),
-                    item_price : $('#price_' + item_id).val()
+                    item_price : $('#price_' + item_id).val(),
+                    item_weight: $('#weight_' + item_id).val()
                 },
                 success:function (response){
                     success("Modifiche apportate correttamente", false);

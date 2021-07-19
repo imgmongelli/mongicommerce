@@ -29,6 +29,7 @@ class AdminNewProductVariationController extends Controller
             'price' => 'required',
             'image' => 'required',
             'details' => 'required|min:4',
+            'weight' => 'required'
         ]);
         $product_id = $r->get('product_id');
 
@@ -36,6 +37,7 @@ class AdminNewProductVariationController extends Controller
         $configuration_fields = json_decode($r->get('configuration_fields'),true);
         $quantity = $r->get('quantity');
         $price = $r->get('price');
+        $weight = $r->get('weight');
         $product_name = $r->get('product_name');
         $product_description = $r->get('product_description');
         $get_image = $r->get('image');
@@ -51,6 +53,7 @@ class AdminNewProductVariationController extends Controller
         $product_item->image = null;
         $product_item->price = $price;
         $product_item->quantity = $quantity;
+        $product_item->weight = $weight;
         $product_item->save();
 
         $base64_str = substr($get_image, strpos($get_image, ",")+1);
@@ -104,9 +107,11 @@ class AdminNewProductVariationController extends Controller
         $item_id = $r->item_id;
         $item_qta = $r->item_qta;
         $item_price = $r->item_price;
+        $item_weight = $r->item_weight;
         $product_item = ProductItem::find($item_id);
         $product_item->price = $item_price;
         $product_item->quantity = $item_qta;
+        $product_item->weight = $item_weight;
         $product_item->save();
         return true;
     }

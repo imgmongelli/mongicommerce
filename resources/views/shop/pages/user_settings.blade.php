@@ -6,7 +6,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-4">
+        <div class="col-md-12 mt-5 mb-5 card" style="padding: 15px">
             <fieldset>
                 <legend>DETTAGLI ACCOUNT</legend>
                 <!-- Text input-->

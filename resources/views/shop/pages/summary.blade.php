@@ -55,6 +55,7 @@
                 </div>
                 <div class="col-sm-6 total">
                     <p>Prodotti: <span id="sum_cart">@money($total)</span></p>
+                    <p>Spedizione: <span id="sum_cart">@money($shipping_price)</span></p>
                     <p>Totale: <span>@money($total + $shipping_price)</span></p>
                 </div>
             </div>
