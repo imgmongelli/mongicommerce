@@ -25,6 +25,14 @@ class SettingsSeeder extends Seeder
         $settings->telephone = '3240537258';
         $settings->claim_email = 'gianluca.mongelli@gmail.com';
         $settings->piva = '12345678901';
+        $settings->free_delivery = 100;
+        $settings->min_delivery = 7;
+        $settings->is_by_weight = false;
+        $settings->delivery_less_5 = 7;
+        $settings->delivery_less_10 = 11.50;
+        $settings->delivery_less_20 = 16.50;
+        $settings->delivery_less_30 = 21.50;
+        $settings->delivery_less_50 = 25;
         $settings->save();
      }
 }
