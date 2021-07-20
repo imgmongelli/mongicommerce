@@ -348,22 +348,29 @@
 <!-- Start Footer Area -->
 <footer class="footer">
     <!-- Footer Top -->
-    <div class="footer-top section">
+    <div class="footer-top small-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-5 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                     <!-- Single Widget -->
                     <div class="single-footer about">
                         <div class="logo">
-                            <a href="{{route('shop.landing')}}"><img src="{{asset('mongicommerce/template/shop/images/logo2.png')}}" alt="#"></a>
+                            <a href="{{route('shop.landing')}}"><img src="{{asset('mongicommerce/template/shop/images/logo2.png')}}" width="110" alt="#"></a>
                         </div>
-                        <p class="text">POR FESR Lazio 2014-2020 - Mis.3.5.1 – Progetto Lazio Open Innovation Center – Zagarolo</p>
-                        <img width="150" src="{{asset('mongicommerce/template/shop/images/img.png')}}" alt="#">
+                        <div class="single-footer social">
+                            <ul>
+                                <li><a href="#"><i class="ti-facebook"></i></a></li>
+                                <li><a href="#"><i class="ti-twitter"></i></a></li>
+                                <li><a href="#"><i class="ti-instagram"></i></a></li>
+                            </ul>
+                        </div>
                         <p class="call">Chiamaci<span><a href="{{$mongicommerce->telephone}}">{{$mongicommerce->telephone}}</a></span></p>
+
+
                     </div>
                     <!-- End Single Widget -->
                 </div>
-                <div class="col-lg-2 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                     <!-- Single Widget -->
                     <div class="single-footer social">
                         <h4>Sitemap</h4>
@@ -377,7 +384,7 @@
                     </div>
                     <!-- End Single Widget -->
                 </div>
-                <div class="col-lg-2 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                     <!-- Single Widget -->
                     <div class="single-footer social">
                         <h4>Link utili</h4>
@@ -403,11 +410,7 @@
                             </ul>
                         </div>
                         <!-- End Single Widget -->
-                        <ul>
-                            <li><a href="#"><i class="ti-facebook"></i></a></li>
-                            <li><a href="#"><i class="ti-twitter"></i></a></li>
-                            <li><a href="#"><i class="ti-instagram"></i></a></li>
-                        </ul>
+
                     </div>
                     <!-- End Single Widget -->
                 </div>
@@ -419,14 +422,17 @@
         <div class="container">
             <div class="inner">
                 <div class="row">
-                    <div class="col-lg-6 col-12">
+                    <div class="col-lg-7 col-12">
                         <div class="left">
-                            <p>Copyright © 2020 <a href="#">{{$mongicommerce->shop_name}}</a>  -  All Rights Reserved.</p>
+                            <p>
+                                POR FESR Lazio 2014-2020 - Mis.3.5.1 – Progetto Lazio Open Innovation Center – Zagarolo <br>
+                                Copyright © 2020 <a href="#">{{$mongicommerce->shop_name}}</a>  -  All Rights Reserved.
+                            </p>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-12">
+                    <div class="col-lg-5 col-12">
                         <div class="right">
-                            <img src="{{asset('mongicommerce/template/shop/images/payments.png')}}" alt="#">
+                            <img width="250" src="{{asset('mongicommerce/template/shop/images/img.png')}}" alt="#">
                         </div>
                     </div>
                 </div>

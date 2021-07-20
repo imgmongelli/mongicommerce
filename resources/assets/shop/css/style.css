@@ -5008,6 +5008,11 @@ body {
     overflow: auto;
 }
 
+.small-section{
+    padding: 60px 0;
+    position: relative;
+}
+
 .custom-link:hover{
     text-decoration: underline;
     color: #52b0ea;
