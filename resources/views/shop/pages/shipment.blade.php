@@ -37,6 +37,9 @@
                         @enderror
                     </div>
                     <button type="submit" class="btn btn-primary">Accedi</button>
+                    <div class="mt-2">
+                        <p>Sei un nuovo utente?<a href="{{route('shop.register')}}" class="custom-link"> Registrati</a></p>
+                    </div>
                 </form>
             </fieldset>
             <hr>
