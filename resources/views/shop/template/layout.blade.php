@@ -119,10 +119,15 @@
                     <!--/ End Logo -->
                     <!-- Search Form -->
                     <div class="search-top">
-                        <form class="search-form" action="{{route('shop.search')}}" method="GET">
-                            <input id="query" name="query" value="{{request()->input('query')}}" placeholder="Cerca prodotti qui..." type="text">
-                            <button value="search" type="submit"><i class="ti-search"></i></button>
-                        </form>
+                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+                        <!-- Search Form -->
+                        <div class="search-top">
+                            <form class="search-form" action="{{route('shop.search')}}" method="GET">
+                                <input id="query" name="query" value="{{request()->input('query')}}" placeholder="Cerca prodotti qui..." type="text">
+                                <button value="search" type="submit"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                        <!--/ End Search Form -->
                     </div>
                     <!--/ End Search Form -->
                     <div class="mobile-nav"></div>
