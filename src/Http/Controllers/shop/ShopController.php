@@ -4,6 +4,7 @@
 namespace Mongi\Mongicommerce\Http\Controllers\shop;
 
 
+use Illuminate\Http\Request;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Libraries\Template;
 use Mongi\Mongicommerce\Models\Category;
@@ -18,7 +19,16 @@ class ShopController extends Controller
         $category_description = '';
         if($category){
             $category_name = $category->name;
-        };
+        }
         return view('mongicommerce.pages.shop',compact('products','category_name','category_description'));
+    }
+
+    public function search(Request $r){
+        $r->validate([
+            'query' => 'required'
+        ]);
+        $query = $r->input('query');
+        $products = Product::where('name', 'like', "%$query%")->get();
+        return view('mongicommerce.pages.search-results', compact('products'));
     }
 }

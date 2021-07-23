@@ -108,21 +108,23 @@
                     <!--/ End Logo -->
                     <!-- Search Form -->
                     <div class="search-top">
-{{--                        <div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>--}}
-{{--                        <!-- Search Form -->--}}
-{{--                        <div class="search-top">--}}
-{{--                            <form class="search-form">--}}
-{{--                                <input type="text" placeholder="Search here..." name="search">--}}
-{{--                                <button value="search" type="submit"><i class="ti-search"></i></button>--}}
-{{--                            </form>--}}
-{{--                        </div>--}}
-                        <!--/ End Search Form -->
+                        <form class="search-form" action="{{route('shop.search')}}" method="GET">
+                            <input id="query" name="query" value="{{request()->input('query')}}" placeholder="Cerca prodotti qui..." type="text">
+                            <button value="search" type="submit"><i class="ti-search"></i></button>
+                        </form>
                     </div>
                     <!--/ End Search Form -->
                     <div class="mobile-nav"></div>
                 </div>
                 <div class="col-lg-8 col-md-7 col-12">
-                     <!--Could be possibile insert a banner here! -->
+                    <div class="search-bar-top">
+                        <div class="search-bar">
+                            <form action="{{route('shop.search')}}" method="GET">
+                                <input id="query" name="query" value="{{request()->input('query')}}" placeholder="Cerca prodotti qui....." type="text">
+                                <button type="submit" id="search_btn" class="btnn"><i class="ti-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-2 col-md-3 col-12">
                     <div class="right-bar">

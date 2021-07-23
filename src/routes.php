@@ -58,6 +58,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('/shop/{id?}', [ShopController::class, 'page'])->name('shop');
+    Route::get('/page/shop/search', [ShopController::class, 'search'])->name('shop.search');
     Route::get('/prodotto/{id}/{item_id?}', [ShopSingleProductController::class, 'page'])->name('shop.single.product');
     Route::get('page/shop/cart/', [ShopCartController::class, 'page'])->name('shop.cart');
     Route::get('page/shop/summary/', [ShopSummaryController::class, 'page'])->name('shop.summary');

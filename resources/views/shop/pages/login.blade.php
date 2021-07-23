@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
-        <div class="col-md-8 mt-5 mb-5">
+        <div class="col-md-8 mt-5 mb-5 card" style="padding: 15px">
              <fieldset>
                 <legend>EFFETTUA IL LOGIN</legend>
                 <form method="POST" action="{{ route('shop.redirect.login') }}">

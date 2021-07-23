@@ -10,6 +10,7 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8 mt-5 mb-5 card" style="padding: 15px">
+            <legend>REGISTRATI</legend>
             <form method="POST" action="{{ route('shop.register') }}">
                 @csrf
                 <!-- Text input-->

@@ -61,7 +61,7 @@
 
     <!-- Start Most Popular -->
     <div class="product-area section">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
@@ -128,7 +128,7 @@
 
     <!-- Start Shop Blog  -->
     <section class="shop-blog section">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
