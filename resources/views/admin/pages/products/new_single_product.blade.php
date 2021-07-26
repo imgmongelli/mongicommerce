@@ -745,7 +745,7 @@
                     }
                 },
                 success: function (response) {
-                    success("Nuova variante inserita con successo",true);
+                    success("Nuovo prodotto singolo inserito con successo", true);
                 }
             });
 

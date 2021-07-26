@@ -49,10 +49,11 @@
                                     <td><input data-id="{{$product->id}}" type="checkbox" {!! $product->is_home == true ? 'checked':'' !!} onclick="saveInHome(this)"></td>
                                     <td>
                                         @if($product->single_product)
-                                            <button data-id="{{$product->id}}" onclick="deleteProduct(this)" class="btn btn-danger">Elimina</button>
+                                            <button data-id="{{$product->id}}" onclick="deleteSingleProduct(this)" class="btn btn-danger">Elimina</button>
                                             <button data-id="{{$product->id}}" onclick="showMore(this)" class="btn btn-secondary">Dettagli</button>
                                         @else
-                                            <a href="{{route('admin.product.new.variante',$product->id)}}" class="btn btn-warning">Varianti</a>
+                                            <button data-id="{{$product->id}}" onclick="deleteVariationProduct(this)" class="btn btn-danger">Elimina</button>
+                                            <a href="{{route('admin.product.new.variante', $product->id)}}" class="btn btn-warning">Varianti</a>
                                         @endif
 
                                     </td>
@@ -111,6 +112,27 @@
             </div>
         </div>
     </div>
+
+    <div id="delete-product-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Eliminazione prodotto con varianti</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Sei sicuro di voler eliminare il prodotto e <strong>tutte</strong> le sue varianti?</p>
+                    <input hidden id="input-category-id" type="text">
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-button" type="button" class="btn btn-primary">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
@@ -140,11 +162,11 @@
             })
         }
 
-        function deleteProduct(el) {
+        function deleteSingleProduct(el) {
             let product_id = $(el).data('id');
             $.ajax({
                 method:'post',
-                url:"{{route('admin.delete.product')}}",
+                url:"{{route('admin.delete.single.product')}}",
                 data:{
                     product_id : product_id
                 },
@@ -153,6 +175,27 @@
                 }
             })
         }
+
+        function deleteVariationProduct(el) {
+           $('#input-category-id').val($(el).data('id'));
+            $('#delete-product-modal').modal('show');
+        }
+
+        $('#confirm-button').click(function () {
+            let product_id = $('#input-category-id').val();
+            $.ajax({
+                method: 'post',
+                url: "{{route('admin.delete.variation.product')}}",
+                data: {
+                    product_id: product_id
+                },
+                success: function (response) {
+                    $('#delete-product-modal').modal('hide');
+                    success("Prodotto eliminato correttamente", true);
+                }
+            })
+        })
+
 
         function showMore(el) {
             let product_id = $(el).data('id');
