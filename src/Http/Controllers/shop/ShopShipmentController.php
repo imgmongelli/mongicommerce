@@ -64,7 +64,6 @@ class ShopShipmentController extends Controller
             'address' => 'required',
             'telephone' => 'required',
             'email_sped' => 'required',
-            'floor' => 'required',
             'province' => 'required',
             'city' => 'required',
             'cap' => 'required',

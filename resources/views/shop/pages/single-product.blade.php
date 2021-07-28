@@ -5,6 +5,14 @@
 @endsection
 
 @section('content')
+    @if(isset($err))
+        <div class="container h-100">
+            <div class="row col-12 d-flex flex-column justify-content-center align-items-center h-100">
+                <h1 class="danger">Prodotto non disponibile!</h1><br>br>
+                <h2 class="danger">Tornerà a breve</h2>
+            </div>
+        </div>
+    @else
     <div class="container">
         <div class="row mt-5 mb-5">
             <div class="col-md-6">
@@ -40,6 +48,7 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 @section('js')
 @endsection

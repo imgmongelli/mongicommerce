@@ -99,6 +99,7 @@ class AdminNewProductVariationController extends Controller
     public function deleteVariation(Request $r){
         $item_id = $r->item_id;
         ProductItemDetail::where('product_item_id', $item_id)->delete();
+        ProductConfigurationField::where('product_item_id', $item_id)->delete();
         ProductItem::find($item_id)->delete();
         return true;
     }

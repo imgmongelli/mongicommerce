@@ -185,7 +185,7 @@
                     </div>
                 </div>
                 <div class="panel-container show">
-                    <div class="panel-content" id="div_details">
+                    <div class="panel-content col-12" id="div_details">
 
                     </div>
                 </div>
@@ -221,8 +221,49 @@
         </div>
     </div>
 
-
-
+    <div id="delete-configuration-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sei sicuro di voler eliminare la specifica?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Confermando <strong>tutti</strong> i prodotti appartententi alla categoria selezionata perderanno le informazioni
+                    relative alla specifica che si intende eliminare.</p>
+                    <input hidden id="input-configuration-id" type="text">
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-button-config" type="button" class="btn btn-primary">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="delete-detail-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sei sicuro di voler eliminare il dettaglio?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Confermando <strong>tutti</strong> i prodotti appartententi alla categoria selezionata perderanno le informazioni
+                        relative al dettaglio che si intende eliminare.</p>
+                    <h5 style="color: red"> Attenzione!! Tutti i prodotti con questa variante saranno eliminati.</h5>
+                    <input hidden id="input-detail-id" type="text">
+                </div>
+                <div class="modal-footer">
+                    <button id="confirm-button-detail" type="button" class="btn btn-primary">Conferma</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulla</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script src="{{js('formplugins/select2/select2.bundle.js')}}"></script>
@@ -346,19 +387,20 @@
             });
         }
 
-
-
-
         function generateDetails(details) {
             if (details.length > 0) {
                 let html = '';
                 $.each(details, function (index, value) {
                     html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
+                    html += '<div class="col-md-10">';
                     html += '<div class="form-group">';
                     html += '<label class="form-label" for="name">' + value.name + '</label>';
                     html += value.html;
                     html += '</div>';
+                    html += '</div>';
+                    html += '<div class="col-md-2 d-flex align-items-end">';
+                    html += '<button class="btn btn-block btn-primary" onclick="deleteDetailField(' + "'" +
+                        value.name + "'" + ')">' + 'Elimina</button>';
                     html += '</div>';
                     html += '</div>';
                 });
@@ -374,11 +416,15 @@
                 let html = '';
                 $.each(details, function (index, value) {
                     html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
+                    html += '<div class="col-md-10">';
                     html += '<div class="form-group">';
                     html += '<label class="form-label" for="name">' + value.name + '</label>';
                     html += value.html;
                     html += '</div>';
+                    html += '</div>';
+                    html += '<div class="col-md-2 d-flex align-items-end">';
+                    html += '<button class="btn btn-block btn-primary" onclick="deleteConfigurationField(' + "'" +
+                        value.name + "'" + ')">' + 'Elimina</button>';
                     html += '</div>';
                     html += '</div>';
                 });
@@ -388,5 +434,48 @@
                 $('#whole_div_configuration_field').hide();
             }
         }
+
+        function deleteConfigurationField(conf_name) {
+            $('#input-configuration-id').val(conf_name);
+            $('#delete-configuration-modal').modal('show');
+        }
+
+        $('#confirm-button-config').click(function () {
+            let config_name = $('#input-configuration-id').val();
+            $.ajax({
+                method: 'post',
+                url: "{{route('admin.post.delete.configuration')}}",
+                data: {
+                    config_name: config_name,
+                    category: $('#categories').val(),
+                },
+                success: function (response) {
+                    $('#delete-configuration-modal').modal('hide');
+                    success("Specifica eliminata correttamente", true);
+                }
+            })
+        })
+
+        function deleteDetailField(detail_name) {
+            $('#input-detail-id').val(detail_name);
+            $('#delete-detail-modal').modal('show');
+        }
+
+        $('#confirm-button-detail').click(function () {
+            let detail_name = $('#input-detail-id').val();
+            $.ajax({
+                method: 'post',
+                url: "{{route('admin.post.delete.details')}}",
+                data: {
+                    detail_name: detail_name,
+                    category: $('#categories').val(),
+                },
+                success: function (response) {
+                    $('#delete-detail-modal').modal('hide');
+                    success("Dettaglio eliminato correttamente", true);
+                }
+            })
+        })
+
     </script>
 @endsection

@@ -9,6 +9,9 @@ use Mongi\Mongicommerce\Models\ConfigurationField;
 use Mongi\Mongicommerce\Models\ConfigurationFieldValue;
 use Mongi\Mongicommerce\Models\Detail;
 use Mongi\Mongicommerce\Models\DetailValue;
+use Mongi\Mongicommerce\Models\ProductConfigurationField;
+use Mongi\Mongicommerce\Models\ProductItem;
+use Mongi\Mongicommerce\Models\ProductItemDetail;
 
 class AdminDetailController extends Controller
 {
@@ -107,5 +110,29 @@ class AdminDetailController extends Controller
         }
 
         return $html;
+    }
+
+    public function deleteDetail(Request $r){
+        $r->validate([
+            'detail_name' => 'required',
+            'category' => 'required'
+        ]);
+        $detail_name = $r->get('detail_name');
+        $category_id = $r->get('category');
+        $detail = Detail::where('name', $detail_name)->where('category_id', $category_id)->first();
+        $product_items_details = ProductItemDetail::where('product_detail_id', $detail->id)->get();
+        foreach ($product_items_details as $product_items_detail) {
+            $product_item_id = $product_items_detail->product_item_id;
+            ProductItemDetail::where('product_item_id', $product_item_id)->delete();
+            ProductConfigurationField::where('product_item_id', $product_item_id)->delete();
+            ProductItem::find($product_item_id)->delete();
+            $product_items_detail->delete();
+        }
+        $detail_values = DetailValue::where('detail_id', $detail->id)->get();
+        foreach ($detail_values as $detail_value) {
+            $detail_value->delete();
+        }
+        $detail->delete();
+        return true;
     }
 }

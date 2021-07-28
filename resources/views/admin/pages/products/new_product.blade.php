@@ -51,7 +51,7 @@
             <div class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        Specifiche prodotto
+                        Foto prodotto
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"

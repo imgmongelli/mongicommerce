@@ -1,6 +1,7 @@
 <?php
 
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminCreatePrivateListController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminEditSingleProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
 
     use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
@@ -99,6 +100,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/prodotti', [AdminProductsListController::class, 'page'])->name('admin.product.list')->middleware('admin');
     Route::get('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'page'])->name('admin.new.single.product')->middleware('admin');
     Route::get('/admin/prodotto-variante/{id_product}', [AdminNewProductVariationController::class, 'page'])->name('admin.product.new.variante')->middleware('admin');
+    Route::get('/admin/prodotto-singolo/{id_product}', [AdminEditSingleProductController::class, 'page'])->name('admin.single.product.edit')->middleware('admin');
     //orders
     Route::get('/admin/ordini', [AdminOrdersController::class, 'page'])->name('admin.orders.list')->middleware('admin');
     Route::get('/admin/ordine/{order_id}', [AdminOrderDetailsController::class, 'page'])->name('admin.order')->middleware('admin');
@@ -119,22 +121,23 @@ Route::group(['middleware' => ['web']], function () {
     //details
     Route::post('/admin/post/create/detail', [AdminDetailController::class, 'setNewDetail'])->name('admin.post.create.detail');
     Route::post('/admin/post/get/details', [AdminDetailController::class, 'getDetails'])->name('admin.post.get.details');
-
+    Route::post('/admin/post/delete/details', [AdminDetailController::class, 'deleteDetail'])->name('admin.post.delete.details');
     //configuration
     Route::post('/admin/post/create/configuration', [AdminConfigurationFieldController::class, 'setNewConfiguration'])->name('admin.post.create.configuration');
     Route::post('/admin/post/get/configuration', [AdminConfigurationFieldController::class, 'getConfigurationFields'])->name('admin.post.get.configuration');
+    Route::post('/admin/post/delete/configuration-field', [AdminConfigurationFieldController::class, 'deleteConfigurationFields'])->name('admin.post.delete.configuration');
 
     //product
     Route::post('/admin/prodotto/crea-prodotto', [AdminNewProductController::class, 'createNewProduct'])->name('admin.post.product.new');
     Route::post('/admin/prodotto/crea-variante-prodotto', [AdminNewProductVariationController::class, 'createNewVariation'])->name('admin.post.product.variation.new');
     Route::post('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'createNewSingleProduct'])->name('admin.post.new.single.product');
-    Route::post('/admin/prodotto/modifica', [AdminNewSingleProductController::class, 'editSingleProduct'])->name('admin.post.single.product.edit');
     Route::post('/admin/prodotto/update/in-home', [AdminProductsListController::class, 'inHome'])->name('admin.update.inHome')->middleware('admin');
     Route::post('/admin/prodottoSingolo/delete', [AdminProductsListController::class, 'deleteSingleProduct'])->name('admin.delete.single.product')->middleware('admin');
     Route::post('/admin/prodottoVarianti/delete', [AdminProductsListController::class, 'deleteVariationProduct'])->name('admin.delete.variation.product')->middleware('admin');
     Route::post('/admin/prodotto/elimina-variante-prodotto', [AdminNewProductVariationController::class, 'deleteVariation'])->name('admin.post.product.variation.delete');
     Route::post('/admin/prodotto/modifica-variante-prodotto', [AdminNewProductVariationController::class, 'editVariation'])->name('admin.post.product.variation.edit');
     Route::post('/admin/prodotto/dettagli', [AdminProductsListController::class, 'showDetail'])->name('admin.detail.product')->middleware('admin');
+    Route::post('/admin/prodotto/modifica-singolo-prodotto', [AdminNewSingleProductController::class, 'editSingleProduct'])->name('admin.post.edit.single.product');
 
     //settings
     Route::post('/admin/settings/update', [AdminSettingsController::class, 'update'])->name('admin.post.settings.update');

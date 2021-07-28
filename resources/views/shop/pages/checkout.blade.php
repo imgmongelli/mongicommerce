@@ -18,11 +18,13 @@
 
             </div>
         </div>
+        <br><br>
         <div class="row">
             <div class="col-sm-12 col-sm-push-2">
                 <header class="centred">
                     <h1>Oppure</h1>
                 </header>
+                <br><br>
                 <div class="row mt-3">
                     <div class="col-md-1">
                         <input id="get_in_shop_checkbox" {{$delivery_where == 'true' ? 'checked':''}} type="checkbox">

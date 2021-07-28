@@ -73,8 +73,11 @@ class Template
 
             $element.= self::generateDetailHtml(Detail::find($key),$details->groupBy('product_detail_value_id'),$product->id,$product_item_id);
         }
+        $are_details_presents = true;
+        if($element == '<div class="row col">') $are_details_presents = false;
         $element.= '<p class="show_error_product" style="color: red; display: none;">Prodotto non disponibile</p>';
         $element .= '</div>';
+        if($are_details_presents) $element .= '<hr>';
         return $element;
     }
 

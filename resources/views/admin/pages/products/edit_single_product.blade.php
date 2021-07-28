@@ -1,17 +1,17 @@
 @extends('mongicommerce::admin.template.layout')
-@section('title','Crea una variante per il prodotto ')
-@section('title_icon',"fa-books")
-@section('subtitle',$product->name)
-@section('description',$product->description)
+@section('title','Modifica un singolo prodotto')
+@section('title_icon',"fa-tags")
+@section('subtitle','')
+@section('description','In questa sezione puoi modificare un prodotto')
 @section('css')
-    <link rel="stylesheet" media="screen, print" href="{{css('datagrid/datatables/datatables.bundle.css')}}">
     <link rel="stylesheet" media="screen, print" href="{{css('formplugins/cropperjs/cropper.css')}}">
     <link rel="stylesheet" media="screen, print" href="{{css('fa-solid.css')}}">
+    <link rel="stylesheet" href="{{css('jstree/themes/default/style.css')}}">
 @endsection
 @section('subheader')
 @endsection
 @section('content')
-    <div class="row">
+<div class="row">
         <div class="col-md-7">
             <div class="panel">
                 <div class="panel-hdr">
@@ -32,7 +32,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nome prodotto</label>
-                                    <input type="text" value="{{$product->name}}" id="product_name" class="form-control">
+                                    <input type="text" value="{{$product_item->name}}" id="product_name" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -42,14 +42,46 @@
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
                                     <textarea name="" id="product_description" class="form-control"
-                                              rows="10">{{$product->description}}</textarea>
+                                              rows="10">{{$product_item->description}}</textarea>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
             <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Immagine attuale
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    </div>
+                </div>
+                <div>
+                    <div class="panel-container show multi-collapse" id="actual_img">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-5 d-flex justify-content-center">
+                                <img src="{{$product_item->image}}" alt="" width="50%">
+                            </div>
+                            <div class="col-md-7 d-flex flex-column justify-content-center">
+                                <h4>Vuoi cambiare la foto del prodotto?</h4>
+                                <br>
+                                <button class="btn-block btn btn-primary"type="button" data-toggle="collapse" data-target=".multi-collapse"
+                                        aria-expanded="false" aria-controls="actual_img img_editor" id="btn_change_img">Cambia immagine</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="panel collapse multi-collapse" id="img_editor">
                 <div class="panel-hdr">
                     <h2>
                         Foto prodotto
@@ -71,7 +103,7 @@
                                     <div class="col-xl-9">
                                         <!-- <h3>Demo:</h3> -->
                                         <div class="img-container">
-                                            <img id="image" src="{{$product->image}}" alt="Picture">
+                                            <img id="image" src="{{img('demo/gallery/4.jpg')}}" alt="Picture">
                                         </div>
                                     </div>
                                     <div class="col-xl-3">
@@ -576,7 +608,8 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        <select class="form-control" disabled name="categories" id="categories"></select>
+                                        <select class="form-control" name="categories" id="categories">
+                                        </select>
                                     </div>
                                     <span class="help-block">Categoria da associare ai dettagli</span>
                                 </div>
@@ -603,19 +636,19 @@
 
             </div>
             <div class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Dettagli prodotto
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    </div>
-                </div>
+{{--                <div class="panel-hdr">--}}
+{{--                    <h2>--}}
+{{--                        Dettagli prodotto--}}
+{{--                    </h2>--}}
+{{--                    <div class="panel-toolbar">--}}
+{{--                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"--}}
+{{--                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>--}}
+{{--                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"--}}
+{{--                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="panel-container show">
-                    <div id="div_details" class="panel-content"></div>
+
                     <div class="col-md-12 mt-2">
 
                         <div class="form-group">
@@ -628,7 +661,7 @@
                                                 </span>
                                             </span>
                                 </div>
-                                <input type="number" id="quantity" class="form-control">
+                                <input type="number" id="quantity" value="{{$product_item->quantity}}" class="form-control">
                             </div>
                             <span class="help-block">Disponibilità del prodotto con questa varietà</span>
                         </div>
@@ -644,7 +677,7 @@
                                                 </span>
                                             </span>
                                 </div>
-                                <input type="number" id="price" class="form-control">
+                                <input type="number" id="price" class="form-control" value="{{$product_item->price}}">
                             </div>
                             <span class="help-block">Quantità per prodotti con questa varietà</span>
                         </div>
@@ -660,89 +693,38 @@
                                                 </span>
                                             </span>
                                 </div>
-                                <input type="number" id="weight" class="form-control">
+                                <input type="number" id="weight" value="{{$product_item->weight}}" class="form-control">
                             </div>
                             <span class="help-block">Peso indicativo prodotto (0.0 Kg)</span>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="row">
-                            <button  onclick="saveProduct()" class="m-3 btn btn-primary btn-block">Crea prodotto </button>
+                            <button  onclick="editProduct()" class="m-3 btn btn-primary btn-block">Salva modifiche </button>
                         </div>
                     </div>
                 </div>
 
-            </div>
-
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xl-12">
-            <div id="panel-1" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Varianti per questo prodotto
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div class="panel-content">
-                        <!-- datatable start -->
-                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
-                            <thead>
-                            <tr>
-                                <th>Nome Prodotto</th>
-                                <th>Descrizione Prodotto</th>
-                                <th>Dettagli</th>
-                                <th>Prezzo</th>
-                                <th>Quantità</th>
-                                <th>Peso (Kg)</th>
-                                <th>Azioni</th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($items as $item)
-                                <tr>
-                                    <td>{{$item->name}}</td>
-                                    <td>{{$item->description}}</td>
-                                    <td>
-                                        @foreach($item->details as $detail)
-                                            <span class="badge badge-danger">{{$detail->detail->value}}</span>
-                                        @endforeach
-                                    </td>
-                                    <td><input id="item_price_{{$loop->index}}" value="{{$item->price}}" class="form-control" type="number"></td>
-                                    <td><input id="item_qta_{{$loop->index}}" value="{{$item->quantity}}" class="form-control" type="number"></td>
-                                    <td><input id="item_weight_{{$loop->index}}" value="{{$item->weight}}" class="form-control" type="number"></td>
-                                    <td>
-                                        <button class="btn btn-dark" data-id="{{$item->id}}" onclick="deleteVariation(this)"><i class="fal fa-trash"></i></button>
-                                        <button class="btn btn-danger" data-id="{{$item->id}}" onclick="editVariation(this, {{$loop->index}})"><i class="fal fa-save"></i></button>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-
-
-                            </tbody>
-                        </table>
-                        <!-- datatable end -->
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
 @section('js')
-    <script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
+
     <script src="{{js('formplugins/cropperjs/cropper.js')}}"></script>
     <script src="{{js('custom_cropper.js')}}"></script>
     <script>
-        let product_id = '{{$product->id}}';
         let category_id = '{{$product->category_id}}';
+        let product_id = '{{$product->id}}';
+        let is_image_changed = false;
+        $(function () {
+            getCategories();
+            $('#categories').change(function () {
+                getConfigurationField();
+            });
+        });
+
         function getCategories() {
             let url_get_categories = '{{route('admin.post.get.categories')}}';
             $.ajax({
@@ -758,67 +740,16 @@
                         if(category_id  == value.id){
                             $('#categories').append($("<option />").val(value.id).text(value.name));
                         }
-
+                        getConfigurationField();
                     });
-                    getDetails();
-                    getConfigurationField();
                 }
             });
         }
-
-        $(function () {
-            getCategories();
-        });
-        function getDetails() {
-            let url = '{{route('admin.post.get.details')}}';
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {
-                    category_id: $('#categories').val()
-                },
-                'statusCode': {
-                    422: function (response) {
-                    }
-                },
-                success: function (response) {
-                    generateDetails(response);
-                }
-            });
-        }
-        function generateDetails(details) {
-            if (details.length > 0) {
-                let html = '';
-                $.each(details, function (index, value) {
-                    html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
-                    html += '<div class="form-group">';
-                    html += '<label class="form-label" for="name">' + value.name + '</label>';
-                    html += value.html;
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-                $('#div_details').html(html);
-            } else {
-                $('#div_details').html('');
-            }
-
-        }
-        function saveProduct() {
+        function editProduct() {
             let details = [];
             let configuration_fields = [];
-            let url = '{{route('admin.post.product.variation.new')}}';
+            let url = '{{route('admin.post.edit.single.product')}}';
             let result = $image.cropper("getCroppedCanvas",{maxWidth: 670, maxHeight: 670, fillColor: "#fff"}, "");
-
-
-            $.each($('.mongifield'), function (index, value) {
-                let detail_id = $(this).data('detail_id');
-                let detail_value = $(this).val();
-                if (detail_value !== '') {
-                    details.push({'detail_id': detail_id, 'detail_value': detail_value});
-                }
-            });
 
             $.each($('.mongiconfigurationfield'), function (index, value) {
                 let configuration_field_id = $(this).data('configuration_id');
@@ -832,14 +763,14 @@
                 method: 'POST',
                 url: url,
                 data: {
+                    product_id: product_id,
+                    is_image_changed: is_image_changed,
                     product_name: $('#product_name').val(),
                     product_description: $('#product_description').val(),
                     category_id: $('#categories').val(),
                     quantity: $('#quantity').val(),
                     price: $('#price').val(),
                     weight: $('#weight').val(),
-                    product_id : product_id,
-                    details: JSON.stringify(details),
                     configuration_fields : JSON.stringify(configuration_fields),
                     image : result.toDataURL(uploadedImageType)
                 },
@@ -849,18 +780,22 @@
                     }
                 },
                 success: function (response) {
-                    success("Nuova variante inserita con successo",true);
+                    is_image_changed = false;
+                    success("Prodotto modificato con successo", true);
                 }
             });
 
         }
         function getConfigurationField() {
             let url = '{{route('admin.post.get.configuration')}}';
+            let product_item_id = '{{$product_item->id}}';
             $.ajax({
                 method: 'POST',
                 url: url,
                 data: {
-                    category_id: $('#categories').val()
+                    category_id: category_id,
+                    is_edit: true,
+                    product_item_id: product_item_id
                 },
                 'statusCode': {
                     422: function (response) {
@@ -891,48 +826,10 @@
             }
         }
 
-        function deleteVariation(el){
-            let item_id = $(el).data('id');
-            $.ajax({
-                method:'post',
-                url:"{{route('admin.post.product.variation.delete')}}",
-                data:{
-                    item_id : item_id
-                },
-                success:function (response){
-                    success("Variante eliminata correttamente",true);
-                }
-            })
-        }
 
-        function editVariation(el, index){
-            let item_id = $(el).data('id');
-            $.ajax({
-                method:'post',
-                url:"{{route('admin.post.product.variation.edit')}}",
-                data:{
-                    item_id : item_id,
-                    item_qta : $('#item_qta_' + index).val(),
-                    item_price : $('#item_price_' + index).val(),
-                    item_weight: $('#item_weight_' + index).val()
-                },
-                success:function (response){
-                    success("Modifiche apportate correttamente",true);
-                }
-            })
-        }
+        $('#btn_change_img').click(function () {
+            is_image_changed = true;
+        })
     </script>
-    <script>
-        $(document).ready(function()
-        {
-            // initialize datatable
-            $('#dt-basic-example').dataTable(
-                {
-                    responsive: true,
-                });
-        });
-
-    </script>
-
 
 @endsection
