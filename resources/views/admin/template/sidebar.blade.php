@@ -76,6 +76,12 @@
                     <span class="nav-link-text">Lista prodotti</span>
                 </a>
             </li>
+            <li>
+                <a href="{{route('admin.gift.validation')}}" title="Menu child">
+                    <i class="fal fa-gift-card"></i>
+                    <span class="nav-link-text">Verifica gift card</span>
+                </a>
+            </li>
             <li class="nav-title">Negozio</li>
             <li>
                 <a href="{{route('admin.orders.list')}}" title="Blank Project">

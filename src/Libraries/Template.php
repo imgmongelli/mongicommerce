@@ -59,9 +59,13 @@ class Template
      */
     public static function getProducts($id = null){
         if($id === null){
-            $products = Product::all();
+            $products = Product::where('deleted', false)->get();
         }else{
-            $products = Category::where('id',$id)->orWhere('parent_id',$id)->first()->products;
+            $products_temp = Category::where('id',$id)->orWhere('parent_id',$id)->first()->products;
+            $products = [];
+            foreach ($products_temp as $product){
+                if($product->deleted == false) array_push($products, $product);
+            }
         }
         return $products;
     }

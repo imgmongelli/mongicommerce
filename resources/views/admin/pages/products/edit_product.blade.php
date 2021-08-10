@@ -1,8 +1,8 @@
 @extends('mongicommerce::admin.template.layout')
-@section('title','Modifica un singolo prodotto')
+@section('title','Modifica prodotto con varianti')
 @section('title_icon',"fa-tags")
 @section('subtitle','')
-@section('description','In questa sezione puoi modificare un prodotto')
+@section('description','In questa sezione puoi modificare i prodotti con varianti')
 @section('css')
     <link rel="stylesheet" media="screen, print" href="{{css('formplugins/cropperjs/cropper.css')}}">
     <link rel="stylesheet" media="screen, print" href="{{css('fa-solid.css')}}">
@@ -11,7 +11,7 @@
 @section('subheader')
 @endsection
 @section('content')
-<div class="row">
+    <div class="row">
         <div class="col-md-7">
             <div class="panel">
                 <div class="panel-hdr">
@@ -32,7 +32,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label class="form-label" for="name">Nome prodotto</label>
-                                    <input type="text" value="{{$product_item->name}}" id="product_name" class="form-control">
+                                    <input type="text" id="product_name" class="form-control" value="{{$product->name}}">
                                 </div>
                             </div>
                         </div>
@@ -42,42 +42,10 @@
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
                                     <textarea name="" id="product_description" class="form-control"
-                                              rows="8">{{$product_item->description}}</textarea>
+                                              rows="8">{{$product->description}}</textarea>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="form-label">Si tratta di un buono regalo o di una gift card?</label>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gift" id="is_gift" value="si" @if($product->is_gift) checked @endif disabled>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                            SI
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="gift" id="is_not_gift" value="no" @if(!$product->is_gift) checked @endif disabled>
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                            NO
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6" id="duration_time" style="display: none">
-                                <div class="form-group">
-                                    <label class="form-label" for="name">Durata buono (gg)</label>
-                                    @if(isset($gift_code))
-                                        <input type="text" value="{{$gift_code->duration}}" id="duration_time_input" class="form-control">
-                                    @else
-                                        <input type="text" value="90" id="duration_time_input" class="form-control">
-                                    @endif
-                                    <span class="help-block">La durata non verrà cambiata a buoni già acquistati</span>
-                                </div>
-                            </div>
-                        </div>
-
 
                     </div>
                 </div>
@@ -96,20 +64,20 @@
                 </div>
                 <div>
                     <div class="panel-container show multi-collapse" id="actual_img">
-                    <div class="panel-content">
-                        <div class="row">
-                            <div class="col-md-5 d-flex justify-content-center">
-                                <img src="{{$product_item->image}}" alt="" width="50%">
-                            </div>
-                            <div class="col-md-7 d-flex flex-column justify-content-center">
-                                <h4>Vuoi cambiare la foto del prodotto?</h4>
-                                <br>
-                                <button class="btn-block btn btn-primary"type="button" data-toggle="collapse" data-target=".multi-collapse"
-                                        aria-expanded="false" aria-controls="actual_img img_editor" id="btn_change_img">Cambia immagine</button>
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col-md-5 d-flex justify-content-center">
+                                    <img src="{{$product->image}}" alt="" width="50%">
+                                </div>
+                                <div class="col-md-7 d-flex flex-column justify-content-center">
+                                    <h4>Vuoi cambiare la foto del prodotto?</h4>
+                                    <br>
+                                    <button class="btn-block btn btn-primary"type="button" data-toggle="collapse" data-target=".multi-collapse"
+                                            aria-expanded="false" aria-controls="actual_img img_editor" id="btn_change_img">Cambia immagine</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
             <div class="panel collapse multi-collapse" id="img_editor">
@@ -639,110 +607,43 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        <select class="form-control" name="categories" id="categories" disabled>
-                                        </select>
+                                        <select class="form-control" name="categories" id="categories" disabled></select>
                                     </div>
                                     <span class="help-block">Categoria da associare ai dettagli</span>
                                 </div>
                             </div>
+
                         </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Si tratta di un buono regalo o di una gift card?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_gift" value="si" @if($product->is_gift) checked @endif disabled>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            SI
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_not_gift" value="no" @if(!$product->is_gift) checked @endif disabled>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            NO
+                                        </label>
+                                    </div>
+                                </div>
+                                <button onclick="editProduct()" class="mt-3 btn btn-primary btn-block">Salva Modifiche</button>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
-            <div id="panel_configuration_field" style="display:none;" class="panel">
-                <div class="panel-hdr">
-                    <h2>
-                        Specifiche prodotto
-                    </h2>
-                    <div class="panel-toolbar">
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
-                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
-                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
-                    </div>
-                </div>
-                <div class="panel-container show">
-                    <div id="div_configuration_field" class="panel-content"></div>
-                </div>
-
-            </div>
-            <div class="panel">
-{{--                <div class="panel-hdr">--}}
-{{--                    <h2>--}}
-{{--                        Dettagli prodotto--}}
-{{--                    </h2>--}}
-{{--                    <div class="panel-toolbar">--}}
-{{--                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"--}}
-{{--                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>--}}
-{{--                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"--}}
-{{--                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-                <div class="panel-container show">
-
-                    <div class="col-md-12 mt-2">
-
-                        <div class="form-group">
-                            <label class="form-label" for="name">Disponibilità prodotto (n°pezzi)</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                            <span class="input-group-text py-1 px-3">
-                                                <span class="icon-stack">
-                                                   <i class="fal fa-abacus"></i>
-                                                </span>
-                                            </span>
-                                </div>
-                                <input type="number" id="quantity" value="{{$product_item->quantity}}" class="form-control">
-                            </div>
-                            <span class="help-block">Disponibilità del prodotto con questa varietà</span>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-2">
-                        <div class="form-group">
-                            <label class="form-label" for="name">Prezzo</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                            <span class="input-group-text py-1 px-3">
-                                                <span class="icon-stack">
-                                                   <i class="fal fa-euro-sign"></i>
-                                                </span>
-                                            </span>
-                                </div>
-                                <input type="number" id="price" class="form-control" value="{{$product_item->price}}">
-                            </div>
-                            <span class="help-block">Quantità per prodotti con questa varietà</span>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-2">
-                        <div class="form-group">
-                            <label class="form-label" for="name">Peso (Kg)</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                            <span class="input-group-text py-1 px-3">
-                                                <span class="icon-stack">
-                                                   <i class="fal fa-weight-hanging"></i>
-                                                </span>
-                                            </span>
-                                </div>
-                                <input type="number" id="weight" value="{{$product_item->weight}}" class="form-control">
-                            </div>
-                            <span class="help-block">Peso indicativo prodotto (0.0 Kg)</span>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <button  onclick="editProduct()" class="m-3 btn btn-primary btn-block">Salva modifiche </button>
-                        </div>
-                    </div>
-                </div>
-
-        </div>
 
         </div>
     </div>
 @endsection
 @section('js')
-
     <script src="{{js('formplugins/cropperjs/cropper.js')}}"></script>
     <script src="{{js('custom_cropper.js')}}"></script>
     <script>
@@ -751,9 +652,6 @@
         let is_image_changed = false;
         $(function () {
             getCategories();
-            $('#categories').change(function () {
-                getConfigurationField();
-            });
         });
 
         function getCategories() {
@@ -771,24 +669,14 @@
                         if(category_id  == value.id){
                             $('#categories').append($("<option />").val(value.id).text(value.name));
                         }
-                        getConfigurationField();
                     });
                 }
             });
         }
-        function editProduct() {
-            let details = [];
-            let configuration_fields = [];
-            let url = '{{route('admin.post.edit.single.product')}}';
-            let result = $image.cropper("getCroppedCanvas",{maxWidth: 670, maxHeight: 670, fillColor: "#fff"}, "");
 
-            $.each($('.mongiconfigurationfield'), function (index, value) {
-                let configuration_field_id = $(this).data('configuration_id');
-                let configuration_field_value = $(this).val();
-                if (configuration_field_value !== '') {
-                    configuration_fields.push({'configuration_field_id': configuration_field_id, 'configuration_field_value': configuration_field_value});
-                }
-            });
+        function editProduct() {
+            let url = '{{route('admin.post.edit.product')}}';
+            let result = $image.cropper("getCroppedCanvas",{maxWidth: 670, maxHeight: 670, fillColor: "#fff"}, "");
 
             $.ajax({
                 method: 'POST',
@@ -798,14 +686,7 @@
                     is_image_changed: is_image_changed,
                     product_name: $('#product_name').val(),
                     product_description: $('#product_description').val(),
-                    category_id: $('#categories').val(),
-                    quantity: $('#quantity').val(),
-                    price: $('#price').val(),
-                    weight: $('#weight').val(),
-                    configuration_fields : JSON.stringify(configuration_fields),
-                    image : result.toDataURL(uploadedImageType),
-                    is_gift: document.getElementById('is_gift').checked,
-                    duration_time: $('#duration_time_input').val()
+                    image : result.toDataURL(uploadedImageType)
                 },
                 'statusCode': {
                     422: function (response) {
@@ -817,55 +698,10 @@
                     success("Prodotto modificato con successo", true);
                 }
             });
-
-        }
-        function getConfigurationField() {
-            let url = '{{route('admin.post.get.configuration')}}';
-            let product_item_id = '{{$product_item->id}}';
-            $.ajax({
-                method: 'POST',
-                url: url,
-                data: {
-                    category_id: category_id,
-                    is_edit: true,
-                    product_item_id: product_item_id
-                },
-                'statusCode': {
-                    422: function (response) {
-                    }
-                },
-                success: function (response) {
-                    generateConfigurationField(response);
-                }
-            });
-        }
-        function generateConfigurationField(details) {
-            if (details.length > 0) {
-                let html = '';
-                $.each(details, function (index, value) {
-                    html += '<div class="row mt-3">';
-                    html += '<div class="col-md-12">';
-                    html += '<div class="form-group">';
-                    html += '<label class="form-label" for="name">' + value.name + '</label>';
-                    html += value.html;
-                    html += '</div>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-                $('#div_configuration_field').html(html);
-                $('#panel_configuration_field').show();
-            } else {
-                $('#panel_configuration_field').hide();
-            }
-        }
-
-        if(document.getElementById('is_gift').checked){
-            $('#duration_time').show();
         }
 
         $('#btn_change_img').click(function () {
             is_image_changed = true;
         })
     </script>
-
 @endsection

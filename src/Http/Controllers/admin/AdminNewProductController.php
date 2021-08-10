@@ -24,18 +24,21 @@ class AdminNewProductController extends Controller
             'product_description' => 'required',
             'category_id' => 'required',
             'image' => 'required',
+            'is_gift' => 'required'
         ]);
 
         $product_name = $r->get('product_name');
         $product_description = $r->get('product_description');
         $category_id = $r->get('category_id');
         $get_image = $r->get('image');
+        $is_gift = $r->get('is_gift');
 
 
         $product = new Product();
         $product->name = $product_name;
         $product->description = $product_description;
         $product->category_id = $category_id;
+        $product->is_gift = $is_gift == 'true' ? true : false;
         $product->save();
 
         $base64_str = substr($get_image, strpos($get_image, ",")+1);

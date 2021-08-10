@@ -57,7 +57,7 @@ function addToCart(el) {
         },
         'statusCode': {
             422: function (response) {
-                //get first error to show it on top of pagse
+                //get first error to show it on top of page
                 error422Badge(response);
             }
         },

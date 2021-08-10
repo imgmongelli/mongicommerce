@@ -41,7 +41,34 @@
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
                                     <textarea name="" id="product_description" class="form-control"
-                                              rows="10"></textarea>
+                                              rows="8"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Si tratta di un buono regalo o di una gift card?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_gift" value="si">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            SI
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_not_gift" value="no" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            NO
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" id="duration_time" style="display: none">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Durata buono (gg)</label>
+                                    <input type="text" value="90" id="duration_time_input" class="form-control">
+                                    <span class="help-block">Verrà calcolata dal momento dell'acquisto</span>
                                 </div>
                             </div>
                         </div>
@@ -737,7 +764,9 @@
                     price: $('#price').val(),
                     weight: $('#weight').val(),
                     configuration_fields : JSON.stringify(configuration_fields),
-                    image : result.toDataURL(uploadedImageType)
+                    image : result.toDataURL(uploadedImageType),
+                    is_gift: document.getElementById('is_gift').checked,
+                    duration_time: $('#duration_time_input').val()
                 },
                 'statusCode': {
                     422: function (response) {
@@ -786,6 +815,17 @@
                 $('#panel_configuration_field').hide();
             }
         }
+
+        $('input[type=radio][name=gift]').change(function() {
+            if (this.value == 'si') {
+                $('#duration_time').show();
+            }
+            else if (this.value == 'no') {
+                $('#duration_time').hide();
+            }
+        });
+
+
     </script>
 
 

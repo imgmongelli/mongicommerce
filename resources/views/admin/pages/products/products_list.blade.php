@@ -53,6 +53,7 @@
                                             <a href="{{route('admin.single.product.edit', $product->id)}}" class="btn btn-secondary">Modifica</a>
                                         @else
                                             <button data-id="{{$product->id}}" onclick="deleteVariationProduct(this)" class="btn btn-danger">Elimina</button>
+                                            <a href="{{route('admin.product.variation.edit', $product->id)}}" class="btn btn-secondary">Modifica</a>
                                             <a href="{{route('admin.product.new.variante', $product->id)}}" class="btn btn-warning">Varianti</a>
                                         @endif
 
@@ -145,7 +146,7 @@
             let product_id = $('#input-product-id').val();
             $.ajax({
                 method: 'post',
-                url: "{{route('admin.delete.variation.product')}}",
+                url: "{{route('admin.delete.all.variations.product')}}",
                 data: {
                     product_id: product_id
                 },

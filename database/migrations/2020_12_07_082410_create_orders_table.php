@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->text('note_delivery')->nullable();
             $table->boolean('pick_up_in_shop')->default(false);
             $table->decimal('order_weight')->default(0);
-
+            $table->unsignedBigInteger('gift_code_id')->default(false);
 
             $table->unsignedBigInteger('status_id');
             $table->unsignedBigInteger('payment_type_id');
@@ -40,6 +40,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('status_id')->references('id')->on('statuses_order');
             $table->foreign('payment_type_id')->references('id')->on('payment_type');
+            $table->foreign('gift_code_id')->references('id')->on('gift_code');
         });
     }
 

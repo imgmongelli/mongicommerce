@@ -41,10 +41,11 @@
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
                                     <textarea name="" id="product_description" class="form-control"
-                                              rows="10"></textarea>
+                                              rows="8"></textarea>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -578,7 +579,27 @@
                                 </div>
                             </div>
 
-                            <button onclick="saveProduct()" class="mt-3 btn btn-primary btn-block">Crea prodotto</button>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="form-label">Si tratta di un buono regalo o di una gift card?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_gift" value="si">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            SI
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_not_gift" value="no" checked>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            NO
+                                        </label>
+                                    </div>
+                                </div>
+                                <button onclick="saveProduct()" class="mt-3 btn btn-primary btn-block">Crea prodotto</button>
+                            </div>
+
                         </div>
 
                     </div>
@@ -629,7 +650,8 @@
                     product_name: $('#product_name').val(),
                     product_description: $('#product_description').val(),
                     category_id: $('#categories').val(),
-                    image : result.toDataURL(uploadedImageType)
+                    image : result.toDataURL(uploadedImageType),
+                    is_gift: document.getElementById('is_gift').checked
                 },
                 'statusCode': {
                     422: function (response) {

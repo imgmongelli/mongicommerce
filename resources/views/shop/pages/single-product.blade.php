@@ -8,7 +8,7 @@
     @if(isset($err))
         <div class="container h-100">
             <div class="row col-12 d-flex flex-column justify-content-center align-items-center h-100">
-                <h1 class="danger">Prodotto non disponibile!</h1><br>br>
+                <h1 class="danger">Prodotto non disponibile!</h1><br><br>
                 <h2 class="danger">Tornerà a breve</h2>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <h5>Descrizione prodotto</h5>
                 <div class="row mt-3 mb-4">
                     <div class="col-md-12">
-                        <p>{{$product->description}}</p>
+                        <p>{{$description}}</p>
                     </div>
 
                 </div>

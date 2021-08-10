@@ -21,8 +21,9 @@ class CreateProductItemsTable extends Migration
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->decimal('price');
-            $table->integer('quantity')->nullable();
+            $table->bigInteger('quantity')->nullable();
             $table->double('weight')->default(0);
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
 
             //foreign

@@ -42,7 +42,34 @@
                                 <div class="form-group">
                                     <label class="form-label" for="name">Descrizione prodotto</label>
                                     <textarea name="" id="product_description" class="form-control"
-                                              rows="10">{{$product->description}}</textarea>
+                                              rows="8">{{$product->description}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label">Si tratta di un buono regalo o di una gift card?</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_gift" value="si" @if($product->is_gift) checked @endif disabled>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            SI
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gift" id="is_not_gift" value="no" @if(!$product->is_gift) checked @endif disabled>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            NO
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" id="duration_time" style="display: none">
+                                <div class="form-group">
+                                    <label class="form-label" for="name">Durata buono (gg)</label>
+                                    <input type="text" value="90" id="duration_time_input" class="form-control">
+                                    <span class="help-block">Verrà calcolata dal momento dell'acquisto</span>
                                 </div>
                             </div>
                         </div>
@@ -50,6 +77,36 @@
                 </div>
             </div>
             <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        Immagine prodotto
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-collapse"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel waves-effect waves-themed" data-action="panel-fullscreen"
+                                data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    </div>
+                </div>
+                <div>
+                    <div class="panel-container show multi-collapse" id="actual_img">
+                        <div class="panel-content">
+                            <div class="row">
+                                <div class="col-md-5 d-flex justify-content-center">
+                                    <img src="{{$product->image}}" alt="" width="50%">
+                                </div>
+                                <div class="col-md-7 d-flex flex-column justify-content-center">
+                                    <h4>Vuoi cambiare la foto per la nuova variante?</h4>
+                                    <br>
+                                    <button class="btn-block btn btn-primary"type="button" data-toggle="collapse" data-target=".multi-collapse"
+                                            aria-expanded="false" aria-controls="actual_img img_editor" id="btn_change_img">Cambia immagine</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel collapse multi-collapse" id="img_editor">
                 <div class="panel-hdr">
                     <h2>
                         Foto prodotto
@@ -743,6 +800,7 @@
     <script>
         let product_id = '{{$product->id}}';
         let category_id = '{{$product->category_id}}';
+        let is_image_changed = false;
         function getCategories() {
             let url_get_categories = '{{route('admin.post.get.categories')}}';
             $.ajax({
@@ -833,6 +891,7 @@
                 url: url,
                 data: {
                     product_name: $('#product_name').val(),
+                    is_image_changed: is_image_changed,
                     product_description: $('#product_description').val(),
                     category_id: $('#categories').val(),
                     quantity: $('#quantity').val(),
@@ -841,7 +900,9 @@
                     product_id : product_id,
                     details: JSON.stringify(details),
                     configuration_fields : JSON.stringify(configuration_fields),
-                    image : result.toDataURL(uploadedImageType)
+                    image : result.toDataURL(uploadedImageType),
+                    is_gift: document.getElementById('is_gift').checked,
+                    duration_time: $('#duration_time_input').val()
                 },
                 'statusCode': {
                     422: function (response) {
@@ -849,6 +910,7 @@
                     }
                 },
                 success: function (response) {
+                    is_image_changed = false;
                     success("Nuova variante inserita con successo",true);
                 }
             });
@@ -897,7 +959,8 @@
                 method:'post',
                 url:"{{route('admin.post.product.variation.delete')}}",
                 data:{
-                    item_id : item_id
+                    item_id : item_id,
+                    product_id: product_id
                 },
                 success:function (response){
                     success("Variante eliminata correttamente",true);
@@ -921,6 +984,15 @@
                 }
             })
         }
+
+        if(document.getElementById('is_gift').checked){
+            $('#duration_time').show();
+        }
+
+        $('#btn_change_img').click(function () {
+            is_image_changed = true;
+        })
+
     </script>
     <script>
         $(document).ready(function()

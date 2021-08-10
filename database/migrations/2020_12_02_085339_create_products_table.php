@@ -22,6 +22,8 @@ class CreateProductsTable extends Migration
             $table->boolean('is_reserved')->default(false);
             $table->unsignedBigInteger('category_id');
             $table->boolean('single_product')->default(false);
+            $table->boolean('is_gift')->default(false);
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
 
             //foreign

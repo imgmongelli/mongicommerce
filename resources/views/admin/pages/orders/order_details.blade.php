@@ -61,6 +61,21 @@
                         <input type="text" id="id_shipping" value="{{$order->id_shipping}}" class="form-control">
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <label> Gift card utilizzata:</label>
+                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="si" @else value="no" @endif class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label> Nome gift card:</label>
+                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="{{$product_item_gift->name}}" @else value="-" @endif class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label> Valore gift card:</label>
+                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="€ {{$product_item_gift->price}}" @else value="-" @endif class="form-control">
+                    </div>
+                </div>
+
 
             </div>
             <div class="card-footer">

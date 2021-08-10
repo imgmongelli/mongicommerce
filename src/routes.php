@@ -1,12 +1,16 @@
 <?php
 
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminCreatePrivateListController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminEditProductVariationController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminEditSingleProductController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminGiftCardValidationController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
 
     use Mongi\Mongicommerce\Http\Controllers\shop\DefaultController;
     use Mongi\Mongicommerce\Http\Controllers\shop\ShopController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopCartController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopGiftCardController;
+use Mongi\Mongicommerce\Http\Controllers\shop\ShopOrderDetailsController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopPrivateListController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopUserController;
 use Mongi\Mongicommerce\Http\Controllers\auth\ShopLoginController;
@@ -56,7 +60,8 @@ Route::group(['middleware' => ['web']], function () {
     */
     Route::get('/page/shop/user/orders', [ShopOrdersController::class, 'page'])->name('shop.user.orders');
     Route::get('/page/shop/user/settings', [ShopUserController::class, 'page'])->name('shop.user.settings');
-
+    Route::get('/page/shop/user/order/{id}/details', [ShopOrderDetailsController::class, 'page'])->name('shop.user.order.details');
+    Route::get('/page/shop/user/order/{order_id}/product/{id}/gift-card', [ShopGiftCardController::class, 'page'])->name('shop.user.gift.card');
 
     Route::get('/shop/{id?}', [ShopController::class, 'page'])->name('shop');
     Route::get('/page/shop/search', [ShopController::class, 'search'])->name('shop.search');
@@ -81,7 +86,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/shop/gotocheckout', [ShopShipmentController::class, 'goToCheckout'])->name('shop.gotocheckout');
     Route::post('/shop/pay', [ShopPaymentController::class, 'pay'])->name('shop.pay');
     Route::post('/shop/normalpayment', [ShopPaymentController::class, 'normalPayment'])->name('shop.normalpayment');
-
+//    Route::post('/page/shop/user/order/download/gift-card', [ShopGiftCardController::class, 'downloadGift'])->name('shop.download.gift');
+    Route::post('page/shop/summary', [ShopSummaryController::class, 'applyCoupon'])->name('shop.summary.coupon');
+    Route::post('page/shop/summary/delete', [ShopSummaryController::class, 'removeCoupon'])->name('shop.summary.remove.coupon');
 
 
 
@@ -101,6 +108,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'page'])->name('admin.new.single.product')->middleware('admin');
     Route::get('/admin/prodotto-variante/{id_product}', [AdminNewProductVariationController::class, 'page'])->name('admin.product.new.variante')->middleware('admin');
     Route::get('/admin/prodotto-singolo/{id_product}', [AdminEditSingleProductController::class, 'page'])->name('admin.single.product.edit')->middleware('admin');
+    Route::get('/admin/modifica/prodotto-variante/{id_product}', [AdminEditProductVariationController::class, 'page'])->name('admin.product.variation.edit')->middleware('admin');
+    Route::get('/admin/verifica/gift-card', [AdminGiftCardValidationController::class, 'page'])->name('admin.gift.validation')->middleware('admin');
     //orders
     Route::get('/admin/ordini', [AdminOrdersController::class, 'page'])->name('admin.orders.list')->middleware('admin');
     Route::get('/admin/ordine/{order_id}', [AdminOrderDetailsController::class, 'page'])->name('admin.order')->middleware('admin');
@@ -133,11 +142,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'createNewSingleProduct'])->name('admin.post.new.single.product');
     Route::post('/admin/prodotto/update/in-home', [AdminProductsListController::class, 'inHome'])->name('admin.update.inHome')->middleware('admin');
     Route::post('/admin/prodottoSingolo/delete', [AdminProductsListController::class, 'deleteSingleProduct'])->name('admin.delete.single.product')->middleware('admin');
-    Route::post('/admin/prodottoVarianti/delete', [AdminProductsListController::class, 'deleteVariationProduct'])->name('admin.delete.variation.product')->middleware('admin');
+    Route::post('/admin/prodottoVarianti/delete', [AdminProductsListController::class, 'deleteAllVariationsProduct'])->name('admin.delete.all.variations.product')->middleware('admin');
     Route::post('/admin/prodotto/elimina-variante-prodotto', [AdminNewProductVariationController::class, 'deleteVariation'])->name('admin.post.product.variation.delete');
     Route::post('/admin/prodotto/modifica-variante-prodotto', [AdminNewProductVariationController::class, 'editVariation'])->name('admin.post.product.variation.edit');
     Route::post('/admin/prodotto/dettagli', [AdminProductsListController::class, 'showDetail'])->name('admin.detail.product')->middleware('admin');
-    Route::post('/admin/prodotto/modifica-singolo-prodotto', [AdminNewSingleProductController::class, 'editSingleProduct'])->name('admin.post.edit.single.product');
+    Route::post('/admin/prodotto/modifica-singolo-prodotto', [AdminEditSingleProductController::class, 'editSingleProduct'])->name('admin.post.edit.single.product');
+    Route::post('/admin/prodotto/gift-card/validation', [AdminGiftCardValidationController::class, 'giftValidation'])->name('admin.post.gift.validation');
+    Route::post('/admin/prodotto/modifica', [AdminEditProductVariationController::class, 'editProduct'])->name('admin.post.edit.product');
 
     //settings
     Route::post('/admin/settings/update', [AdminSettingsController::class, 'update'])->name('admin.post.settings.update');

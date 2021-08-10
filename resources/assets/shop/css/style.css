@@ -3052,7 +3052,7 @@ Version:1.0
 .shopping-cart .total-amount .left{}
 .shopping-cart .total-amount .left .coupon{}
 .shopping-cart .total-amount .left .coupon form{}
-.shopping-cart .total-amount .left .coupon form input {
+.coupon form input {
 	width: 220px;
 	display: inline-block;
 	height: 48px;
@@ -5016,6 +5016,14 @@ body {
 .custom-link:hover{
     text-decoration: underline;
     color: #52b0ea;
+}
+
+.btn-nostyle{
+    background: transparent;
+    border: none;
+}
+.btn-nostyle:focus{
+    outline: none!important;
 }
 
 /*=============================

@@ -90,7 +90,7 @@ class AdminCategoryController extends Controller
                 ConfigurationField::where('category_id', $category->id)->delete();
                 $details = Detail::where('category_id', $category->id);
                 foreach ($details->get() as $detail){
-                    DetailValue::find($detail->id)->delete();
+                    DetailValue::where('detail_id', $detail->id)->delete();
                 }
                 $details->delete();
                 Category::find($category->id)->delete();
@@ -99,7 +99,7 @@ class AdminCategoryController extends Controller
         ConfigurationField::where('category_id', $category_id)->delete();
         $details = Detail::where('category_id', $category_id);
         foreach ($details->get() as $detail){
-            DetailValue::find($detail->id)->delete();
+            DetailValue::where('detail_id', $detail->id)->delete();
         }
         $details->delete();
         Category::find($category_id)->delete();

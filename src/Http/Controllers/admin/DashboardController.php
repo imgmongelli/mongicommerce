@@ -20,7 +20,7 @@ class DashboardController extends Controller
                 $completed_orders++;
             }
         }
-        $products = Product::all();
+        $products = Product::where('deleted', false)->get();
         $products_number = $products->count();
         return view('mongicommerce::admin.pages.dashboard', compact('orders', 'statuses', 'current_orders', 'completed_orders', 'products_number'));
     }

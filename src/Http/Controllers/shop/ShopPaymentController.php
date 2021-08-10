@@ -1,6 +1,10 @@
 <?php
 namespace Mongi\Mongicommerce\Http\Controllers\shop;
 
+use Carbon\Carbon;
+use Mongi\Mongicommerce\Models\GiftCode;
+use Mongi\Mongicommerce\Models\OrderGift;
+use Mongi\Mongicommerce\Models\Product;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Illuminate\Http\Request;
@@ -68,7 +72,17 @@ class ShopPaymentController extends Controller
             $order->save();
             //save into order_products
 
-            $products = Cart::where('user_id',Auth::user()->id)->get();
+            $get_coupon_discount_code = session('checkout.coupon.discount') ? session('checkout.coupon.discount')['code'] : null;
+            if($get_coupon_discount_code != null){
+                $gift_card_utilizzata = GiftCode::where('code', $get_coupon_discount_code)->whereNotNull('bought_the')->first();
+                $gift_card_utilizzata->is_validated = true;
+                $gift_card_utilizzata->save();
+                session()->forget('checkout.coupon.discount');
+            }
+
+            $products = Cart::where('user_id', Auth::user()->id)->get();
+            $are_there_gifts = false;
+            $gifts_index = [];
             foreach ($products as $product){
                 $order_products = new ProductsOrder();
                 $order_products->order_id = $order->id;
@@ -81,6 +95,35 @@ class ShopPaymentController extends Controller
                 $productM->quantity = $productM->quantity - $product->quantity;
                 $productM->save();
 
+                //check if there are some gift cards
+                $parent_product = Product::find($productM->product_id);
+                if($parent_product->is_gift){
+                    $are_there_gifts = true;
+                    //store the product item key foreach bought gift
+                    for($i = 0; $i < $product->quantity; $i++){
+                        array_push($gifts_index, $productM->id);
+                    }
+                }
+            }
+            if($are_there_gifts){
+                $purchased_gift = [];
+                for($i = 0; $i < count($gifts_index); $i++){
+                    $gift_code = GiftCode::where('product_item_id', $gifts_index[$i])->where('bought_the', null)->first();
+
+                    //set purchase date and expiration date
+                    $time_duration = $gift_code->duration;
+                    $gift_code->bought_the = Carbon::now('CEST');
+                    $gift_code->expires_on = Carbon::now()->addDays($time_duration);
+                    $gift_code->save();
+                    array_push($purchased_gift, $gift_code->id);
+
+                    //save record in order_gift table
+                    $order_gift = new OrderGift();
+                    $order_gift->order_id = $order->id;
+                    $order_gift->gift_code_id = $gift_code->id;
+                    $order_gift->product_item_id = $gifts_index[$i];
+                    $order_gift->save();
+                }
             }
             //empty cart
             Cart::emptyCart();
@@ -151,8 +194,13 @@ class ShopPaymentController extends Controller
         $total = session('checkout.total');
         $cost_shipping = session('checkout.shipping_price');
         $order_weight = session('checkout.total_weight');
-
-
+        $get_coupon_discount_code = session('checkout.coupon.discount') ? session('checkout.coupon.discount')['code'] : null;
+        if($get_coupon_discount_code != null){
+            $gift_card_utilizzata = GiftCode::where('code', $get_coupon_discount_code)->whereNotNull('bought_the')->first();
+            $gift_card_utilizzata->is_validated = true;
+            $gift_card_utilizzata->save();
+            session()->forget('checkout.coupon.discount');
+        }
         $note_delivery = session('checkout.note_delivery');
         $get_in_shop_checkbox = session('checkout.get_in_shop_checkbox');
 
@@ -165,11 +213,14 @@ class ShopPaymentController extends Controller
         $order->note_delivery = $note_delivery;
         $order->payment_type_id = $typePayment;
         $order->pick_up_in_shop = $get_in_shop_checkbox == 'true' ? true : false;
+        $order->gift_code_id = ($get_coupon_discount_code != null) ? $gift_card_utilizzata->id : null;
         $order->save();
 
         //save into order_products
 
         $products = Cart::where('user_id',Auth::user()->id)->get();
+        $are_there_gifts = false;
+        $gifts_index = [];
         foreach ($products as $product){
             $order_products = new ProductsOrder();
             $order_products->order_id = $order->id;
@@ -182,11 +233,41 @@ class ShopPaymentController extends Controller
             $productM->quantity = $productM->quantity - $product->quantity;
             $productM->save();
 
+            //check if there are some gift cards
+            $parent_product = Product::find($productM->product_id);
+            if($parent_product->is_gift){
+                $are_there_gifts = true;
+                //store the product item key foreach bought gift
+                for($i = 0; $i < $product->quantity; $i++){
+                    array_push($gifts_index, $productM->id);
+                }
+            }
+        }
+        if($are_there_gifts){
+            $purchased_gift = [];
+            for($i = 0; $i < count($gifts_index); $i++){
+                $gift_code = GiftCode::where('product_item_id', $gifts_index[$i])->where('bought_the', null)->first();
+
+                //set purchase date and expiration date
+                $time_duration = $gift_code->duration;
+                $gift_code->bought_the = Carbon::now('CEST');
+                $gift_code->expires_on = Carbon::now()->addDays($time_duration);
+                $gift_code->save();
+                array_push($purchased_gift, $gift_code->id);
+
+                //save record in order_gift table
+                $order_gift = new OrderGift();
+                $order_gift->order_id = $order->id;
+                $order_gift->gift_code_id = $gift_code->id;
+                $order_gift->product_item_id = $gifts_index[$i];
+                $order_gift->save();
+            }
         }
         //empty cart
         Cart::emptyCart();
-        Session::flash('success', 'Ordine inoltrato con successo');
+        Session::flash('success', 'Ordine inoltrato con successo. Controlla i dettagli ordine');
         return response()->json(['url'=>route('shop.user.orders')]);
+
 
     }
 }

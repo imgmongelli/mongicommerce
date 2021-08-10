@@ -21,17 +21,18 @@
         <div class="col-md-12 mt-md-5 mb-md-2">
             <table id="orders" class="table table-bordered table-hover table-striped w-100">
                 <thead>
-                    <tr>
-                        <th><span class="fa fa-shopping-cart"></span> Ordine</th>
-                        <th>Data</th>
-                        <th>Stato</th>
-                        <th>ID Tracking (se disponibile)</th>
-                        <th>Totale</th>
-                        <th>Tipologia Pagamento</th>
-                    </tr>
+                <tr>
+                    <th><span class="fa fa-shopping-cart"></span> Ordine</th>
+                    <th>Data</th>
+                    <th>Stato</th>
+                    <th>ID Tracking (se disponibile)</th>
+                    <th>Totale</th>
+                    <th>Tipologia Pagamento</th>
+                    <th>Azioni</th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $order)
+                @foreach($orders as $order)
                     <tr>
                         <td>#{{$order->id}}</td>
                         <td>{{$order->created_at->format('d/m/Y')}}</td>
@@ -39,8 +40,9 @@
                         <td>{{$order->id_shipping}}</td>
                         <td>@money($order->total_price)</td>
                         <td>{{$order->typePayment->name}}</td>
+                        <td><a href="{{route('shop.user.order.details', $order->id)}}" class="custom-link">Dettagli ordine</a></td>
                     </tr>
-                    @endforeach
+                @endforeach
                 </tbody>
 
             </table>
