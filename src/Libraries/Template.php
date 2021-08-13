@@ -1,7 +1,9 @@
 <?php
 namespace Mongi\Mongicommerce\Libraries;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Mongi\Mongicommerce\Models\Cart;
 use Mongi\Mongicommerce\Models\User;
 use Mongi\Mongicommerce\Models\Detail;
@@ -161,5 +163,30 @@ class Template
 
     public static function getVolantini(){
         return Volantino::all();
+    }
+
+    public static function generateCode(){
+        $random_string = Str::random(5);
+
+        $today = Carbon::now();
+        $day = $today->day;
+        $mm = $today->month;
+        $yy = $today->year;
+        $h = $today->hour;
+        $mill = $today->milliseconds;
+
+        $date_prod = $day * $mm * $yy;
+        $time_sum = $h + $mill;
+        $str = $date_prod - $time_sum;
+
+        if(strlen($str) > 5){
+            $str = substr($str, 0, 5);
+        }else if(strlen($str) < 5){
+            $diff = 5 - strlen($str);
+            for($i = 0; $i < $diff; $i++){
+                $str .= $i;
+            }
+        }
+        return 'GIFT-'.$str.'-'.$random_string;
     }
 }

@@ -16,8 +16,10 @@ class ShopCheckoutController extends Controller
 
     public function saveDetailsInSession(Request $r){
         $note_delivery = $r->get('note_delivery');
+        $note_order = $r->get('note_order');
         $get_in_shop_checkbox = $r->get('get_in_shop_checkbox');
         session()->put('checkout.note_delivery', $note_delivery);
+        session()->put('checkout.note_order', $note_order);
         session()->put('checkout.get_in_shop_checkbox', $get_in_shop_checkbox);
         return response()->json(['link' => route('shop.summary')]);
     }

@@ -11,14 +11,26 @@
         <div class="row">
             <div class="col-sm-12 col-sm-push-2">
                 <hr class="space-40" />
+                <p class="centred">Vuoi far sapere qualcosa al venditore?</p>
+                <hr class="space-40" />
+                <textarea id="note_order" placeholder="Note per l'ordine"
+                          class="form-control" rows="5"></textarea>
+
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12 col-sm-push-2">
+                <hr class="space-40" />
                 <p class="centred">Note sul tuo ordine, ad es. note speciali per la consegna.</p>
                 <hr class="space-40" />
                 <textarea id="note_delivery" placeholder="Note per la spedizione"
-                    class="form-control">{{$note}}</textarea>
+                          class="form-control">{{$note}}</textarea>
 
             </div>
         </div>
         <br><br>
+
         <div class="row">
             <div class="col-sm-12 col-sm-push-2">
                 <header class="centred">
@@ -56,6 +68,7 @@
                 url:url_save_cache_details_order,
                 data: {
                     note_delivery: $('#note_delivery').val(),
+                    note_order: $('#note_order').val(),
                     get_in_shop_checkbox: $('#get_in_shop_checkbox').is(":checked")
                 },
                 success:function (response) {

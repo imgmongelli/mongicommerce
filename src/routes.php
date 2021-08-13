@@ -79,6 +79,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/shop/addtocart', [ShopCartController::class, 'addToCart'])->name('shop.addtocart');
     Route::post('/shop/getcartelements', [ShopCartController::class, 'getCartElements'])->name('shop.getcartelements');
 
+    Route::post('/shop/user/settings', [ShopUserController::class, 'updateSettings'])->name('shop.user.settings.edit');
     Route::post('/shop/getcartproducts/', [ShopCartController::class, 'getCartProducts'])->name('getcartproducts');
     Route::post('/shop/increment_number_product_in_cart/', [ShopCartController::class, 'incrementOrDecrementElementInCart'])->name('increment_number_product_in_cart');
     Route::post('/shop/delete_from_cart', [ShopCartController::class, 'deleteFromCart'])->name('delete_from_cart');

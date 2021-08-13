@@ -48,15 +48,16 @@
                                     <td>{{$product->updated_at->format('d/m/Y')}}</td>
                                     <td><input data-id="{{$product->id}}" type="checkbox" {!! $product->is_home == true ? 'checked':'' !!} onclick="saveInHome(this)"></td>
                                     <td>
-                                        @if($product->single_product)
-                                            <button data-id="{{$product->id}}" onclick="deleteSingleProduct(this)" class="btn btn-danger">Elimina</button>
-                                            <a href="{{route('admin.single.product.edit', $product->id)}}" class="btn btn-secondary">Modifica</a>
-                                        @else
-                                            <button data-id="{{$product->id}}" onclick="deleteVariationProduct(this)" class="btn btn-danger">Elimina</button>
-                                            <a href="{{route('admin.product.variation.edit', $product->id)}}" class="btn btn-secondary">Modifica</a>
-                                            <a href="{{route('admin.product.new.variante', $product->id)}}" class="btn btn-warning">Varianti</a>
-                                        @endif
-
+                                        <div class="d-flex flex-column justify-content-center">
+                                            @if($product->single_product)
+                                                <button data-id="{{$product->id}}" onclick="deleteSingleProduct(this)" class="btn btn-danger" style="margin: 2px">Elimina</button>
+                                                <a href="{{route('admin.single.product.edit', $product->id)}}" class="btn btn-secondary" style="margin: 2px">Modifica</a>
+                                            @else
+                                                <button data-id="{{$product->id}}" onclick="deleteVariationProduct(this)" class="btn btn-danger" style="margin: 2px">Elimina</button>
+                                                <a href="{{route('admin.product.variation.edit', $product->id)}}" class="btn btn-secondary" style="margin: 2px">Modifica</a>
+                                                <a href="{{route('admin.product.new.variante', $product->id)}}" class="btn btn-warning" style="margin: 2px">Varianti</a>
+                                            @endif
+                                        </div>
 
                                     </td>
                                 </tr>

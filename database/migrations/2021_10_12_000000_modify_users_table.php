@@ -19,6 +19,9 @@ class ModifyUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('company')->nullable();
             $table->string('piva')->nullable();
+            $table->string('cf')->nullable();
+            //codice di fatturazione elettronica
+            $table->string('ipa')->nullable();
 
             $table->boolean('admin')->default(false);
 

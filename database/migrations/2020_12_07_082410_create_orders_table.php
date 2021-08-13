@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('shipping_price')->default(0);
             $table->text('id_shipping')->nullable();
             $table->text('note_delivery')->nullable();
+            $table->text('note_order')->nullable();
             $table->boolean('pick_up_in_shop')->default(false);
             $table->decimal('order_weight')->default(0);
             $table->unsignedBigInteger('gift_code_id')->default(false);

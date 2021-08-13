@@ -58,6 +58,7 @@ class ShopPaymentController extends Controller
             ]);
 
             $note_delivery = session('checkout.note_delivery');
+            $note_order = session('checkout.note_order');
             $get_in_shop_checkbox = session('checkout.get_in_shop_checkbox');
 
             $order = new Order();
@@ -67,6 +68,7 @@ class ShopPaymentController extends Controller
             $order->order_weight = 0;
             $order->status_id = OrderStatus::IN_PREPARAZIONE;
             $order->note_delivery = $note_delivery;
+            $order->note_order = $note_order;
             $order->payment_type_id = TypePayment::STRIPE;
             $order->pick_up_in_shop = $get_in_shop_checkbox == 'true' ? true : false;
             $order->save();
@@ -202,6 +204,7 @@ class ShopPaymentController extends Controller
             session()->forget('checkout.coupon.discount');
         }
         $note_delivery = session('checkout.note_delivery');
+        $note_order = session('checkout.note_order');
         $get_in_shop_checkbox = session('checkout.get_in_shop_checkbox');
 
         $order = new Order();
@@ -211,6 +214,7 @@ class ShopPaymentController extends Controller
         $order->order_weight = 0;
         $order->status_id = $orderStatus;
         $order->note_delivery = $note_delivery;
+        $order->note_order = $note_order;
         $order->payment_type_id = $typePayment;
         $order->pick_up_in_shop = $get_in_shop_checkbox == 'true' ? true : false;
         $order->gift_code_id = ($get_coupon_discount_code != null) ? $gift_card_utilizzata->id : null;

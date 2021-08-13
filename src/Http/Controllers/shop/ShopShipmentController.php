@@ -38,6 +38,8 @@ class ShopShipmentController extends Controller
                 $province = $user->province;
                 $city = $user->city;
                 $cap = $user->cap;
+                $ipa = $user->ipa;
+                $cf = $user->cf;
                 Template::MoveSessionToCart($user->id);
         }
 
@@ -52,7 +54,10 @@ class ShopShipmentController extends Controller
             'floor',
             'province',
             'city',
-            'cap'
+            'cap',
+            'ipa',
+            'cf',
+
         ));
     }
 
@@ -67,6 +72,8 @@ class ShopShipmentController extends Controller
             'province' => 'required',
             'city' => 'required',
             'cap' => 'required',
+            'cf' => 'nullable|min:16|max:16',
+            'ipa' => 'nullable|min:6|max:7',
         ]);
 
 
@@ -81,6 +88,8 @@ class ShopShipmentController extends Controller
         $province = $r->get('province');
         $city = $r->get('city');
         $cap = $r->get('cap');
+        $ipa = $r->get('ipa');
+        $cf = $r->get('cf');
 
         $user = User::where('email',$email_sped)->first();
         //if user exist
@@ -95,6 +104,8 @@ class ShopShipmentController extends Controller
                 $user->province = $province;
                 $user->city = $city;
                 $user->cap = $cap;
+                $user->ipa = $ipa;
+                $user->cf = $cf;
                 $user->save();
         //if user doesn't exist
         }else{
@@ -111,6 +122,8 @@ class ShopShipmentController extends Controller
             $user->province = $province;
             $user->city = $city;
             $user->cap = $cap;
+            $user->ipa = $ipa;
+            $user->cf = $cf;
             $user->save();
             Auth::login($user);
         }

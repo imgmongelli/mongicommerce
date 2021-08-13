@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
+use Mongi\Mongicommerce\Libraries\Template;
 use Mongi\Mongicommerce\Models\ConfigurationField;
 use Mongi\Mongicommerce\Models\GiftCode;
 use Mongi\Mongicommerce\Models\Product;
@@ -118,7 +119,7 @@ class AdminNewProductVariationController extends Controller
                 $gift_code->product_item_id = $product_item->id;
 
                 //generate unique code
-                $code = Self::generateCode();
+                $code = Template::generateCode();
 
                 $gift_code->code = $code;
                 $gift_code->is_validated = false;
@@ -165,7 +166,7 @@ class AdminNewProductVariationController extends Controller
                 $gift_code = new GiftCode();
                 $gift_code->product_item_id = $product_item->id;
                 //generate unique code
-                $code = Self::generateCode();
+                $code = Template::generateCode();
                 $gift_code->code = $code;
                 $gift_code->is_validated = false;
                 $gift_code->duration = $duration_time;
@@ -177,28 +178,4 @@ class AdminNewProductVariationController extends Controller
         return true;
     }
 
-    public static function generateCode(){
-        $random_string = Str::random(5);
-
-        $today = Carbon::now();
-        $day = $today->day;
-        $mm = $today->month;
-        $yy = $today->year;
-        $h = $today->hour;
-        $mill = $today->milliseconds;
-
-        $date_prod = $day * $mm * $yy;
-        $time_sum = $h + $mill;
-        $str = $date_prod - $time_sum;
-
-        if(strlen($str) > 5){
-            $str = substr($str, 0, 5);
-        }else if(strlen($str) < 5){
-            $diff = 5 - strlen($str);
-            for($i = 0; $i < $diff; $i++){
-                $str .= $i;
-            }
-        }
-        return 'GIFT-'.$str.'-'.$random_string;
-    }
 }

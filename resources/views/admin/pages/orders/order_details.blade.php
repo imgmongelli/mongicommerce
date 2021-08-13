@@ -46,6 +46,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12">
+                        <label> Note ordine:</label>
+                        <textarea class="form-control" disabled>{{$order->note_order}}</textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
                         <label> Stato ordine:</label>
                         <select onchange="changeStatus(this,{{$order->id}})" class="form-control" name="" id="">
                             @foreach($statuses as $status)
@@ -97,13 +103,17 @@
                         <label> ID cliente:</label>
                         <input type="text" id="id" value="{{$cliente->id}}" class="form-control" readonly>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <label>Nome:</label>
                         <input type="text" id="nome" value="{{$cliente->first_name}}" class="form-control">
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <label>Cognome:</label>
                         <input type="text" id="cognome" value="{{$cliente->last_name}}" class="form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Codice fiscale:</label>
+                        <input type="text" id="cf" value="{{$cliente->cf}}" class="form-control">
                     </div>
                 </div>
                 <div class="row">
@@ -113,13 +123,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Ragione Sociale:</label>
                         <input type="text" id="ragione_sociale" class="form-control" value="{{$cliente->company}}">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Partita IVA:</label>
                         <input type="text" id="piva" class="form-control" value="{{$cliente->piva}}">
+                    </div>
+                    <div class="col-md-4">
+                        <label>Codice fatturazione elettronica:</label>
+                        <input type="text" id="ipa" class="form-control" value="{{$cliente->ipa}}">
                     </div>
                 </div>
                 <div class="row">
