@@ -70,15 +70,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label> Gift card utilizzata:</label>
-                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="si" @else value="no" @endif class="form-control">
+                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="si" @else value="no" @endif class="form-control" readonly>
                     </div>
                     <div class="col-md-4">
                         <label> Nome gift card:</label>
-                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="{{$product_item_gift->name}}" @else value="-" @endif class="form-control">
+                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="{{$product_item_gift->name}}" @else value="-" @endif class="form-control" readonly>
                     </div>
                     <div class="col-md-4">
                         <label> Valore gift card:</label>
-                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="€ {{$product_item_gift->price}}" @else value="-" @endif class="form-control">
+                        <input type="text" id="id_shipping" @if($order->gift_code_id != null) value="€ {{$product_item_gift->price}}" @else value="-" @endif class="form-control" readonly>
                     </div>
                 </div>
 
@@ -105,15 +105,15 @@
                     </div>
                     <div class="col-md-3">
                         <label>Nome:</label>
-                        <input type="text" id="nome" value="{{$cliente->first_name}}" class="form-control">
+                        <input type="text" id="nome" value="{{$cliente->first_name}}" class="form-control" readonly>
                     </div>
                     <div class="col-md-3">
                         <label>Cognome:</label>
-                        <input type="text" id="cognome" value="{{$cliente->last_name}}" class="form-control">
+                        <input type="text" id="cognome" value="{{$cliente->last_name}}" class="form-control" readonly>
                     </div>
                     <div class="col-md-4">
                         <label>Codice fiscale:</label>
-                        <input type="text" id="cf" value="{{$cliente->cf}}" class="form-control">
+                        <input type="text" id="cf" value="{{$cliente->cf}}" class="form-control" readonly>
                     </div>
                 </div>
                 <div class="row">
@@ -125,33 +125,33 @@
                 <div class="row">
                     <div class="col-md-4">
                         <label>Ragione Sociale:</label>
-                        <input type="text" id="ragione_sociale" class="form-control" value="{{$cliente->company}}">
+                        <input type="text" id="ragione_sociale" class="form-control" value="{{$cliente->company}}" readonly>
                     </div>
                     <div class="col-md-4">
                         <label>Partita IVA:</label>
-                        <input type="text" id="piva" class="form-control" value="{{$cliente->piva}}">
+                        <input type="text" id="piva" class="form-control" value="{{$cliente->piva}}" readonly>
                     </div>
                     <div class="col-md-4">
                         <label>Codice fatturazione elettronica:</label>
-                        <input type="text" id="ipa" class="form-control" value="{{$cliente->ipa}}">
+                        <input type="text" id="ipa" class="form-control" value="{{$cliente->ipa}}" readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-3">
                         <label>Citta:</label>
-                        <input type="text" id="fax" class="form-control" value="{{$cliente->city}}">
+                        <input type="text" id="fax" class="form-control" value="{{$cliente->city}}" readonly>
                     </div>
                     <div class="col-md-3">
                         <label>Indirizzo:</label>
-                        <input type="text" id="indirizzo" class="form-control" value="{{$cliente->address}}">
+                        <input type="text" id="indirizzo" class="form-control" value="{{$cliente->address}}" readonly>
                     </div>
                     <div class="col-md-3">
                         <label>Cap:</label>
-                        <input type="text" id="cap" class="form-control" value="{{$cliente->cap}}">
+                        <input type="text" id="cap" class="form-control" value="{{$cliente->cap}}" readonly>
                     </div>
                     <div class="col-md-3">
                         <label>Telefono:</label>
-                        <input type="text" id="telefono" class="form-control" value="{{$cliente->telephone}}">
+                        <input type="text" id="telefono" class="form-control" value="{{$cliente->telephone}}" readonly>
                     </div>
 
                 </div>
