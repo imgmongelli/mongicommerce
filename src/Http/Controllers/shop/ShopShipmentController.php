@@ -25,6 +25,8 @@ class ShopShipmentController extends Controller
         $province = '';
         $city = '';
         $cap = '';
+        $cf = '';
+        $ipa = '';
         if(Auth::check()){
                 $user = Auth::user();
                 $piva = $user->piva;
