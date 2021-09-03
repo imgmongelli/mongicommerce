@@ -16,7 +16,9 @@
             @if(!$product->is_reserved)
                 <div class="col-md-4 mb-5">
                     <div class="card h-100">
-                        <img class="card-img-top" width="100%" src="{{$product->image}}" alt="" style="max-height: 335px;min-height: 335px;">
+                        <div class="d-flex justify-content-center">
+                            <img class="card-img-top" src="{{$product->image}}" alt="" style="height: 280px;width: auto;">
+                        </div>
                         <div class="card-body">
                             <h4 class="card-title">{{$product->name}}</h4>
                             <p class="badge badge-danger">{{$product->category->name}}</p>
