@@ -28,7 +28,7 @@ class ShopController extends Controller
             'query' => 'required'
         ]);
         $query = $r->input('query');
-        $products = Product::where('name', 'like', "%$query%")->get();
+        $products = Product::where('name', 'like', "%$query%")->where('deleted', false)->get();
         return view('mongicommerce.pages.search-results', compact('products'));
     }
 }
