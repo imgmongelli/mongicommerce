@@ -6,7 +6,7 @@
 @section('content')
 <div class="container mb-5">
     @foreach($gifts_info as $gift_info)
-        <div id="first" class="row mt-5 card" style="padding: 15px">
+        <div id="gift_{{$loop->index}}" class="row mt-5 card" style="padding: 15px">
             <h3>INFORMAZIONI GIFT CARD</h3>
             <div class="row mt-3">
                 <div class="col-md-6 ">
@@ -52,10 +52,32 @@
                 </div>
 
             </div>
+            <div class="row col-md-12 d-flex justify-content-end">
+                <button class="btn btn-primary" type="button" onclick="printDiv({{$loop->index}})">Salva gift card</button>
+            </div>
         </div>
     @endforeach
 </div>
 @endsection
 @section('js')
-
+    <script>
+        let style = '{{asset('mongicommerce/template/shop/css/style.css')}}';
+        let bootoast = '{{asset('mongicommerce/template/shop/plugins/jqueryToast/bootoast.css')}}';
+        let bootstap = '{{asset('mongicommerce/template/shop/css/bootstrap.css')}}';
+        function printDiv(index) {
+            let divName = "gift_" + index;
+            let divContents = document.getElementById(divName).innerHTML;
+            let a = window.open('', '', 'height=1000, width=1400');
+            a.document.write('<html>');
+            a.document.write('<link rel="stylesheet" href="' + bootstap + '"/>');
+            a.document.write('<link rel="stylesheet" href="' + style + '"/>');
+            a.document.write('<link rel="stylesheet" href="' + bootoast + '"/>');
+            a.document.write('<body >');
+            a.document.write('<div class="container mb-5">');
+            a.document.write(divContents);
+            a.document.write('</body></div></html>');
+            setTimeout(function(){a.print();},500);
+            a.document.close();
+        }
+    </script>
 @endsection
