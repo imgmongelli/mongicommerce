@@ -3,6 +3,7 @@ namespace Mongi\Mongicommerce\Libraries;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Mongi\Mongicommerce\Models\Cart;
 use Mongi\Mongicommerce\Models\User;
@@ -63,7 +64,17 @@ class Template
         if($id === null){
             $products = Product::where('deleted', false)->get();
         }else{
-            $products_temp = Category::where('id',$id)->orWhere('parent_id',$id)->first()->products;
+            $products_temp = Category::find($id)->products;
+            if($products_temp->count() == 0){
+                $parent_cat = Category::where('parent_id',$id);
+                if($parent_cat->count() > 0){
+                    $products_temp = $parent_cat->first()->products;
+                }
+            }
+
+//            $products_temp = Category::find($id)
+//                            ->orWhere('parent_id',$id)->first()
+//                            ->products;
             $products = [];
             foreach ($products_temp as $product){
                 if($product->deleted == false) array_push($products, $product);
