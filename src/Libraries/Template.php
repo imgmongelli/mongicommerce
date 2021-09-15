@@ -68,7 +68,11 @@ class Template
             if($products_temp->count() == 0){
                 $parent_cat = Category::where('parent_id',$id);
                 if($parent_cat->count() > 0){
-                    $products_temp = $parent_cat->first()->products;
+                    $i = 0;
+                    while($i < $parent_cat->count() && $products_temp->count() == 0){
+                        $products_temp = $parent_cat->get()[$i]->products;
+                        $i++;
+                    }
                 }
             }
 
