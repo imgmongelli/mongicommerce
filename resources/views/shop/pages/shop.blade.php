@@ -31,6 +31,15 @@
             @endif
         @endforeach
     </div>
+    @if(count($products) == 0)
+        <div class="container">
+            <div class="row mt-5 mb-5">
+                <div class="col-sm-12 promo text-center mt-5 mb-4">
+                    <h2>Non è presente alcun prodotto per la categoria '{{$category_name}}'.</h2>
+                </div>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
 @section('js')

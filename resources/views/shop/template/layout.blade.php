@@ -9,8 +9,9 @@
     <meta name='copyright' content=''>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Title Tag  -->
-    <title>Eshop - eCommerce HTML5 Template.</title>
+
+    <meta name="keywords" content="">
+    <meta name="description" content="@yield('description')">
     <!-- Favicon -->
 
     <link rel="icon" type="image/png" href="{{asset('mongicommerce/template/shop/images/favicon.png')}}">
@@ -61,8 +62,8 @@
                     <!-- Top Left -->
                     <div class="top-left">
                         <ul class="list-main">
-                            <li><i class="ti-headphone-alt"></i> {{$mongicommerce->telephone}}</li>
-                            <li><i class="ti-email"></i> {{$mongicommerce->email}}</li>
+                            <li><a href="tel:{{$mongicommerce->telephone}}"><i class="ti-headphone-alt"></i> {{$mongicommerce->telephone}}</a></li>
+                            <li><a href="mailto:{{$mongicommerce->email}}"><i class="ti-email"></i> {{$mongicommerce->email}}</a></li>
                         </ul>
                     </div>
                     <!--/ End Top Left -->
@@ -382,7 +383,7 @@
                                 <li><a href="#"><i class="ti-instagram"></i></a></li>
                             </ul>
                         </div>
-                        <p class="call">Chiamaci<span><a href="{{$mongicommerce->telephone}}">{{$mongicommerce->telephone}}</a></span></p>
+                        <p class="call">Chiamaci<span><a href="tel:{{$mongicommerce->telephone}}">{{$mongicommerce->telephone}}</a></span></p>
 
 
                     </div>
@@ -423,8 +424,8 @@
                         <div class="contact">
                             <ul>
                                 <li>{{$mongicommerce->address}}</li>
-                                <li>{{$mongicommerce->email}}</li>
-                                <li>{{$mongicommerce->telephone}}</li>
+                                <li><a href="mailto:{{$mongicommerce->email}}">{{$mongicommerce->email}}</a></li>
+                                <li><a href="tel:{{$mongicommerce->telephone}}">{{$mongicommerce->telephone}}</a></li>
                             </ul>
                         </div>
                         <!-- End Single Widget -->

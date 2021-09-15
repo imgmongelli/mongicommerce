@@ -66,19 +66,16 @@ class Template
         }else{
             $products_temp = Category::find($id)->products;
             if($products_temp->count() == 0){
+                //if there aren't any products belonging to the category we can check
+                //if the category is a parent one
                 $parent_cat = Category::where('parent_id',$id);
                 if($parent_cat->count() > 0){
-                    $i = 0;
-                    while($i < $parent_cat->count() && $products_temp->count() == 0){
-                        $products_temp = $parent_cat->get()[$i]->products;
-                        $i++;
+                    //the category has some children so we take all products for each child category
+                    foreach($parent_cat->get() as $child_cat){
+                        $products_temp = $products_temp->merge(Category::find($child_cat->id)->products);
                     }
                 }
             }
-
-//            $products_temp = Category::find($id)
-//                            ->orWhere('parent_id',$id)->first()
-//                            ->products;
             $products = [];
             foreach ($products_temp as $product){
                 if($product->deleted == false) array_push($products, $product);
