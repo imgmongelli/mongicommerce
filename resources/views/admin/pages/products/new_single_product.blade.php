@@ -774,7 +774,8 @@
                     }
                 },
                 success: function (response) {
-                    success("Nuovo prodotto singolo inserito con successo", true);
+                    console.log(response);
+                    // success("Nuovo prodotto singolo inserito con successo", true);
                 }
             });
 

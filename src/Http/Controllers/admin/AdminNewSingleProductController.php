@@ -59,6 +59,7 @@ class AdminNewSingleProductController extends Controller
 
         $base64_str = substr($get_image, strpos($get_image, ",")+1);
         $image = base64_decode($base64_str);
+        return public_path();
         $destinationPath = public_path().'/uploads/products_img/'.$product->id.'/'.$product->id.'/';
         $destinationPathDB = url('/').'/uploads/products_img/'.$product->id.'/'.$product->id.'/';
 
