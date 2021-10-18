@@ -71,7 +71,6 @@ class AdminNewSingleProductController extends Controller
         file_put_contents($path_file, $image);
 
         $product->image = $dbPath;
-        return $dbPath;
         $product->save();
 
         $product_item = new ProductItem();
