@@ -62,16 +62,16 @@ class AdminNewSingleProductController extends Controller
         $destinationPath = public_path().'/uploads/products_img/'.$product->id.'/'.$product->id.'/';
         $destinationPathDB = url('/').'/uploads/products_img/'.$product->id.'/'.$product->id.'/';
 
-//        if(!File::isDirectory($destinationPath)){
-//            File::makeDirectory($destinationPath, $mode = 0777, true, true);
-//        }
-        return [ url('/'), $destinationPath, File::isDirectory($destinationPath)];
+        if(!File::isDirectory($destinationPath)){
+            File::makeDirectory($destinationPath, $mode = 0777, true, true);
+        }
         $image_name = time().'.'.'jpeg';
         $path_file = $destinationPath.$image_name;
         $dbPath = $destinationPathDB.$image_name;
         file_put_contents($path_file, $image);
 
         $product->image = $dbPath;
+        return $dbPath;
         $product->save();
 
         $product_item = new ProductItem();

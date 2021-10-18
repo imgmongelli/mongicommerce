@@ -774,11 +774,8 @@
                     }
                 },
                 success: function (response) {
-                    for(i=0; i<3; i++){
-                        console.log(response[i]);
-                    }
-
-                    // success("Nuovo prodotto singolo inserito con successo", true);
+                    console.log(response);
+                    success("Nuovo prodotto singolo inserito con successo", true);
                 }
             });
 
