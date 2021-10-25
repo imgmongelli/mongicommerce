@@ -14,7 +14,7 @@ use Mongi\Mongicommerce\Models\Volantino;
 class AdminCreatePrivateListController extends Controller
 {
     public function page(){
-        $products = Product::all();
+        $products = Product::where('deleted', false)->get();
         $lists = PrivateList::all();
         return view('mongicommerce::admin.pages.lista_privata',['products' => $products, 'lists' => $lists]);
     }
