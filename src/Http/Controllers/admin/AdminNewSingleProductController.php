@@ -65,7 +65,6 @@ class AdminNewSingleProductController extends Controller
         if(!File::isDirectory($destinationPath)){
             File::makeDirectory($destinationPath, $mode = 0777, true, true);
         }
-
         $image_name = time().'.'.'jpeg';
         $path_file = $destinationPath.$image_name;
         $dbPath = $destinationPathDB.$image_name;
