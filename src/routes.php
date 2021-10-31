@@ -142,6 +142,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/admin/prodotto/crea-variante-prodotto', [AdminNewProductVariationController::class, 'createNewVariation'])->name('admin.post.product.variation.new');
     Route::post('/admin/prodotto/crea-singolo-prodotto', [AdminNewSingleProductController::class, 'createNewSingleProduct'])->name('admin.post.new.single.product');
     Route::post('/admin/prodotto/update/in-home', [AdminProductsListController::class, 'inHome'])->name('admin.update.inHome')->middleware('admin');
+    Route::post('/admin/prodotto/update/reserve', [AdminProductsListController::class, 'reserve'])->name('admin.update.reserve')->middleware('admin');
     Route::post('/admin/prodottoSingolo/delete', [AdminProductsListController::class, 'deleteSingleProduct'])->name('admin.delete.single.product')->middleware('admin');
     Route::post('/admin/prodottoVarianti/delete', [AdminProductsListController::class, 'deleteAllVariationsProduct'])->name('admin.delete.all.variations.product')->middleware('admin');
     Route::post('/admin/prodotto/elimina-variante-prodotto', [AdminNewProductVariationController::class, 'deleteVariation'])->name('admin.post.product.variation.delete');

@@ -103,7 +103,13 @@
                             <tr>
                                 <td>{{$list->id}}</td>
                                 <td>{{$list->name}}</td>
-                                <td>{{route('shop.private.list', $list->id_list)}}</td>
+                                <td>
+                                    <div class="d-flex justify-content-around">
+                                        <input type="text" class="form-control mr-2" id="list_link_{{$list->id}}" value="{{route('shop.private.list', $list->id_list)}}" readonly>
+                                        <button data-id="{{$list->id}}" onclick="copyLink(this)" class="btn btn-primary">Copia!</button>
+                                    </div>
+
+                                </td>
                                 <td>
                                     <button data-id="{{$list->id}}" onclick="deleteList(this)" class="btn btn-danger">Elimina</button>
                                 </td>
@@ -156,9 +162,17 @@
                 list_id : list_id
             },
             success:function (response){
-                success("Lista eliminato correttamente",true);
+                success("Lista eliminata correttamente", true);
             }
         })
+    }
+
+    function copyLink(el){
+        let list_id = $(el).data('id');
+        let input_id = "list_link_"+list_id;
+        let copyText = document.getElementById(input_id);
+        copyText.select();
+        document.execCommand("copy");
     }
 </script>
 @endsection

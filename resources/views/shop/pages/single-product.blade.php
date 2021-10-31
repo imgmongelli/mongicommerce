@@ -26,7 +26,7 @@
                 <h5>Descrizione prodotto</h5>
                 <div class="row mt-3 mb-4">
                     <div class="col-md-12">
-                        <p>{{$description}}</p>
+                        <p style="text-align: justify;">{{$description}}</p>
                     </div>
 
                 </div>

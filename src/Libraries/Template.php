@@ -102,7 +102,7 @@ class Template
     public static function generateHtmlField($type,$value,$label){
             $html = '';
             $html .= "<h5>{$label}</h5>";
-            $html .= "<div class='divtext'>{$value}</div>";
+            $html .= "<div class='divtext' style='text-align: justify;'>{$value}</div>";
             $html .= "<hr>";
 
             return $html;

@@ -34,6 +34,7 @@
                                 <th>Creato</th>
                                 <th>Modificato</th>
                                 <th>In evidenza</th>
+                                <th>Nascondi</th>
                                 <th>Azioni</th>
                             </tr>
                             </thead>
@@ -47,6 +48,7 @@
                                     <td>{{$product->created_at->format('d/m/Y')}}</td>
                                     <td>{{$product->updated_at->format('d/m/Y')}}</td>
                                     <td><input data-id="{{$product->id}}" type="checkbox" {!! $product->is_home == true ? 'checked':'' !!} onclick="saveInHome(this)"></td>
+                                    <td><input data-id="{{$product->id}}" type="checkbox" {!! $product->is_reserved == true ? 'checked':'' !!} onclick="reserve(this)"></td>
                                     <td>
                                         <div class="d-flex flex-column justify-content-center">
                                             @if($product->single_product)
@@ -119,7 +121,23 @@
                     is_checked : is_checked
                 },
                 success:function (response){
-                    success("Prodotto aggiornato",true);
+                    success("Prodotto aggiornato", false);
+                }
+            })
+        }
+
+        function reserve(el) {
+            let product_id = $(el).data('id');
+            let is_checked = $(el).is(':checked');
+            $.ajax({
+                method:'post',
+                url:"{{route('admin.update.reserve')}}",
+                data:{
+                    product_id : product_id,
+                    is_checked : is_checked
+                },
+                success:function (response){
+                    success("Prodotto aggiornato", false);
                 }
             })
         }

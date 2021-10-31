@@ -33,6 +33,15 @@ class AdminProductsListController extends Controller
         return true;
     }
 
+    public function reserve(Request $r){
+        $product_id = $r->product_id;
+        $is_checked = $r->is_checked == 'true' ? true : false;
+        $product = Product::find($product_id);
+        $product->is_reserved = $is_checked;
+        $product->save();
+        return true;
+    }
+
     public function deleteSingleProduct(Request $r){
         $product_id = $r->product_id;
         $product = Product::find($product_id);
