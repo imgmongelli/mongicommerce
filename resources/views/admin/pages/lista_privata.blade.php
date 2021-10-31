@@ -4,6 +4,7 @@
 @section('subtitle','Crea la tua lista')
 @section('description','Lista privata')
 @section('css')
+    <link rel="stylesheet" media="screen, print" href="{{css('datagrid/datatables/datatables.bundle.css')}}">
 @endsection
 @section('subheader')
 @endsection
