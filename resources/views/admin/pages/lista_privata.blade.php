@@ -126,7 +126,18 @@
 </div>
 @endsection
 @section('js')
+<script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
 <script>
+
+    $(document).ready(function()
+    {
+        // initialize datatable
+        $('#dt-basic-example').dataTable(
+            {
+                responsive: true,
+            });
+    });
+
     function saveList(){
         let arrayList = [];
         $('.product-list').each(function (index, el){
