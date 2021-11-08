@@ -319,6 +319,12 @@
                                                             </ul>
                                                             </li>
                                                             <li><a href="{{route('shop')}}">Shop</a></li>
+                                                            @auth
+                                                                <li class="d-block d-sm-none"><a href="{{route('shop.user.settings')}}">Profilo</a></li>
+                                                            @else
+                                                                <li class="d-block d-sm-none"><a href="{{route('shop.redirect.login')}}">Login</a></li>
+                                                            @endauth
+                                                                <li class="d-block d-sm-none"><a href="{{route('shop.cart')}}">Carrello</a></li>
                                                     </ul>
                                     </div>
                                         </ul>
