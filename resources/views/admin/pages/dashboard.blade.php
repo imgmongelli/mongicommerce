@@ -187,6 +187,7 @@
         </div>
     </div>
 @endsection
+
 @section('js')
     <script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
     <script>
