@@ -3,6 +3,7 @@
 @section('subtitle','Sotto titolo')
 @section('description','Questa è una breve descrizione')
 @section('css')
+<link rel="stylesheet" media="screen, print" href="{{css('datagrid/datatables/datatables.bundle.css')}}">
 @endsection
 @section('subheader')
 @endsection
@@ -187,4 +188,15 @@
     </div>
 @endsection
 @section('js')
+    <script src="{{js('datagrid/datatables/datatables.bundle.js')}}"></script>
+    <script>
+        $(document).ready(function()
+        {
+            // initialize datatable
+            $('#dt-basic-example').dataTable(
+                {
+                    responsive: true,
+                });
+        });
+    </script>
 @endsection
