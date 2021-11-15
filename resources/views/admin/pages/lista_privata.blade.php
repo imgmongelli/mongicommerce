@@ -41,10 +41,10 @@
                                 <tr>
                                     <td>{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->description}}</td>
+                                    <td style="text-align: justify">{{Str::limit($product->description, 300)}}</td>
                                     <td>{{$product->category->name}}</td>
-                                    <td><input class="product-list-reserved" data-id="{{$product->id}}" type="checkbox"></td>
-                                    <td><input class="product-list" data-id="{{$product->id}}" type="checkbox"></td>
+                                    <td><input class="product-list-reserved" id="reserved_{{$product->id}}" type="checkbox" onclick="addReservedToSession({{$product->id}})"></td>
+                                    <td><input class="product-list" id="add_{{$product->id}}" type="checkbox" onclick="addItemToSession({{$product->id}})"></td>
                                 </tr>
                             @endforeach
 
@@ -137,21 +137,55 @@
             {
                 responsive: true,
             });
+        sessionStorage.removeItem('arrayList');
+        sessionStorage.removeItem('arrayReserved');
     });
 
+    function addItemToSession(productId){
+        let arrayList = sessionStorage.getItem('arrayList') ? JSON.parse(sessionStorage.getItem('arrayList')) : [];
+
+        const index = arrayList.indexOf(productId);
+        if (index > -1) {
+            arrayList.splice(index, 1);
+        }
+
+        if($('#add_' + productId).is(':checked')){
+            arrayList.push(productId);
+        }
+
+        sessionStorage.setItem('arrayList', JSON.stringify(arrayList));
+    }
+
+    function addReservedToSession(productId){
+        let arrayReserved = sessionStorage.getItem('arrayReserved') ? JSON.parse(sessionStorage.getItem('arrayReserved')) : [];
+
+        const index = arrayReserved.indexOf(productId);
+        if (index > -1) {
+            arrayReserved.splice(index, 1);
+        }
+
+        if($('#reserved_' + productId).is(':checked')){
+            arrayReserved.push(productId);
+        }
+
+        sessionStorage.setItem('arrayReserved', JSON.stringify(arrayReserved));
+    }
+
     function saveList(){
-        let arrayList = [];
-        $('.product-list').each(function (index, el){
-            if($(el).is(':checked')){
-                arrayList.push($(el).data('id'));
-            }
-        })
-        let arrayReserved = [];
-        $('.product-list-reserved').each(function (index, el){
-            if($(el).is(':checked')){
-                arrayReserved.push($(el).data('id'));
-            }
-        })
+        // let arrayList = [];
+        // $('.product-list').each(function (index, el){
+        //     if($(el).is(':checked')){
+        //         arrayList.push($(el).data('id'));
+        //     }
+        // })
+        // let arrayReserved = [];
+        // $('.product-list-reserved').each(function (index, el){
+        //     if($(el).is(':checked')){
+        //         arrayReserved.push($(el).data('id'));
+        //     }
+        // })
+        let arrayList = sessionStorage.getItem('arrayList') ? JSON.parse(sessionStorage.getItem('arrayList')) : [];
+        let arrayReserved = sessionStorage.getItem('arrayReserved') ? JSON.parse(sessionStorage.getItem('arrayReserved')) : [];
         $.ajax({
             method:'post',
             url:"{{route('admin.create.private.list')}}",
@@ -161,7 +195,8 @@
                 list_name : $('#list_name').val()
             },
             success:function (response){
-                success("Lista creata correttamente",true);
+                // console.log(response);
+                success("Lista creata correttamente", true);
             }
         })
     }
