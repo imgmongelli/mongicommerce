@@ -37,6 +37,7 @@ use Mongi\Mongicommerce\Http\Controllers\admin\AdminConfigurationFieldController
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminLoginController;
 use Mongi\Mongicommerce\Http\Controllers\shop\ShopShowVariationProductController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminNewProductVariationController;
+use Mongi\Mongicommerce\Http\Controllers\termsAndPrivacy\TermsPrivacyController;
 use Mongi\Mongicommerce\Http\Middleware\AdminMiddleware;
 
 Route::group(['middleware' => ['web']], function () {
@@ -73,6 +74,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('page/shop/payment/', [ShopPaymentController::class, 'page'])->name('shop.payment');
     Route::get('page/shop/private-list/{list_id}', [ShopPrivateListController::class, 'page'])->name('shop.private.list');
 
+    //PG - 14.11.2021
+    Route::get('page/terms-and-conditions', [TermsPrivacyController::class, 'termsConditions'])->name('termsConditions');
 
 
     Route::post('/shop/get/product-information', [ShopShowVariationProductController::class, 'getData'])->name('shop.get.product.information');
