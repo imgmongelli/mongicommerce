@@ -76,6 +76,7 @@ Route::group(['middleware' => ['web']], function () {
 
     //PG - 14.11.2021
     Route::get('page/terms-and-conditions', [TermsPrivacyController::class, 'termsConditions'])->name('termsConditions');
+    Route::get('page/cookie-policy', [TermsPrivacyController::class, 'cookiePolicy'])->name('cookiePolicy');
 
 
     Route::post('/shop/get/product-information', [ShopShowVariationProductController::class, 'getData'])->name('shop.get.product.information');
