@@ -6,12 +6,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Models\Cart;
+use Mongi\Mongicommerce\Models\Detail;
+use Mongi\Mongicommerce\Models\DetailValue;
 use Mongi\Mongicommerce\Models\ProductItem;
+use Mongi\Mongicommerce\Models\ProductItemDetail;
 
 class ShopCartController extends Controller
 {
     public function page(){
-        return view('mongicommerce.pages.cart');
+
+        $products_item_id = ProductItemDetail::all();
+        $details = Detail::all();
+        $details_value = DetailValue::all();
+        $cartItems = Cart::all();
+
+        return view('mongicommerce.pages.cart',compact('products_item_id','details','details_value','cartItems'));
     }
     /**
      * @param ProductItem $product

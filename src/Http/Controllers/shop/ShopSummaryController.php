@@ -9,9 +9,12 @@ use Illuminate\Support\Facades\Redirect;
 use Mongi\Mongicommerce\Http\Controllers\Controller;
 use Mongi\Mongicommerce\Models\AdminSetting;
 use Mongi\Mongicommerce\Models\Cart;
+use Mongi\Mongicommerce\Models\Detail;
+use Mongi\Mongicommerce\Models\DetailValue;
 use Mongi\Mongicommerce\Models\GiftCode;
 use Mongi\Mongicommerce\Models\Product;
 use Mongi\Mongicommerce\Models\ProductItem;
+use Mongi\Mongicommerce\Models\ProductItemDetail;
 
 
 class ShopSummaryController extends Controller
@@ -26,6 +29,11 @@ class ShopSummaryController extends Controller
         $total = 0;
         $total_weight = 0;
         $allGiftCards = true;
+
+        $products_item_id = ProductItemDetail::all();
+        $details = Detail::all();
+        $details_value = DetailValue::all();
+
         if (!Auth::check()) {
             $ids = [];
             $productsCart = session('cart');
@@ -113,12 +121,12 @@ class ShopSummaryController extends Controller
         }
         session()->put('checkout.total_weight', $total_weight);
         session()->put('checkout.shipping_price', $shipping_price);
-        return view('mongicommerce.pages.summary',compact('products','total','shipping_price','note','get_in_shop_checkbox', 'get_coupon_discount_name', 'get_coupon_discount_price' ));
+        return view('mongicommerce.pages.summary',compact('products','total','shipping_price','note','get_in_shop_checkbox', 'get_coupon_discount_name', 'get_coupon_discount_price','products_item_id','details','details_value' ));
     }
 
     public function applyCoupon(Request $r){
         $r->validate([
-           'gift_card_code' => 'required'
+            'gift_card_code' => 'required'
         ]);
 
         $input_code = $r->get('gift_card_code');
