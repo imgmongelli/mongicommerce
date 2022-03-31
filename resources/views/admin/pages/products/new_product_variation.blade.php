@@ -778,6 +778,7 @@
                                     <td>
                                         <button class="btn btn-dark" data-id="{{$item->id}}" onclick="deleteVariation(this)"><i class="fal fa-trash"></i></button>
                                         <button class="btn btn-danger" data-id="{{$item->id}}" onclick="editVariation(this, {{$loop->index}})"><i class="fal fa-save"></i></button>
+                                        <button class="btn btn-secondary" onclick="location.href='{{ route('admin.specifica.edit', ['id' => $item->id]) }}'"><i class="fal fa-edit"></i></button>
                                     </td>
                                 </tr>
                             @endforeach

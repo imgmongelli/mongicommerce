@@ -3,6 +3,7 @@
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminCreatePrivateListController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminEditProductVariationController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminEditSingleProductController;
+use Mongi\Mongicommerce\Http\Controllers\admin\AdminEditSpecificaController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminGiftCardValidationController;
 use Mongi\Mongicommerce\Http\Controllers\admin\AdminVolantiniController;
 
@@ -151,6 +152,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/admin/prodottoVarianti/delete', [AdminProductsListController::class, 'deleteAllVariationsProduct'])->name('admin.delete.all.variations.product')->middleware('admin');
     Route::post('/admin/prodotto/elimina-variante-prodotto', [AdminNewProductVariationController::class, 'deleteVariation'])->name('admin.post.product.variation.delete');
     Route::post('/admin/prodotto/modifica-variante-prodotto', [AdminNewProductVariationController::class, 'editVariation'])->name('admin.post.product.variation.edit');
+    Route::get('/admin/editSpecifica/{id}', [AdminEditSpecificaController::class, 'page'])->name('admin.specifica.edit')->middleware('admin');
+    Route::post('/admin/saveSpecifica', [AdminEditSpecificaController::class, 'saveSpecifica'])->name('admin.specifica.save')->middleware('admin');
     Route::post('/admin/prodotto/dettagli', [AdminProductsListController::class, 'showDetail'])->name('admin.detail.product')->middleware('admin');
     Route::post('/admin/prodotto/modifica-singolo-prodotto', [AdminEditSingleProductController::class, 'editSingleProduct'])->name('admin.post.edit.single.product');
     Route::post('/admin/prodotto/gift-card/validation', [AdminGiftCardValidationController::class, 'giftValidation'])->name('admin.post.gift.validation');

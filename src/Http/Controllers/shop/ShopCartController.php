@@ -161,8 +161,36 @@ class ShopCartController extends Controller
                 ];
             }
         }
-
-        return response()->json(['product' => $products , 'total' => self::calculateTotalPrice($products)]);
+        $products_item_id = ProductItemDetail::all();
+        $products_item_id_res = [];
+        foreach ($products_item_id as $curr) {
+            $products_item_id_res[] = [
+                'detail' => $curr,
+                'id' => $curr->product_item_id,
+                'product_detail_id' => $curr->product_detail_id,
+                'product_detail_value_id' => $curr->product_detail_value_id
+            ];
+        }
+        $details = Detail::all();
+        $details_res = [];
+        foreach ($details as $curr) {
+            $details_res[] = [
+                'detail' => $curr,
+                'id' => $curr->id,
+                'name' => $curr->name
+            ];
+        }
+        $details_value = DetailValue::all();
+        $details_value_res = [];
+        foreach ($details_value as $curr) {
+            $details_value_res[] = [
+                'detail' => $curr,
+                'id' => $curr->id,
+                'value' => $curr->value
+            ];
+        }
+        return response()->json(['product' => $products , 'total' => self::calculateTotalPrice($products),
+            'products_item_id_res' => $products_item_id_res , 'details_res' => $details_res , 'details_value_res' => $details_value_res ]);
     }
 
     public function incrementOrDecrementElementInCart(Request $r){
