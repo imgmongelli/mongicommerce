@@ -65,7 +65,7 @@ class Template
             $products = Product::where('deleted', false)->get();
         }else{
             $products_temp = Category::find($id)->products;
-            if($products_temp->count() == 0){
+            //if($products_temp->count() == 0){
                 //if there aren't any products belonging to the category we can check
                 //if the category is a parent one
                 $parent_cat = Category::where('parent_id',$id);
@@ -75,7 +75,7 @@ class Template
                         $products_temp = $products_temp->merge(Category::find($child_cat->id)->products);
                     }
                 }
-            }
+            //}
             $products = [];
             foreach ($products_temp as $product){
                 if($product->deleted == false) array_push($products, $product);
