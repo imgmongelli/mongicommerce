@@ -87,7 +87,8 @@ class AdminCategoryController extends Controller
         $prod_deleted = Product::where('category_id', $category_id)->where('deleted', 1)->count(); //PG
 
         if($products-$prod_deleted > 0) { //PG aggiunto '-$prod_deleted' e anche sotto nel return ora c'è la differenza
-            return ['error' => 'Per questa categoria ci sono '.$products-$prod_deleted.' prodotti. Elimina prima i prodotti per questa categoria.'];
+            $cont = $products-$prod_deleted;
+            return ['error' => 'Per questa categoria ci sono '.$cont.' prodotti. Elimina prima i prodotti per questa categoria.'];
         }
         $parent_categories = Category::where('parent_id', $category_id)->get();
 
