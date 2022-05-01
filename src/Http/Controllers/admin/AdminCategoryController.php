@@ -39,9 +39,12 @@ class AdminCategoryController extends Controller
     }
 
     function getCategoryTree($parent_id = null, $spacing = '', $tree_array = array()) {
-        $categories = Category::select('id', 'name', 'parent_id')->where('parent_id' ,'=', $parent_id)->orderBy('parent_id')->get();
+        $categories = Category::select('id', 'name', 'parent_id')->where('parent_id' ,'=', $parent_id)->where(function ($query) {
+            $query->where('description', '!=', 'DELETED')
+                ->orWhereNull('description');
+        })->orderBy('parent_id')->get();
         foreach ($categories as $item){
-            $tree_array[] = ['id' => $item->id, 'name' =>$spacing . $item->name] ;
+            $tree_array[] = ['id' => $item->id, 'name' =>$spacing . $item->name, 'parent_id' => $item->parent_id] ;
             $tree_array = $this->getCategoryTree($item->id, $spacing . '- ', $tree_array);
         }
         return $tree_array;
@@ -49,7 +52,10 @@ class AdminCategoryController extends Controller
 
     public function getStructureCategories(){
 
-        $categories = Category::with('children')->whereNull('parent_id')->get();
+        $categories = Category::with('children')->whereNull('parent_id')->where(function ($query) {
+            $query->where('description', '!=', 'DELETED')
+                ->orWhereNull('description');
+        })->get();
         $tree = [];
         foreach($categories as $category){
                 $tree[] = [
@@ -78,23 +84,32 @@ class AdminCategoryController extends Controller
     public function deleteCategory(Request $r){
         $category_id = $r->category_id;
         $products = Product::where('category_id', $category_id)->count();
-        if($products > 0) {
-            return ['error' => 'Per questa categoria ci sono '.$products.' prodotti. Elimina prima i prodotti per questa categoria.'];
+        $prod_deleted = Product::where('category_id', $category_id)->where('deleted', 1)->count(); //PG
+
+        if($products-$prod_deleted > 0) { //PG aggiunto '-$prod_deleted' e anche sotto nel return ora c'è la differenza
+            return ['error' => 'Per questa categoria ci sono '.$products-$prod_deleted.' prodotti. Elimina prima i prodotti per questa categoria.'];
         }
         $parent_categories = Category::where('parent_id', $category_id)->get();
-        foreach ($parent_categories as $category){
+
+        foreach ($parent_categories as $category) {
             $products = Product::where('category_id', $category->id)->count();
-            if($products > 0){
-                return ['error' => 'Per questa categoria '.$category->name .' ci sono '.$products.' prodotti. Elimina prima i prodotti per questa categoria.'];
-            } else{
-                ConfigurationField::where('category_id', $category->id)->delete();
-                $details = Detail::where('category_id', $category->id);
-                foreach ($details->get() as $detail){
-                    DetailValue::where('detail_id', $detail->id)->delete();
-                }
-                $details->delete();
-                Category::find($category->id)->delete();
+            $prod_deleted = Product::where('category_id', $category->id)->where('deleted', 1)->count(); //PG
+            if ($products - $prod_deleted > 0) {
+                //PG aggiunto '-$prod_deleted' e anche sotto nel return ora c'è la differenza
+                return ['error' => 'Nella sottocategoria ' .$category->name. ' sono presenti ' . $products - $prod_deleted . ' prodotti. Elimina prima i prodotti per questa categoria.'];
             }
+        }
+        foreach ($parent_categories as $category) {
+            ConfigurationField::where('category_id', $category->id)->delete();
+            $details = Detail::where('category_id', $category->id);
+            foreach ($details->get() as $detail) {
+                DetailValue::where('detail_id', $detail->id)->delete();
+            }
+            $details->delete();
+            //Category::find($category->id)->delete();
+            $cat = Category::find($category->id);
+            $cat->description = 'DELETED';
+            $cat->save();
         }
         ConfigurationField::where('category_id', $category_id)->delete();
         $details = Detail::where('category_id', $category_id);
@@ -102,7 +117,10 @@ class AdminCategoryController extends Controller
             DetailValue::where('detail_id', $detail->id)->delete();
         }
         $details->delete();
-        Category::find($category_id)->delete();
+        //Category::find($category_id)->delete();
+        $cat = Category::find($category_id);
+        $cat->description = 'DELETED';
+        $cat->save();
         return true;
     }
 
