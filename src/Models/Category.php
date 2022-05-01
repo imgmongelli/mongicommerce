@@ -21,7 +21,10 @@ class Category extends Model
 
     public function children_rec()
     {
-        return $this->hasMany(Category::class, 'parent_id');
+        return $this->hasMany(Category::class, 'parent_id')->where(function ($query) {
+            $query->where('description', '!=', 'DELETED')
+                ->orWhereNull('description');
+        });
     }
 
     public function children()

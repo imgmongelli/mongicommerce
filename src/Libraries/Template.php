@@ -48,7 +48,10 @@ class Template
     }
 
     public static function  getCategoryTree($parent_id = null, $spacing = '', $tree_array = array()) {
-        $categories = Category::select('id', 'name', 'parent_id')->where('parent_id' ,'=', $parent_id)->orderBy('parent_id')->get();
+        $categories = Category::select('id', 'name', 'parent_id')->where('parent_id' ,'=', $parent_id)->where(function ($query) {
+            $query->where('description', '!=', 'DELETED')
+                ->orWhereNull('description');
+        })->orderBy('parent_id')->get();
         foreach ($categories as $item){
             $tree_array[] = ['id' => $item->id, 'name' =>$spacing . $item->name] ;
             $tree_array = self::getCategoryTree($item->id, $spacing . '- ', $tree_array);

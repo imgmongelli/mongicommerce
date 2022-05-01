@@ -235,7 +235,10 @@
                 success: function (response) {
                     $('#sub-category').html('<option value="" selected>Categoria Madre</option>');
                     $.each(response, function (index, value) {
-                        $('#sub-category').append($("<option />").val(value.id).text(value.name));
+                        if(value.parent_id == null) {
+                            $('#sub-category').append($("<option />").val(value.id).text(value.name));
+                        }
+                        //$('#sub-category').append($("<option />").val(value.id).text(value.name));
                     });
                 }
             });
