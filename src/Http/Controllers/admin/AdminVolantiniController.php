@@ -25,7 +25,7 @@ class AdminVolantiniController
         ]);
 
         if ($validator->fails()) {
-            return ['error' => 'Inserire file e nome'];
+            return ['error' => 'Inserire file e nome.'];
         }else{
             $name = $r->all()['nome'];
             $file_pdf = $r->all()['pdf'];
