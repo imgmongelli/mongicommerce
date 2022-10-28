@@ -21,6 +21,7 @@ class AdminVolantiniController
         $validator = Validator::make($r->all(), [
             'nome' => 'required',
             'pdf' => 'required|mimes:pdf',
+            'pdf' => 'max:8000',
         ]);
 
         if ($validator->fails()) {
