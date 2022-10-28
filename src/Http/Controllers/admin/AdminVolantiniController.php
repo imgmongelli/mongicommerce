@@ -20,8 +20,7 @@ class AdminVolantiniController
     public function uploadVolantino(Request $r){
         $validator = Validator::make($r->all(), [
             'nome' => 'required',
-            'pdf' => 'required|mimes:pdf',
-            'pdf' => 'max:8000',
+            'pdf' => 'required|mimes:pdf|max:8000',
         ]);
 
         if ($validator->fails()) {
